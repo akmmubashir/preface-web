@@ -10,14 +10,14 @@ export default function Loading() {
       </div>
 
       {/* Tabs Skeleton */}
-      <div className="mb-8 flex flex-wrap gap-2 md:gap-4">
+      {/* <div className="mb-8 flex flex-wrap gap-2 md:gap-4">
         {[1, 2, 3, 4].map((i) => (
           <div
             key={i}
             className="h-10 w-24 animate-pulse rounded-full bg-neutral-100 dark:bg-neutral-800"
           />
         ))}
-      </div>
+      </div> */}
 
       {/* Stories Grid Skeleton */}
       <div className="mb-12">
