@@ -1,0 +1,64 @@
+{
+  "common": {
+    "watchfullvideo": "കാണുക",
+    "startreading": "വായന ആരംഭിക്കുക",
+    "topics": "Topics",
+    "continuesread": "Continues Read",
+    "othertopics": "Other Topics",
+    "viewall": "View All",
+    "previouspage": "Previous Page",
+    "nextpage": "Next Page",
+    "loadMore": "കൂടുതൽ ലോഡ് ചെയ്യുക"
+  },
+  "navigation": {
+    "about": "About",
+    "stories": "സ്റ്റോറീസ്",
+    "visuals": "വീഡിയോകൾ",
+    "knowledgehub": "Knowledge Hub",
+    "quicklook": "Quick Look",
+    "topics": "കാറ്റഗറികൾ",
+    "askthescholar": "Ask the Scholar",
+    "dashboard": "Dashboard",
+    "myaccount": "My Account",
+    "signin": "Sign In",
+    "logout": "Logout"
+  },
+  "sections": {
+    "storytelling": {
+      "heading": "ഇസ്‌ലാം കഥ പറയുന്നു",
+      "description": "1001 കഥകളിലൂടെ ഇസ്‌ലാമിനെ അറിയുക "
+    },
+    "holyquran": {
+      "heading": "വിശുദ്ധ ഖുർആൻ",
+      "description": "ഖുർആനിനെ അടുത്തറിയുക"
+    },
+    "trendingcategories": {
+      "heading": "ട്രെൻഡിങ് കാറ്റഗറികൾ",
+      "description": "നൂറിലധികം പോപ്പുലർ വിഷയങ്ങൾ "
+    },
+    "islamforbeginners": {
+      "heading": "തുടക്കക്കാർക്ക് ഇസ്ലാം",
+      "description": "തുടക്കക്കാർക്കായി 93-ലധികം ലേഖനങ്ങൾ"
+    },
+    "latestarticles": {
+      "heading": "ഏറ്റവും പുതിയ ലേഖനങ്ങൾ",
+      "description": "ജീവിതത്തിലെ എല്ലാ വിഷയങ്ങളിലുമുള്ള ഏറ്റവും മികച്ച ലേഖനങ്ങൾ കണ്ടെത്തുക."
+    },
+    "visuals": {
+      "heading": "വിഷ്വലുകൾ",
+      "description": "പോസ്റ്റ് കാർഡിൽ ഹോവർ ചെയ്ത് വീഡിയോ പ്രിവ്യൂ ചെയ്യുക"
+    },
+    "topratedonpreface": {
+      "heading": "പ്രിഫേസിലെ ടോപ് റേറ്റുള്ളത് ",
+      "description": "പുതിയ സുഹൃത്തുക്കൾക്ക് വേണ്ടി നൂറിലധികം വിഷയങ്ങൾ "
+    },
+    "populararticlesfrom": {
+      "heading": "കുറിച്ച് ഏറ്റവും പുതിയ ലേഖനങ്ങൾ ",
+      "description": ""
+    },
+    "populararticles": {
+      "heading": "ഏറ്റവും പുതിയ ലേഖനങ്ങൾ ",
+      "description": ""
+    }
+  }
+}

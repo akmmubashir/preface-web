@@ -1,0 +1,64 @@
+{
+  "common": {
+    "watchfullvideo": "Watch full video",
+    "startreading": "Start Reading",
+    "topics": "Topics",
+    "continuesread": "Continues Read",
+    "othertopics": "Other Topics",
+    "viewall": "View All",
+    "previouspage": "Previous Page",
+    "nextpage": "Next Page",
+    "loadMore": "تحميل المزيد"
+  },
+  "navigation": {
+    "about": "عن الموقع",
+    "stories": "القصص",
+    "visuals": "فيديوهات",
+    "knowledgehub": "مركز المعرفة",
+    "quicklook": "نظرة سريعة",
+    "topics": "الموضوعات",
+    "askthescholar": "اسأل العالِم",
+    "dashboard": "لوحة الرئيسية",
+    "myaccount": "حسابي",
+    "signin": "تسجيل الدخول",
+    "logout": "تسجيل الخروج"
+  },
+  "sections": {
+    "storytelling": {
+      "heading": "الاسلام يحكي قصته",
+      "description": "فهم الإسلام من خلال ألف قصة وقصة"
+    },
+    "holyquran": {
+      "heading": "القرآن الكريم",
+      "description": "اكتشف العناويه من القرآن الكريم"
+    },
+    "trendingcategories": {
+      "heading": "الفئات الشئعة",
+      "description": "اكتشف اكثر من 100 موضوع شائع"
+    },
+    "islamforbeginners": {
+      "heading": "الاسلام للمبتدئين",
+      "description": " اكثر من 100 مقالة للمبتدئين"
+    },
+    "latestarticles": {
+      "heading": "أحدث المقالات",
+      "description": "اطّلع على المقالات المميزة"
+    },
+    "visuals": {
+      "heading": "فيديوهات",
+      "description": "مرّر المؤشر فوق البطاقة وشاهد معاينة الفيديو"
+    },
+    "topratedonpreface": {
+      "heading": "الاعلى تقييماََ في الموقع",
+      "description": " اكثر من 100 مقالة للمبتدئين"
+    },
+    "populararticlesfrom": {
+      "heading": "لمقالات الشهيرة عن",
+      "description": "اكثر من100 مقالات"
+    },
+    "populararticles": {
+      "heading": "المقالات الشهيرة",
+      "description": ""
+    }
+  }
+}

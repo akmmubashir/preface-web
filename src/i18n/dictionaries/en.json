@@ -1,0 +1,64 @@
+{
+  "common": {
+    "watchfullvideo": "Watch full video",
+    "startreading": "Start Reading",
+    "topics": "Topics",
+    "continuesread": "Continues Read",
+    "othertopics": "Other Topics",
+    "viewall": "View All",
+    "previouspage": "Previous Page",
+    "nextpage": "Next Page",
+    "loadMore": "Load More"
+  },
+  "navigation": {
+    "about": "About",
+    "stories": "Stories",
+    "visuals": "Visuals",
+    "knowledgehub": "Knowledge Hub",
+    "quicklook": "Quick Look",
+    "topics": "Topics",
+    "askthescholar": "Ask the Scholar",
+    "dashboard": "Dashboard",
+    "myaccount": "My Account",
+    "signin": "Sign In",
+    "logout": "Logout"
+  },
+  "sections": {
+    "storytelling": {
+      "heading": "STORYTELLING ISLAM",
+      "description": "Understanding Islam through 1001 Stories"
+    },
+    "holyquran": {
+      "heading": "HOLY QUR’AN",
+      "description": "Explore the lessons from Holy Quran"
+    },
+    "trendingcategories": {
+      "heading": "TRENDING CATEGORIES",
+      "description": "Discover over 100 Popular topics"
+    },
+    "islamforbeginners": {
+      "heading": "ISLAM FOR BEGINNERS",
+      "description": "Over 100 Articles for beginners"
+    },
+    "latestarticles": {
+      "heading": "LATEST ARTICLES",
+      "description": "Discover the most outstanding articles in all topics of life"
+    },
+    "visuals": {
+      "heading": "VISUALS",
+      "description": "Hover on the post card and preview video"
+    },
+    "topratedonpreface": {
+      "heading": "TOP RATED ON PREFACE",
+      "description": "Over 100 Articles for beginners"
+    },
+    "populararticlesfrom": {
+      "heading": "POPULAR ARTICLES FROM",
+      "description": ""
+    },
+    "populararticles": {
+      "heading": "POPULAR ARTICLES",
+      "description": ""
+    }
+  }
+}
