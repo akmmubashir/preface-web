@@ -8,7 +8,8 @@
     "viewall": "View All",
     "previouspage": "Previous Page",
     "nextpage": "Next Page",
-    "loadMore": "Load More"
+    "loadMore": "Load More",
+    "loading": "Loading"
   },
   "navigation": {
     "about": "About",

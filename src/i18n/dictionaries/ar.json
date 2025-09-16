@@ -8,7 +8,8 @@
     "viewall": "View All",
     "previouspage": "Previous Page",
     "nextpage": "Next Page",
-    "loadMore": "تحميل المزيد"
+    "loadMore": "تحميل المزيد",
+    "loading": "تحميل"
   },
   "navigation": {
     "about": "عن الموقع",
