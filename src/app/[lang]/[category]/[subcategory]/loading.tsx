@@ -10,8 +10,8 @@ export default function Loading() {
       </div>
 
       <div className="container pt-10 lg:pt-20">
-        <div className="flex gap-x-2 gap-y-4 rounded-full bg-neutral-200 p-3 dark:bg-neutral-700">
-          <div className="h-2 w-14 rounded bg-neutral-400 dark:bg-neutral-800"></div>
+        <div className="flex w-16 gap-x-2 gap-y-4 rounded-full bg-neutral-200 p-3 dark:bg-neutral-700">
+          <div className="h-2 w-12 rounded bg-neutral-400 dark:bg-neutral-800"></div>
           <div className="aspect-square h-2 w-2 rounded-full bg-neutral-400 dark:bg-neutral-800"></div>
         </div>
         <PostListsSkelton />
