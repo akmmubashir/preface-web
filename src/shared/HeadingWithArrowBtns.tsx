@@ -1,19 +1,16 @@
-import { NextPrev } from "@/shared/NextPrev";
-import clsx from "clsx";
-import React, { HTMLAttributes } from "react";
-import HeadingWithSub, { HeadingWithSubProps } from "./Heading";
+import { NextPrev } from '@/shared/NextPrev'
+import clsx from 'clsx'
+import React, { HTMLAttributes } from 'react'
+import HeadingWithSub, { HeadingWithSubProps } from './Heading'
 
 interface Props
   extends HTMLAttributes<HTMLHeadingElement>,
-    Pick<
-      HeadingWithSubProps,
-      "subHeading" | "dimHeading" | "level" | "isCenter"
-    > {
-  hasNextPrev?: boolean;
-  onClickNext?: () => void;
-  onClickPrev?: () => void;
-  nextBtnDisabled?: boolean;
-  prevBtnDisabled?: boolean;
+    Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading' | 'level' | 'isCenter'> {
+  hasNextPrev?: boolean
+  onClickNext?: () => void
+  onClickPrev?: () => void
+  nextBtnDisabled?: boolean
+  prevBtnDisabled?: boolean
 }
 
 const HeadingWithArrowBtns: React.FC<Props> = ({
@@ -29,18 +26,8 @@ const HeadingWithArrowBtns: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <div
-      className={clsx(
-        "relative mb-10 flex flex-wrap items-end gap-4",
-        className
-      )}
-    >
-      <HeadingWithSub
-        className="mb-0!"
-        level={level}
-        subHeading={subHeading}
-        dimHeading={dimHeading}
-      >
+    <div className={clsx('relative mb-10 flex flex-wrap items-end gap-4', className)}>
+      <HeadingWithSub className="mb-0!" level={level} subHeading={subHeading} dimHeading={dimHeading}>
         {children}
       </HeadingWithSub>
       {hasNextPrev && (
@@ -53,7 +40,7 @@ const HeadingWithArrowBtns: React.FC<Props> = ({
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default HeadingWithArrowBtns;
+export default HeadingWithArrowBtns

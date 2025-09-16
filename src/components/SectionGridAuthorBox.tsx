@@ -1,24 +1,18 @@
-import { TAuthor } from "@/data/authors";
-import HeadingWithSub, { HeadingWithSubProps } from "@/shared/Heading";
-import clsx from "clsx";
-import { FC } from "react";
-import CardAuthorBox from "./CardAuthorBoxs/CardAuthorBox";
+import { TAuthor } from '@/data/authors'
+import HeadingWithSub, { HeadingWithSubProps } from '@/shared/Heading'
+import clsx from 'clsx'
+import { FC } from 'react'
+import CardAuthorBox from './CardAuthorBoxs/CardAuthorBox'
 
-interface Props extends Pick<HeadingWithSubProps, "subHeading" | "dimHeading"> {
-  className?: string;
-  authors: TAuthor[];
-  heading?: string;
+interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
+  className?: string
+  authors: TAuthor[]
+  heading?: string
 }
 
-const SectionGridAuthorBox: FC<Props> = ({
-  className = "",
-  authors,
-  heading,
-  subHeading,
-  dimHeading,
-}) => {
+const SectionGridAuthorBox: FC<Props> = ({ className = '', authors, heading, subHeading, dimHeading }) => {
   return (
-    <div className={clsx("section-grid-author-box relative", className)}>
+    <div className={clsx('section-grid-author-box relative', className)}>
       <HeadingWithSub subHeading={subHeading} dimHeading={dimHeading} isCenter>
         {heading}
       </HeadingWithSub>
@@ -28,7 +22,7 @@ const SectionGridAuthorBox: FC<Props> = ({
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SectionGridAuthorBox;
+export default SectionGridAuthorBox

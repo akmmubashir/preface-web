@@ -1,15 +1,15 @@
-import { Metadata } from "next";
-import SignupForm from "@/components/auth/SignupForm";
-import SocialLogin from "@/components/auth/SocialLogin";
-import Logo from "@/shared/Logo";
-import Image from "next/image";
-import Link from "next/link";
-import { GuestRoute } from "@/contexts/AuthContext";
+import SignupForm from '@/components/auth/SignupForm'
+import SocialLogin from '@/components/auth/SocialLogin'
+import { GuestRoute } from '@/contexts/AuthContext'
+import Logo from '@/shared/Logo'
+import { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: "Sign Up",
-  description: "Create a new account and join our blog magazine community",
-};
+  title: 'Sign Up',
+  description: 'Create a new account and join our blog magazine community',
+}
 
 function SignupPageContent() {
   // This component will only be rendered if GuestRoute allows it
@@ -20,12 +20,8 @@ function SignupPageContent() {
       <div className="flex flex-col justify-center bg-white px-6 sm:px-12 lg:px-20 dark:bg-black">
         <div className="mt-16 mb-10 flex flex-col items-center text-center">
           <Logo />
-          <h1 className="mt-8 text-2xl font-semibold text-[#000000] dark:text-white">
-            Create your account
-          </h1>
-          <p className="mt-1 text-sm text-[#000000] dark:text-neutral-300">
-            Welcome to our blog magazine Community
-          </p>
+          <h1 className="mt-8 text-2xl font-semibold text-[#000000] dark:text-white">Create your account</h1>
+          <p className="mt-1 text-sm text-[#000000] dark:text-neutral-300">Welcome to our blog magazine Community</p>
         </div>
 
         <div className="mx-auto max-w-md space-y-6">
@@ -38,10 +34,7 @@ function SignupPageContent() {
           {/* Footer link */}
           <div className="mb-16 block text-center text-sm text-[#404040] dark:text-neutral-300">
             Already have an account? {` `}
-            <Link
-              href="/login"
-              className="font-medium text-[#00652E] underline hover:no-underline transition-all"
-            >
+            <Link href="/login" className="font-medium text-[#00652E] underline transition-all hover:no-underline">
               Sign In
             </Link>
           </div>
@@ -60,7 +53,7 @@ function SignupPageContent() {
         />
       </div>
     </div>
-  );
+  )
 }
 
 export default function SignupPage() {
@@ -69,5 +62,5 @@ export default function SignupPage() {
     <GuestRoute>
       <SignupPageContent />
     </GuestRoute>
-  );
+  )
 }

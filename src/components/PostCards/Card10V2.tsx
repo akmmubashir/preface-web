@@ -1,49 +1,36 @@
-"use client";
-import { TPost } from "@/data/posts";
-import clsx from "clsx";
-import { FC, useState } from "react";
-import CategoryBadgeList from "../CategoryBadgeList";
-import PostCardMeta2 from "../PostCardMeta/PostCardMeta2";
-import PostCardSaveBtn from "../PostCardSaveBtn";
-import PostFeaturedMedia from "../PostFeaturedMedia/PostFeaturedMedia";
+'use client'
+import { TPost } from '@/data/posts'
+import clsx from 'clsx'
+import { FC, useState } from 'react'
+import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardMeta2 from '../PostCardMeta/PostCardMeta2'
+import PostCardSaveBtn from '../PostCardSaveBtn'
+import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 
 interface Props {
-  className?: string;
-  post: TPost;
-  ratio?: string;
-  lang?: string;
+  className?: string
+  post: TPost
+  ratio?: string
+  lang?: string
 }
 
-const Card10V2: FC<Props> = ({
-  className,
-  post,
-  ratio = "aspect-square sm:aspect-11/12",
-  lang,
-}) => {
-  const { handle, categories, bookmarked, slug } = post;
+const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-11/12', lang }) => {
+  const { handle, categories, bookmarked, slug } = post
 
-  const [isHover, setIsHover] = useState(false);
+  const [isHover, setIsHover] = useState(false)
 
   return (
     <div
-      className={clsx(
-        "group post-card-10-v2 relative flex flex-col",
-        className
-      )}
+      className={clsx('group post-card-10-v2 relative flex flex-col', className)}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      <div
-        className={clsx(
-          "relative w-full shrink-0 overflow-hidden rounded-[15px]",
-          ratio
-        )}
-      >
+      <div className={clsx('relative w-full shrink-0 overflow-hidden rounded-[15px]', ratio)}>
         <PostFeaturedMedia
           post={post}
           isHover={isHover}
           href={
-            lang === "en"
+            lang === 'en'
               ? `/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
               : `/${lang}/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
           }
@@ -56,7 +43,7 @@ const Card10V2: FC<Props> = ({
 
       <PostCardMeta2 meta={post} className="mt-4" />
     </div>
-  );
-};
+  )
+}
 
-export default Card10V2;
+export default Card10V2

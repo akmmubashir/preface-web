@@ -1,63 +1,47 @@
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import ButtonSecondary from "@/shared/ButtonSecondary";
-import { CheckIcon } from "@heroicons/react/24/solid";
-import { Metadata } from "next";
+import ButtonPrimary from '@/shared/ButtonPrimary'
+import ButtonSecondary from '@/shared/ButtonSecondary'
+import { CheckIcon } from '@heroicons/react/24/solid'
+import { Metadata } from 'next'
 
 const pricings = [
   {
     isPopular: false,
-    name: "Starter",
-    pricing: "$5",
-    per: "/mo",
-    features: ["Automated Reporting", "Faster Processing", "Customizations"],
+    name: 'Starter',
+    pricing: '$5',
+    per: '/mo',
+    features: ['Automated Reporting', 'Faster Processing', 'Customizations'],
     description: `Literally you probably haven't heard of them jean shorts.`,
   },
   {
     isPopular: true,
-    name: "Basic",
-    pricing: "$15",
-    per: "/mo",
-    features: [
-      "Everything in Starter",
-      "100 Builds",
-      "Progress Reports",
-      "Premium Support",
-    ],
+    name: 'Basic',
+    pricing: '$15',
+    per: '/mo',
+    features: ['Everything in Starter', '100 Builds', 'Progress Reports', 'Premium Support'],
     description: `Literally you probably haven't heard of them jean shorts.`,
   },
   {
     isPopular: false,
-    name: "Plus",
-    pricing: "$25",
-    per: "/mo",
-    features: [
-      "Everything in Basic",
-      "Unlimited Builds",
-      "Advanced Analytics",
-      "Company Evaluations",
-    ],
+    name: 'Plus',
+    pricing: '$25',
+    per: '/mo',
+    features: ['Everything in Basic', 'Unlimited Builds', 'Advanced Analytics', 'Company Evaluations'],
     description: `Literally you probably haven't heard of them jean shorts.`,
   },
-];
+]
 
 export const metadata: Metadata = {
-  title: "Subscription",
-  description:
-    "Subscription page for our service, offering various pricing plans to fit your needs.",
-};
+  title: 'Subscription',
+  description: 'Subscription page for our service, offering various pricing plans to fit your needs.',
+}
 
 const Page = () => {
-  const renderPricingItem = (
-    pricing: (typeof pricings)[number],
-    index: number
-  ) => {
+  const renderPricingItem = (pricing: (typeof pricings)[number], index: number) => {
     return (
       <div
         key={index}
         className={`relative flex h-full flex-col overflow-hidden rounded-3xl border-2 px-6 py-8 ${
-          pricing.isPopular
-            ? "border-primary-500"
-            : "border-neutral-100 dark:border-neutral-700"
+          pricing.isPopular ? 'border-primary-500' : 'border-neutral-100 dark:border-neutral-700'
         }`}
       >
         {pricing.isPopular && (
@@ -71,9 +55,7 @@ const Page = () => {
           </h3>
           <h2 className="flex items-center text-5xl leading-none text-neutral-900 dark:text-neutral-300">
             <span>{pricing.pricing}</span>
-            <span className="ms-1 text-lg font-normal text-neutral-500">
-              {pricing.per}
-            </span>
+            <span className="ms-1 text-lg font-normal text-neutral-500">{pricing.per}</span>
           </h2>
         </div>
         <nav className="mb-8 space-y-4">
@@ -82,9 +64,7 @@ const Page = () => {
               <span className="me-4 inline-flex shrink-0 text-primary-600">
                 <CheckIcon className="h-5 w-5" aria-hidden="true" />
               </span>
-              <span className="text-neutral-700 dark:text-neutral-300">
-                {item}
-              </span>
+              <span className="text-neutral-700 dark:text-neutral-300">{item}</span>
             </li>
           ))}
         </nav>
@@ -96,13 +76,11 @@ const Page = () => {
               <span className="font-medium">Submit</span>
             </ButtonSecondary>
           )}
-          <p className="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
-            {pricing.description}
-          </p>
+          <p className="mt-3 text-xs text-neutral-500 dark:text-neutral-400">{pricing.description}</p>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className={`container pb-24 lg:pb-32`}>
@@ -116,12 +94,10 @@ const Page = () => {
         </span>
       </header>
       <section className="overflow-hidden text-sm text-neutral-600 md:text-base">
-        <div className="grid gap-5 lg:grid-cols-3 xl:gap-8">
-          {pricings.map(renderPricingItem)}
-        </div>
+        <div className="grid gap-5 lg:grid-cols-3 xl:gap-8">{pricings.map(renderPricingItem)}</div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

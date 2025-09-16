@@ -1,10 +1,10 @@
-import SectionHero from "@/components/SectionHero";
-import rightImg from "@/images/about-hero-right.png";
-import { Button } from "@/shared/Button";
-import Input from "@/shared/Input";
-import { Divider } from "@/shared/divider";
-import SectionFounder from "./SectionFounder";
-import SectionStatistic from "./SectionStatistic";
+import SectionHero from '@/components/SectionHero'
+import rightImg from '@/images/about-hero-right.png'
+import { Button } from '@/shared/Button'
+import Input from '@/shared/Input'
+import { Divider } from '@/shared/divider'
+import SectionFounder from './SectionFounder'
+import SectionStatistic from './SectionStatistic'
 
 const PageAbout = ({}) => {
   return (
@@ -42,11 +42,8 @@ const PageAbout = ({}) => {
                 <Button type="submit">Subscribe</Button>
               </div>
               <p className="mt-4 text-sm/6">
-                We care about your data. Read our{" "}
-                <a
-                  href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
+                We care about your data. Read our{' '}
+                <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
                   privacy&nbsp;policy
                 </a>
                 .
@@ -56,7 +53,7 @@ const PageAbout = ({}) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PageAbout;
+export default PageAbout

@@ -1,21 +1,21 @@
-import { ApplicationLayout } from "@/app/[lang]/application-layout";
-import BackgroundSection from "@/components/BackgroundSection";
-import SectionGridCategoryBox from "@/components/SectionGridCategoryBox";
-import SectionSliderNewAuthors from "@/components/SectionSliderNewAuthors";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
-import { getAuthors } from "@/data/authors";
-import { getCategories } from "@/data/categories";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import { ReactNode } from "react";
+import { ApplicationLayout } from '@/app/[lang]/application-layout'
+import BackgroundSection from '@/components/BackgroundSection'
+import SectionGridCategoryBox from '@/components/SectionGridCategoryBox'
+import SectionSliderNewAuthors from '@/components/SectionSliderNewAuthors'
+import SectionSubscribe2 from '@/components/SectionSubscribe2'
+import { getAuthors } from '@/data/authors'
+import { getCategories } from '@/data/categories'
+import ButtonPrimary from '@/shared/ButtonPrimary'
+import { ReactNode } from 'react'
 
 interface Props {
-  children: ReactNode;
-  params: Promise<{ lang: string }>;
+  children: ReactNode
+  params: Promise<{ lang: string }>
 }
 
 const Layout: React.FC<Props> = async ({ children, params }) => {
-  const categories = await getCategories();
-  const authors = await getAuthors();
+  const categories = await getCategories()
+  const authors = await getAuthors()
   return (
     <ApplicationLayout params={params}>
       {children}
@@ -38,7 +38,7 @@ const Layout: React.FC<Props> = async ({ children, params }) => {
         <SectionSubscribe2 />
       </div>
     </ApplicationLayout>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

@@ -1,33 +1,21 @@
-"use client";
+'use client'
 
-import ButtonPlayMusicPlayer from "@/components/ButtonPlayMusicPlayer";
-import { TPost } from "@/data/posts";
-import playingIcon from "@/images/icon-playing.gif";
-import clsx from "clsx";
-import Image from "next/image";
+import ButtonPlayMusicPlayer from '@/components/ButtonPlayMusicPlayer'
+import { TPost } from '@/data/posts'
+import playingIcon from '@/images/icon-playing.gif'
+import clsx from 'clsx'
+import Image from 'next/image'
 
 const AudioPlayerButton = ({ post }: { post: TPost }) => {
-  const { featuredImage, title } = post;
+  const { featuredImage, title } = post
 
   const renderIcon = (playing: boolean) => {
     if (playing) {
-      return (
-        <Image
-          className="w-7"
-          src={playingIcon}
-          alt="playing"
-          priority
-          sizes="30px"
-        />
-      );
+      return <Image className="w-7" src={playingIcon} alt="playing" priority sizes="30px" />
     }
 
     return (
-      <svg
-        className="ms-0.5 size-11 rtl:rotate-180"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
+      <svg className="ms-0.5 size-11 rtl:rotate-180" fill="currentColor" viewBox="0 0 24 24">
         <path
           stroke="currentColor"
           strokeLinecap="round"
@@ -36,16 +24,16 @@ const AudioPlayerButton = ({ post }: { post: TPost }) => {
           d="M18.25 12L5.75 5.75V18.25L18.25 12Z"
         ></path>
       </svg>
-    );
-  };
+    )
+  }
 
   const renderButtonPlay = (playing: boolean) => {
     return (
       <div className="group relative size-full cursor-pointer">
         <Image
           className={clsx(
-            "nc-animation-spin rounded-full object-cover shadow-2xl brightness-50 transition-transform",
-            playing && "playing"
+            'nc-animation-spin rounded-full object-cover shadow-2xl brightness-50 transition-transform',
+            playing && 'playing'
           )}
           src={featuredImage}
           sizes="300px"
@@ -60,8 +48,8 @@ const AudioPlayerButton = ({ post }: { post: TPost }) => {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <ButtonPlayMusicPlayer
@@ -70,7 +58,7 @@ const AudioPlayerButton = ({ post }: { post: TPost }) => {
       customPaused={renderButtonPlay(false)}
       post={post}
     />
-  );
-};
+  )
+}
 
-export default AudioPlayerButton;
+export default AudioPlayerButton

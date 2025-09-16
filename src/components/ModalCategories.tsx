@@ -1,35 +1,24 @@
-"use client";
+'use client'
 
-import CardCategory1 from "@/components/CategoryCards/CardCategory1";
-import { TCategory } from "@/data/categories";
-import { Button } from "@/shared/Button";
-import {
-  Dialog,
-  DialogActions,
-  DialogBody,
-  DialogTitle,
-} from "@/shared/dialog";
-import { Divider } from "@/shared/divider";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { NotificationSquareIcon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { FC, useState } from "react";
+import CardCategory1 from '@/components/CategoryCards/CardCategory1'
+import { TCategory } from '@/data/categories'
+import { Button } from '@/shared/Button'
+import { Dialog, DialogActions, DialogBody, DialogTitle } from '@/shared/dialog'
+import { Divider } from '@/shared/divider'
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
+import { FC, useState } from 'react'
 
 interface Props {
-  categories: TCategory[];
+  categories: TCategory[]
 }
 
 const ModalCategories: FC<Props> = ({ categories }) => {
-  let [isOpen, setIsOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className="modal-categories">
       <>
-        <Button
-          type="button"
-          color="transparent"
-          onClick={() => setIsOpen(true)}
-        >
+        <Button type="button" color="transparent" onClick={() => setIsOpen(true)}>
           {/* <HugeiconsIcon icon={NotificationSquareIcon} size={24} /> */}
           <span>Other Categories</span>
           <ChevronDownIcon className="size-4" />
@@ -53,7 +42,7 @@ const ModalCategories: FC<Props> = ({ categories }) => {
         </Dialog>
       </>
     </div>
-  );
-};
+  )
+}
 
-export default ModalCategories;
+export default ModalCategories

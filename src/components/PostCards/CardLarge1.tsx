@@ -1,29 +1,24 @@
-import NcImage from "@/components/NcImage/NcImage";
-import { TPost } from "@/data/posts";
-import { NextPrev } from "@/shared/NextPrev";
-import clsx from "clsx";
-import Link from "next/link";
-import { FC } from "react";
-import CategoryBadgeList from "../CategoryBadgeList";
-import PostCardCommentBtn from "../PostCardCommentBtn";
-import PostCardLikeBtn from "../PostCardLikeBtn";
-import PostCardMeta3 from "../PostCardMeta/PostCardMeta3";
-import PostCardSaveBtn from "../PostCardSaveBtn";
-import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon";
+import NcImage from '@/components/NcImage/NcImage'
+import { TPost } from '@/data/posts'
+import { NextPrev } from '@/shared/NextPrev'
+import clsx from 'clsx'
+import Link from 'next/link'
+import { FC } from 'react'
+import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardCommentBtn from '../PostCardCommentBtn'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardMeta3 from '../PostCardMeta/PostCardMeta3'
+import PostCardSaveBtn from '../PostCardSaveBtn'
+import PostTypeFeaturedIcon from '../PostTypeFeaturedIcon'
 
 interface Props {
-  className?: string;
-  post: TPost;
-  onClickNext?: () => void;
-  onClickPrev?: () => void;
+  className?: string
+  post: TPost
+  onClickNext?: () => void
+  onClickPrev?: () => void
 }
 
-const CardLarge1: FC<Props> = ({
-  className,
-  post,
-  onClickNext,
-  onClickPrev,
-}) => {
+const CardLarge1: FC<Props> = ({ className, post, onClickNext, onClickPrev }) => {
   const {
     featuredImage,
     title,
@@ -36,11 +31,11 @@ const CardLarge1: FC<Props> = ({
     commentCount,
     liked,
     bookmarked,
-  } = post;
+  } = post
   return (
     <div
       className={clsx(
-        "nc-CardLarge1 nc-CardLarge1--hasAnimation relative flex flex-col-reverse justify-end md:flex-row",
+        'nc-CardLarge1 nc-CardLarge1--hasAnimation relative flex flex-col-reverse justify-end md:flex-row',
         className
       )}
     >
@@ -49,11 +44,7 @@ const CardLarge1: FC<Props> = ({
           <CategoryBadgeList categories={categories} />
 
           <h2 className="nc-card-title text-base font-semibold sm:text-xl lg:text-2xl">
-            <Link
-              href={`/post/${handle}`}
-              className="line-clamp-2"
-              title={title}
-            >
+            <Link href={`/post/${handle}`} className="line-clamp-2" title={title}>
               {title}
             </Link>
           </h2>
@@ -72,18 +63,11 @@ const CardLarge1: FC<Props> = ({
           </div>
         </div>
         <div className="p-4 sm:px-10 sm:pt-8">
-          <NextPrev
-            btnClassName="size-11"
-            onClickNext={onClickNext}
-            onClickPrev={onClickPrev}
-          />
+          <NextPrev btnClassName="size-11" onClickNext={onClickNext} onClickPrev={onClickPrev} />
         </div>
       </div>
       <div className="w-full md:w-4/5 lg:w-2/3">
-        <Link
-          href={`/post/${handle}`}
-          className="nc-CardLarge1__right relative block"
-        >
+        <Link href={`/post/${handle}`} className="nc-CardLarge1__right relative block">
           <NcImage
             containerClassName="relative aspect-w-16 aspect-h-12 sm:aspect-h-9 md:aspect-h-14 lg:aspect-h-10 2xl:aspect-h-9"
             className="absolute inset-0 rounded-3xl object-cover"
@@ -94,14 +78,11 @@ const CardLarge1: FC<Props> = ({
             priority
           />
           {/* META TYPE */}
-          <PostTypeFeaturedIcon
-            postType={post.postType}
-            className="absolute end-5 top-5"
-          />
+          <PostTypeFeaturedIcon postType={post.postType} className="absolute end-5 top-5" />
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardLarge1;
+export default CardLarge1

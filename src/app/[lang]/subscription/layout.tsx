@@ -1,9 +1,9 @@
-import { ApplicationLayout } from "@/app/[lang]/application-layout";
-import { ReactNode } from "react";
+import { ApplicationLayout } from '@/app/[lang]/application-layout'
+import { ReactNode } from 'react'
 
 interface Props {
-  children: ReactNode;
-  params: Promise<{ lang: string }>;
+  children: ReactNode
+  params: Promise<{ lang: string }>
 }
 
 const Layout: React.FC<Props> = ({ children, params }) => {
@@ -11,7 +11,7 @@ const Layout: React.FC<Props> = ({ children, params }) => {
     <ApplicationLayout params={params} headerHasBorder>
       {children}
     </ApplicationLayout>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

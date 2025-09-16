@@ -1,88 +1,88 @@
-"use client";
+'use client'
 
-import CurrLangDropdown from "@/components/Header/CurrLangDropdown";
-import { INFlag, SAFlag, USFlag } from "@/components/Header/FlagIcons";
-import { CalendarIcon, HomeIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import Link from "next/link";
-import { FC, useEffect, useState } from "react";
+import CurrLangDropdown from '@/components/Header/CurrLangDropdown'
+import { INFlag, SAFlag, USFlag } from '@/components/Header/FlagIcons'
+import { CalendarIcon, HomeIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
+import Link from 'next/link'
+import { FC, useEffect, useState } from 'react'
 
 interface Navbar2Props {
-  home?: boolean;
-  lang?: string;
-  dict?: any;
+  home?: boolean
+  lang?: string
+  dict?: any
 }
 
 const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
-  const [currentTime, setCurrentTime] = useState<string>("");
-  const [currentDate, setCurrentDate] = useState<string>("");
+  const [currentTime, setCurrentTime] = useState<string>('')
+  const [currentDate, setCurrentDate] = useState<string>('')
 
   // Language data with country flags
   const languages = [
     {
-      id: "English",
-      name: "English",
-      description: "United States",
-      href: "#",
+      id: 'English',
+      name: 'English',
+      description: 'United States',
+      href: '#',
       active: true,
-      code: "en",
+      code: 'en',
       FlagComponent: USFlag,
     },
     {
-      id: "Arabic",
-      name: "العربية",
-      description: "Saudi Arabia",
-      href: "#",
-      code: "ar",
+      id: 'Arabic',
+      name: 'العربية',
+      description: 'Saudi Arabia',
+      href: '#',
+      code: 'ar',
       FlagComponent: SAFlag,
     },
     {
-      id: "Malayalam",
-      name: "മലയാളം",
-      description: "India",
-      href: "#",
-      code: "ml",
+      id: 'Malayalam',
+      name: 'മലയാളം',
+      description: 'India',
+      href: '#',
+      code: 'ml',
       FlagComponent: INFlag,
     },
-  ];
+  ]
 
   // Update time and date
   useEffect(() => {
     const updateDateTime = () => {
-      const now = new Date();
+      const now = new Date()
 
       // Format time (e.g., "11:31 AM")
-      const timeStr = now.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
+      const timeStr = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
         hour12: true,
-      });
+      })
 
       // Format date (e.g., "06/07/2025")
-      const dateStr = now.toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      });
+      const dateStr = now.toLocaleDateString('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+      })
 
-      setCurrentTime(timeStr);
-      setCurrentDate(dateStr);
-    };
+      setCurrentTime(timeStr)
+      setCurrentDate(dateStr)
+    }
 
     // Update immediately
-    updateDateTime();
+    updateDateTime()
 
     // Update every minute
-    const interval = setInterval(updateDateTime, 60000);
+    const interval = setInterval(updateDateTime, 60000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
-  const activeLanguage = languages.find((lang) => lang.active) || languages[0];
+  const activeLanguage = languages.find((lang) => lang.active) || languages[0]
 
   return (
     <div
-      dir={lang === "ar" ? "rtl" : "ltr"}
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
       className="relative flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1"
     >
       <div
@@ -92,7 +92,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         <div
           style={{
             clipPath:
-              "polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)",
+              'polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)',
           }}
           className="aspect-577/310 w-144.25"
         />
@@ -104,7 +104,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         <div
           style={{
             clipPath:
-              "polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)",
+              'polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)',
           }}
           className="aspect-577/310 w-144.25"
         />
@@ -115,10 +115,8 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         <Link
           href="/"
           className={clsx(
-            "flex items-center gap-x-1 rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10",
-            home
-              ? "text-[#fff] dark:text-[#fff]"
-              : "text-[#000000] dark:text-white"
+            'flex items-center gap-x-1 rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10',
+            home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
           )}
           title="Home"
         >
@@ -130,9 +128,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
           href="/about"
           className={clsx(
             `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:bg-white/10 ${
-              home
-                ? "text-[#fff] dark:text-[#fff]"
-                : "text-[#000000] dark:text-white"
+              home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
             }`
           )}
         >
@@ -182,10 +178,8 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         {/* Calendar with Date and Time */}
         <div
           className={clsx(
-            "flex items-center gap-x-2 text-sm font-medium",
-            home
-              ? "text-[#fff] dark:text-[#fff]"
-              : "text-[#000000] dark:text-white"
+            'flex items-center gap-x-2 text-sm font-medium',
+            home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
           )}
         >
           <CalendarIcon className="h-5 w-5" />
@@ -196,7 +190,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar2;
+export default Navbar2

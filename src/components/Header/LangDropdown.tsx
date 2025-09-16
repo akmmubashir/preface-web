@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   Popover,
@@ -10,107 +10,107 @@ import {
   TabPanel,
   TabPanels,
   Transition,
-} from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { GlobeAltIcon } from "@heroicons/react/24/outline";
+} from '@headlessui/react'
 import {
-  CurrencyDollarIcon,
   CurrencyBangladeshiIcon,
+  CurrencyDollarIcon,
   CurrencyEuroIcon,
   CurrencyPoundIcon,
   CurrencyRupeeIcon,
-} from "@heroicons/react/24/outline";
-import { FC, Fragment } from "react";
+  GlobeAltIcon,
+} from '@heroicons/react/24/outline'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { FC, Fragment } from 'react'
 
 export const headerCurrency = [
   {
-    id: "EUR",
-    name: "EUR",
-    href: "##",
+    id: 'EUR',
+    name: 'EUR',
+    href: '##',
     icon: CurrencyEuroIcon,
     active: true,
   },
   {
-    id: "USD",
-    name: "USD",
-    href: "##",
+    id: 'USD',
+    name: 'USD',
+    href: '##',
     icon: CurrencyDollarIcon,
   },
   {
-    id: "GBF",
-    name: "GBF",
-    href: "##",
+    id: 'GBF',
+    name: 'GBF',
+    href: '##',
     icon: CurrencyBangladeshiIcon,
   },
   {
-    id: "SAR",
-    name: "SAR",
-    href: "##",
+    id: 'SAR',
+    name: 'SAR',
+    href: '##',
     icon: CurrencyPoundIcon,
   },
   {
-    id: "QAR",
-    name: "QAR",
-    href: "##",
+    id: 'QAR',
+    name: 'QAR',
+    href: '##',
     icon: CurrencyRupeeIcon,
   },
   {
-    id: "BAD",
-    name: "BAD",
-    href: "##",
+    id: 'BAD',
+    name: 'BAD',
+    href: '##',
     icon: CurrencyBangladeshiIcon,
   },
-];
+]
 
 export const headerLanguage = [
   {
-    id: "English",
-    name: "English",
-    description: "United State",
-    href: "##",
+    id: 'English',
+    name: 'English',
+    description: 'United State',
+    href: '##',
     active: true,
   },
   {
-    id: "Vietnamese",
-    name: "Vietnamese",
-    description: "Vietnamese",
-    href: "##",
+    id: 'Vietnamese',
+    name: 'Vietnamese',
+    description: 'Vietnamese',
+    href: '##',
   },
   {
-    id: "Francais",
-    name: "Francais",
-    description: "Belgique",
-    href: "##",
+    id: 'Francais',
+    name: 'Francais',
+    description: 'Belgique',
+    href: '##',
   },
   {
-    id: "Francais",
-    name: "Francais",
-    description: "Canada",
-    href: "##",
+    id: 'Francais',
+    name: 'Francais',
+    description: 'Canada',
+    href: '##',
   },
   {
-    id: "Francais",
-    name: "Francais",
-    description: "Belgique",
-    href: "##",
+    id: 'Francais',
+    name: 'Francais',
+    description: 'Belgique',
+    href: '##',
   },
   {
-    id: "Francais",
-    name: "Francais",
-    description: "Canada",
-    href: "##",
+    id: 'Francais',
+    name: 'Francais',
+    description: 'Canada',
+    href: '##',
   },
-];
+]
 
 interface LangDropdownProps {
-  panelClassName?: string;
+  panelClassName?: string
 }
 
 function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ')
 }
 
-const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
+const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = '' }) => {
   const renderLang = (close: () => void) => {
     return (
       <div className="grid gap-8 lg:grid-cols-2">
@@ -120,20 +120,18 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
             href={item.href}
             onClick={() => close()}
             className={`-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500 dark:hover:bg-gray-700 ${
-              item.active ? "bg-gray-100 dark:bg-gray-700" : "opacity-80"
+              item.active ? 'bg-gray-100 dark:bg-gray-700' : 'opacity-80'
             }`}
           >
             <div className="">
               <p className="text-sm font-medium">{item.name}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {item.description}
-              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{item.description}</p>
             </div>
           </a>
         ))}
       </div>
-    );
-  };
+    )
+  }
 
   const renderCurr = (close: () => void) => {
     return (
@@ -144,7 +142,7 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
             href={item.href}
             onClick={() => close()}
             className={`-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500 dark:hover:bg-gray-700 ${
-              item.active ? "bg-gray-100 dark:bg-gray-700" : "opacity-80"
+              item.active ? 'bg-gray-100 dark:bg-gray-700' : 'opacity-80'
             }`}
           >
             <item.icon className="h-[18px] w-[18px]" />
@@ -152,8 +150,8 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
           </a>
         ))}
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="LangDropdown hidden md:block">
@@ -166,9 +164,7 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
               <GlobeAltIcon className="h-[18px] w-[18px] opacity-80" />
               <span className="ms-2">Language</span>
               <ChevronDownIcon
-                className={`${
-                  open ? "-rotate-180" : ""
-                } ms-1 h-4 w-4 transition duration-150 ease-in-out`}
+                className={`${open ? '-rotate-180' : ''} ms-1 h-4 w-4 transition duration-150 ease-in-out`}
                 aria-hidden="true"
               />
             </PopoverButton>
@@ -181,22 +177,20 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <PopoverPanel
-                className={`absolute end-0 z-20 mt-3.5 w-96 ${panelClassName}`}
-              >
+              <PopoverPanel className={`absolute end-0 z-20 mt-3.5 w-96 ${panelClassName}`}>
                 <div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5 dark:bg-neutral-800">
                   <TabGroup>
                     <TabList className="flex space-x-1 rounded-full bg-gray-100 p-1 dark:bg-slate-700">
-                      {["Language", "Currency"].map((category) => (
+                      {['Language', 'Currency'].map((category) => (
                         <Tab
                           key={category}
                           className={({ selected }) =>
                             classNames(
-                              "w-full rounded-full py-2 text-sm leading-5 font-medium text-gray-700",
-                              "focus:ring-0 focus:outline-hidden",
+                              'w-full rounded-full py-2 text-sm leading-5 font-medium text-gray-700',
+                              'focus:ring-0 focus:outline-hidden',
                               selected
-                                ? "bg-white shadow-sm"
-                                : "text-gray-700 hover:bg-white/70 dark:text-slate-300 dark:hover:bg-slate-900/40"
+                                ? 'bg-white shadow-sm'
+                                : 'text-gray-700 hover:bg-white/70 dark:text-slate-300 dark:hover:bg-slate-900/40'
                             )
                           }
                         >
@@ -205,20 +199,10 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
                       ))}
                     </TabList>
                     <TabPanels className="mt-5">
-                      <TabPanel
-                        className={classNames(
-                          "rounded-xl p-3",
-                          "focus:ring-0 focus:outline-hidden"
-                        )}
-                      >
+                      <TabPanel className={classNames('rounded-xl p-3', 'focus:ring-0 focus:outline-hidden')}>
                         {renderLang(close)}
                       </TabPanel>
-                      <TabPanel
-                        className={classNames(
-                          "rounded-xl p-3",
-                          "focus:ring-0 focus:outline-hidden"
-                        )}
-                      >
+                      <TabPanel className={classNames('rounded-xl p-3', 'focus:ring-0 focus:outline-hidden')}>
                         {renderCurr(close)}
                       </TabPanel>
                     </TabPanels>
@@ -230,6 +214,6 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
         )}
       </Popover>
     </div>
-  );
-};
-export default LangDropdown;
+  )
+}
+export default LangDropdown

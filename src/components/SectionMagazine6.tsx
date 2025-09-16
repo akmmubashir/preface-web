@@ -1,30 +1,23 @@
-import PostCardMeta from "@/components/PostCardMeta/PostCardMeta";
-import { TPost } from "@/data/posts";
-import { HeadingWithSubProps } from "@/shared/Heading";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { FC } from "react";
-import PostCardMeta3 from "./PostCardMeta/PostCardMeta3";
-import SectionTabHeader from "./SectionTabHeader";
+import PostCardMeta from '@/components/PostCardMeta/PostCardMeta'
+import { TPost } from '@/data/posts'
+import { HeadingWithSubProps } from '@/shared/Heading'
+import clsx from 'clsx'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FC } from 'react'
+import PostCardMeta3 from './PostCardMeta/PostCardMeta3'
+import SectionTabHeader from './SectionTabHeader'
 
-type Props = Pick<HeadingWithSubProps, "subHeading" | "dimHeading"> & {
-  posts: TPost[];
-  className?: string;
-  heading?: string;
-};
+type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> & {
+  posts: TPost[]
+  className?: string
+  heading?: string
+}
 
-const SectionMagazine6: FC<Props> = ({
-  posts,
-  heading,
-  className,
-  subHeading,
-  dimHeading,
-}) => {
+const SectionMagazine6: FC<Props> = ({ posts, heading, className, subHeading, dimHeading }) => {
   const renderMain = () => {
-    const { featuredImage, author, title, date, excerpt, handle, readingTime } =
-      posts[0];
-    const subPosts = posts.slice(1);
+    const { featuredImage, author, title, date, excerpt, handle, readingTime } = posts[0]
+    const subPosts = posts.slice(1)
     return (
       <main className="relative">
         {/* Image */}
@@ -48,17 +41,11 @@ const SectionMagazine6: FC<Props> = ({
                   {title}
                 </Link>
               </h2>
-              <span className="mt-5 hidden text-base/relaxed text-neutral-200 lg:block">
-                {excerpt}
-              </span>
+              <span className="mt-5 hidden text-base/relaxed text-neutral-200 lg:block">{excerpt}</span>
             </div>
 
             <div className="mt-7">
-              <PostCardMeta3
-                readingTime={readingTime}
-                date={date}
-                author={author}
-              />
+              <PostCardMeta3 readingTime={readingTime} date={date} author={author} />
             </div>
           </div>
         </div>
@@ -70,38 +57,32 @@ const SectionMagazine6: FC<Props> = ({
               {subPosts.map((post, i) => (
                 <div key={i} className="block py-5 lg:py-7">
                   <h2 className="nc-card-title text-sm font-semibold lg:text-base">
-                    <Link
-                      href={`/post/${post.handle}`}
-                      className="line-clamp-2"
-                    >
+                    <Link href={`/post/${post.handle}`} className="line-clamp-2">
                       {post.title}
                     </Link>
                   </h2>
-                  <PostCardMeta
-                    className="mt-4 text-xs sm:text-sm"
-                    meta={post}
-                  />
+                  <PostCardMeta className="mt-4 text-xs sm:text-sm" meta={post} />
                 </div>
               ))}
             </div>
           </div>
         </div>
       </main>
-    );
-  };
+    )
+  }
 
   return (
-    <div className={clsx("section-magazine-6 relative", className)}>
+    <div className={clsx('section-magazine-6 relative', className)}>
       <SectionTabHeader
         heading={heading}
         subHeading={subHeading}
         dimHeading={dimHeading}
         tabActive="development"
-        tabs={["development", "design", "illustration", "photography"]}
+        tabs={['development', 'design', 'illustration', 'photography']}
       />
       {posts[0] && renderMain()}
     </div>
-  );
-};
+  )
+}
 
-export default SectionMagazine6;
+export default SectionMagazine6

@@ -1,74 +1,57 @@
-"use client";
+'use client'
 
-import { TPost } from "@/data/posts";
-import SpinLoading from "@/shared/spin-loading";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { FC, useState } from "react";
-import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon";
-import MediaVideo from "./MediaVideo";
+import { TPost } from '@/data/posts'
+import SpinLoading from '@/shared/spin-loading'
+import clsx from 'clsx'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FC, useState } from 'react'
+import PostTypeFeaturedIcon from '../PostTypeFeaturedIcon'
+import MediaVideo from './MediaVideo'
 
 interface Props {
-  className?: string;
-  post: TPost;
+  className?: string
+  post: TPost
 }
 
 const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
-  const {
-    featuredImage,
-    thumbnail,
-    postType,
-    videoFile,
-    videoUrl,
-    video_file,
-    handle,
-    title,
-  } = post;
-  const [isHovered, setIsHovered] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { featuredImage, thumbnail, postType, videoFile, videoUrl, video_file, handle, title } = post
+  const [isHovered, setIsHovered] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   // Use video_file as primary, then videoFile, then videoUrl as fallbacks
-  const videoSource = video_file || videoFile || videoUrl;
+  const videoSource = video_file || videoFile || videoUrl
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
-    setIsLoading(true);
+    setIsHovered(true)
+    setIsLoading(true)
 
     // If no video source, stop loading after 2 seconds
     if (!videoSource) {
       setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
+        setIsLoading(false)
+      }, 2000)
     }
-  };
+  }
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsLoading(false);
-  };
+    setIsHovered(false)
+    setIsLoading(false)
+  }
 
   const handleVideoStart = () => {
-    setIsLoading(false);
-  };
+    setIsLoading(false)
+  }
 
   const renderImage = () => {
-    const imageSrc = featuredImage || thumbnail;
-    if (!imageSrc) return null;
-    return (
-      <Image
-        alt={title}
-        fill
-        className="object-cover"
-        src={imageSrc}
-        sizes="(max-width: 600px) 100vw, 50vw"
-      />
-    );
-  };
+    const imageSrc = featuredImage || thumbnail
+    if (!imageSrc) return null
+    return <Image alt={title} fill className="object-cover" src={imageSrc} sizes="(max-width: 600px) 100vw, 50vw" />
+  }
 
   return (
     <div
-      className={clsx("relative size-full overflow-hidden", className)}
+      className={clsx('relative size-full overflow-hidden', className)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -99,13 +82,7 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
 
       {/* Video Player - shown when hovered and video source exists */}
       {isHovered && videoSource && (
-        <MediaVideo
-          isHover={true}
-          videoUrl={videoSource}
-          handle={handle}
-          autoPlay={false}
-          onStart={handleVideoStart}
-        />
+        <MediaVideo isHover={true} videoUrl={videoSource} handle={handle} autoPlay={false} onStart={handleVideoStart} />
       )}
 
       {/* Fallback for no video source - keep showing loading */}
@@ -118,7 +95,7 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
       {/* Link overlay */}
       <Link href={`/video/${post.slug}`} className="absolute inset-0 z-10" />
     </div>
-  );
-};
+  )
+}
 
-export default VideoHoverPlayer;
+export default VideoHoverPlayer

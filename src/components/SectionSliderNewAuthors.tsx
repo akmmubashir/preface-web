@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import { ThemeContext } from "@/app/theme-provider";
-import { TAuthor } from "@/data/authors";
-import { useCarouselArrowButtons } from "@/hooks/use-carousel-arrow-buttons";
-import { HeadingWithSubProps } from "@/shared/Heading";
-import HeadingWithArrowBtns from "@/shared/HeadingWithArrowBtns";
-import clsx from "clsx";
-import type { EmblaOptionsType } from "embla-carousel";
-import useEmblaCarousel from "embla-carousel-react";
-import { FC, useContext } from "react";
-import CardAuthorBox2 from "./CardAuthorBoxs/CardAuthorBox2";
+import { ThemeContext } from '@/app/theme-provider'
+import { TAuthor } from '@/data/authors'
+import { useCarouselArrowButtons } from '@/hooks/use-carousel-arrow-buttons'
+import { HeadingWithSubProps } from '@/shared/Heading'
+import HeadingWithArrowBtns from '@/shared/HeadingWithArrowBtns'
+import clsx from 'clsx'
+import type { EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
+import { FC, useContext } from 'react'
+import CardAuthorBox2 from './CardAuthorBoxs/CardAuthorBox2'
 
-interface Props extends Pick<HeadingWithSubProps, "subHeading" | "dimHeading"> {
-  className?: string;
-  heading?: string;
-  authors: TAuthor[];
-  emblaOptions?: EmblaOptionsType;
+interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
+  className?: string
+  heading?: string
+  authors: TAuthor[]
+  emblaOptions?: EmblaOptionsType
 }
 
 const SectionSliderNewAuthors: FC<Props> = ({
@@ -25,23 +25,18 @@ const SectionSliderNewAuthors: FC<Props> = ({
   authors,
   heading,
   emblaOptions = {
-    slidesToScroll: "auto",
+    slidesToScroll: 'auto',
   },
 }) => {
-  const theme = useContext(ThemeContext);
+  const theme = useContext(ThemeContext)
   const [emblaRef, emblaApi] = useEmblaCarousel({
     ...emblaOptions,
     direction: theme?.themeDir,
-  });
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick,
-  } = useCarouselArrowButtons(emblaApi);
+  })
+  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = useCarouselArrowButtons(emblaApi)
 
   return (
-    <div className={clsx("section-slider-new-authors relative", className)}>
+    <div className={clsx('section-slider-new-authors relative', className)}>
       <HeadingWithArrowBtns
         hasNextPrev
         prevBtnDisabled={prevBtnDisabled}
@@ -67,7 +62,7 @@ const SectionSliderNewAuthors: FC<Props> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SectionSliderNewAuthors;
+export default SectionSliderNewAuthors

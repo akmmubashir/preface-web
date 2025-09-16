@@ -1,48 +1,43 @@
-import { ReactNode } from "react";
-import { Noto_Kufi_Arabic, Noto_Serif } from "next/font/google";
-import Header2 from "@/components/Header/Header2";
-import SocialSidebar from "@/components/SocialSidebar";
-import AsideSidebarNavigation from "@/components/aside-sidebar-navigation";
-import Navbar2 from "@/shared/Navbar2";
-import Footer from "@/components/Footer/Footer";
-import { getNavigation as fetchNavigation } from "@/data/navigation";
-import { getAllPosts } from "@/data/posts";
-import { getDictionary } from "@/i18n";
+import Footer from '@/components/Footer/Footer'
+import Header2 from '@/components/Header/Header2'
+import SocialSidebar from '@/components/SocialSidebar'
+import AsideSidebarNavigation from '@/components/aside-sidebar-navigation'
+import { getNavigation as fetchNavigation } from '@/data/navigation'
+import { getAllPosts } from '@/data/posts'
+import { getDictionary } from '@/i18n'
+import Navbar2 from '@/shared/Navbar2'
+import { Noto_Kufi_Arabic, Noto_Serif } from 'next/font/google'
+import { ReactNode } from 'react'
 
 interface Props {
-  children: ReactNode;
-  headerHasBorder?: boolean;
-  headerStyle?: "header-1" | "header-2" | "header-scroll" | "header-3";
-  showBanner?: boolean;
-  home?: boolean;
-  params?: any;
+  children: ReactNode
+  headerHasBorder?: boolean
+  headerStyle?: 'header-1' | 'header-2' | 'header-scroll' | 'header-3'
+  showBanner?: boolean
+  home?: boolean
+  params?: any
 }
 const notoSerif = Noto_Serif({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
 const notoKufiArabic = Noto_Kufi_Arabic({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
 
 const ApplicationLayout = async ({ children, home, params }: Props) => {
-  const dict = await getDictionary((await params).lang);
-  const fetchNavigationData = await fetchNavigation((await params).lang);
-  const postsData = await getAllPosts();
+  const dict = await getDictionary((await params).lang)
+  const fetchNavigationData = await fetchNavigation((await params).lang)
+  const postsData = await getAllPosts()
   // Check if current page should hide Navbar2 and use header-scroll
-  const isTransparentHeader =
-    (await params).pathname === "/" || (await params).pathname === "/visuals";
+  const isTransparentHeader = (await params).pathname === '/' || (await params).pathname === '/visuals'
   return (
     <div
-      className={
-        (await params).lang === "ar"
-          ? notoKufiArabic.className
-          : notoSerif.className
-      }
-      dir={(await params).lang === "ar" ? "rtl" : "ltr"}
+      className={(await params).lang === 'ar' ? notoKufiArabic.className : notoSerif.className}
+      dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}
     >
       {home ? null : (
         <div className="container">
@@ -64,7 +59,7 @@ const ApplicationLayout = async ({ children, home, params }: Props) => {
       <AsideSidebarNavigation />
       <SocialSidebar />
     </div>
-  );
-};
+  )
+}
 
-export { ApplicationLayout };
+export { ApplicationLayout }

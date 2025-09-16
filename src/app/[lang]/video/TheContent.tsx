@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const TheContent = ({ content }: { content: string }) => {
   // for your content
   // return <div dangerouslySetInnerHTML={{ __html: content }} />
@@ -9,19 +7,17 @@ const TheContent = ({ content }: { content: string }) => {
     <>
       {/* THIS IS THE DEMP CONTENT - YOU CAN USE MARKDOWN, JSON ...*/}
       <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure vel
-        officiis ipsum placeat itaque neque dolorem modi perspiciatis dolor
-        distinctio veritatis sapiente, minima corrupti dolores necessitatibus
-        suscipit accusantium dignissimos culpa cumque.
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure vel officiis ipsum placeat itaque neque dolorem
+        modi perspiciatis dolor distinctio veritatis sapiente, minima corrupti dolores necessitatibus suscipit
+        accusantium dignissimos culpa cumque.
       </p>
       <p>
-        It is a long established fact that a <strong>reader</strong> will be
-        distracted by the readable content of a page when looking at its{" "}
-        <strong>layout</strong>. The point of using Lorem Ipsum is that it has a
-        more-or-less normal{" "}
+        It is a long established fact that a <strong>reader</strong> will be distracted by the readable content of a
+        page when looking at its <strong>layout</strong>. The point of using Lorem Ipsum is that it has a more-or-less
+        normal{' '}
         <a href="/#" target="_blank" rel="noopener noreferrer">
           distribution of letters.
-        </a>{" "}
+        </a>{' '}
       </p>
       <ol>
         <li>We want everything to look good out of the box.</li>
@@ -70,11 +66,10 @@ const TheContent = ({ content }: { content: string }) => {
       <p>{`And that's the end of this section.`}</p>
       <h2>Code should look okay by default.</h2>
       <p>
-        I think most people are going to use{" "}
-        <a href="https://highlightjs.org/">highlight.js</a> or{" "}
+        I think most people are going to use <a href="https://highlightjs.org/">highlight.js</a> or{' '}
         <a href="https://prismjs.com/">Prism</a> or something if they want to
-        {` style their code blocks but it wouldn't hurt to make them look`}{" "}
-        <em>okay</em> out of the box, even with no syntax highlighting.
+        {` style their code blocks but it wouldn't hurt to make them look`} <em>okay</em> out of the box, even with no
+        syntax highlighting.
       </p>
       <p>
         {`  What I've written here is probably long enough, but adding this final
@@ -99,10 +94,7 @@ const TheContent = ({ content }: { content: string }) => {
         {` Let's make sure we don't screw that up with <code>h4</code> elements,
         either.`}
       </h4>
-      <p>
-        Phew, with any luck we have styled the headings above this text and they
-        look pretty good.
-      </p>
+      <p>Phew, with any luck we have styled the headings above this text and they look pretty good.</p>
       <p>
         {` Let's add a closing paragraph here so things end with a decently sized
         block of text. I can't explain why I want things to end that way but I
@@ -114,7 +106,7 @@ const TheContent = ({ content }: { content: string }) => {
         sentence can't hurt.`}
       </p>
     </>
-  );
-};
+  )
+}
 
-export default TheContent;
+export default TheContent

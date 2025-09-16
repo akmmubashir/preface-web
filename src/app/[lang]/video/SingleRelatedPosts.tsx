@@ -1,21 +1,17 @@
-import SectionGridPosts from "@/components/SectionGridPosts";
-import SectionSliderPosts from "@/components/SectionSliderPosts";
-import { getLatestVideos } from "@/data/api/posts";
-import { getPostsDefault, getPostsVideo, TPost } from "@/data/posts";
-import { FC } from "react";
+import SectionGridPosts from '@/components/SectionGridPosts'
+import { getLatestVideos } from '@/data/api/posts'
+import { getPostsDefault, getPostsVideo, TPost } from '@/data/posts'
+import { FC } from 'react'
 
 interface Props {
-  relatedPosts?: TPost[];
-  moreFromAuthorPosts?: TPost[];
+  relatedPosts?: TPost[]
+  moreFromAuthorPosts?: TPost[]
 }
 
-const SingleRelatedPosts: FC<Props> = async ({
-  relatedPosts,
-  moreFromAuthorPosts,
-}) => {
-  const defaultPosts = await getPostsDefault();
-  const videoPosts = await getPostsVideo();
-  const latestVideos = await getLatestVideos();
+const SingleRelatedPosts: FC<Props> = async ({ relatedPosts, moreFromAuthorPosts }) => {
+  const defaultPosts = await getPostsDefault()
+  const videoPosts = await getPostsVideo()
+  const latestVideos = await getLatestVideos()
   return (
     <div className="relative my-16">
       {/* RELATED  */}
@@ -34,7 +30,7 @@ const SingleRelatedPosts: FC<Props> = async ({
         {/* <SectionSliderPosts posts={moreFromAuthorPosts} heading="More from author" /> */}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SingleRelatedPosts;
+export default SingleRelatedPosts

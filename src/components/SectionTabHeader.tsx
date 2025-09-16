@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import { Button } from "@/shared/Button";
-import Heading, { HeadingWithSubProps } from "@/shared/Heading";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import { FC, ReactNode, useState } from "react";
+import { Button } from '@/shared/Button'
+import Heading, { HeadingWithSubProps } from '@/shared/Heading'
+import { ArrowRightIcon } from '@heroicons/react/24/outline'
+import { FC, ReactNode, useState } from 'react'
 
-interface Props extends Pick<HeadingWithSubProps, "subHeading" | "dimHeading"> {
-  tabActive: string;
-  tabs: string[];
-  heading: ReactNode;
-  onChangeTab?: (item: string) => void;
-  rightButtonHref?: string;
+interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
+  tabActive: string
+  tabs: string[]
+  heading: ReactNode
+  onChangeTab?: (item: string) => void
+  rightButtonHref?: string
 }
 
 const SectionTabHeader: FC<Props> = ({
@@ -20,14 +20,14 @@ const SectionTabHeader: FC<Props> = ({
   dimHeading,
   heading,
   onChangeTab,
-  rightButtonHref = "/category/all",
+  rightButtonHref = '/category/all',
 }) => {
-  const [currentTab, setCurrentTab] = useState(tabActive);
+  const [currentTab, setCurrentTab] = useState(tabActive)
 
   const handleClickTab = (tab: string) => {
-    setCurrentTab(tab);
-    onChangeTab && onChangeTab(tab);
-  };
+    setCurrentTab(tab)
+    onChangeTab && onChangeTab(tab)
+  }
 
   return (
     <div className="section-tab-header relative mb-9 flex flex-col">
@@ -38,11 +38,7 @@ const SectionTabHeader: FC<Props> = ({
         <div className="flex grow flex-wrap gap-2">
           {tabs.map((tab) =>
             currentTab === tab ? (
-              <Button
-                key={tab}
-                color="dark/white"
-                onClick={() => handleClickTab(tab)}
-              >
+              <Button key={tab} color="dark/white" onClick={() => handleClickTab(tab)}>
                 {tab}
               </Button>
             ) : (
@@ -58,7 +54,7 @@ const SectionTabHeader: FC<Props> = ({
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SectionTabHeader;
+export default SectionTabHeader

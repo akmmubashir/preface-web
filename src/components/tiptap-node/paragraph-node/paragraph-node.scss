@@ -34,7 +34,7 @@
     height: 0;
   }
 
-  &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+  &:where(:dir(rtl), [dir='rtl'], [dir='rtl'] *) {
     > p.is-editor-empty::before {
       float: right;
     }
@@ -57,7 +57,7 @@
     position: absolute;
 
     &:after {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       top: 1em;
@@ -133,7 +133,7 @@
 /* =====================
      EMOJI
      ===================== */
-.tiptap.ProseMirror [data-type="emoji"] img {
+.tiptap.ProseMirror [data-type='emoji'] img {
   display: inline-block;
   width: 1.25em;
   height: 1.25em;
@@ -174,9 +174,7 @@
 /* =====================
      PLACEHOLDER
      ===================== */
-.is-empty:not(h1)[data-placeholder]:has(
-    > .ProseMirror-trailingBreak:only-child
-  ):before {
+.is-empty:not(h1)[data-placeholder]:has(> .ProseMirror-trailingBreak:only-child):before {
   pointer-events: none;
   height: 0;
   position: absolute;
@@ -197,7 +195,7 @@
   }
 }
 
-:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+:where(:dir(rtl), [dir='rtl'], [dir='rtl'] *) {
   .tiptap.ProseMirror .is-empty {
     &::before {
       float: right;

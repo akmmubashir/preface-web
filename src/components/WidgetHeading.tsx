@@ -1,23 +1,23 @@
-import { Button } from "@/shared/Button";
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import { FC } from "react";
+import { Button } from '@/shared/Button'
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
+import { FC } from 'react'
 
 interface Props {
-  className?: string;
+  className?: string
   viewAll: {
-    label: string;
-    href: string;
-    targetBlank?: boolean;
-  };
-  title: string;
+    label: string
+    href: string
+    targetBlank?: boolean
+  }
+  title: string
 }
 
 const WidgetHeading: FC<Props> = ({ className, viewAll, title }) => {
   return (
     <div
       className={clsx(
-        "widget-heading flex items-center gap-2.5 border-b border-neutral-200 p-4 xl:px-5 dark:border-neutral-700",
+        'widget-heading flex items-center gap-2.5 border-b border-neutral-200 p-4 xl:px-5 dark:border-neutral-700',
         className
       )}
     >
@@ -25,7 +25,7 @@ const WidgetHeading: FC<Props> = ({ className, viewAll, title }) => {
       {!!viewAll.href && (
         <Button
           className="ms-auto"
-          target={viewAll.targetBlank ? "_blank" : undefined}
+          target={viewAll.targetBlank ? '_blank' : undefined}
           rel="noopener noreferrer"
           href={viewAll.href}
           plain
@@ -35,7 +35,7 @@ const WidgetHeading: FC<Props> = ({ className, viewAll, title }) => {
         </Button>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default WidgetHeading;
+export default WidgetHeading

@@ -1,8 +1,8 @@
-import { RefObject, useCallback, useEffect, useState } from "react";
+import { RefObject, useCallback, useEffect, useState } from 'react'
 
 export interface UseIntersectionObserverArgs extends IntersectionObserverInit {
-  freezeOnceVisible?: boolean;
-  onIntersect?: (entry: IntersectionObserverEntry) => void;
+  freezeOnceVisible?: boolean
+  onIntersect?: (entry: IntersectionObserverEntry) => void
 }
 
 function useIntersectionObserver(
@@ -10,67 +10,61 @@ function useIntersectionObserver(
   {
     threshold = 0,
     root = null,
-    rootMargin = "0%",
+    rootMargin = '0%',
     freezeOnceVisible = false,
     onIntersect,
   }: UseIntersectionObserverArgs = {}
 ): IntersectionObserverEntry | undefined {
-  const [entry, setEntry] = useState<IntersectionObserverEntry>();
-  const [error, setError] = useState<Error | null>(null);
+  const [entry, setEntry] = useState<IntersectionObserverEntry>()
+  const [error, setError] = useState<Error | null>(null)
 
-  const frozen = entry?.isIntersecting && freezeOnceVisible;
+  const frozen = entry?.isIntersecting && freezeOnceVisible
 
   // Memoize the callback to prevent unnecessary re-renders
   const updateEntry = useCallback(
     ([entry]: IntersectionObserverEntry[]): void => {
-      setEntry(entry);
-      onIntersect?.(entry);
+      setEntry(entry)
+      onIntersect?.(entry)
     },
     [onIntersect]
-  );
+  )
 
   useEffect(() => {
-    const node = elementRef?.current;
+    const node = elementRef?.current
 
     // Check if IntersectionObserver is supported
     if (!window.IntersectionObserver) {
-      setError(
-        new Error("IntersectionObserver is not supported in this browser")
-      );
-      return;
+      setError(new Error('IntersectionObserver is not supported in this browser'))
+      return
     }
 
     if (!node) {
-      return;
+      return
     }
 
     if (frozen) {
-      return;
+      return
     }
 
     try {
-      const observerParams = { threshold, root, rootMargin };
-      const observer = new IntersectionObserver(updateEntry, observerParams);
+      const observerParams = { threshold, root, rootMargin }
+      const observer = new IntersectionObserver(updateEntry, observerParams)
 
-      observer.observe(node);
+      observer.observe(node)
 
       return () => {
-        observer.disconnect();
-      };
+        observer.disconnect()
+      }
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err
-          : new Error("Failed to create IntersectionObserver")
-      );
+      setError(err instanceof Error ? err : new Error('Failed to create IntersectionObserver'))
     }
-  }, [elementRef, threshold, root, rootMargin, frozen, updateEntry]);
+  }, [elementRef, threshold, root, rootMargin, frozen, updateEntry])
 
   if (error) {
-    console.error("useIntersectionObserver error:", error);
+    console.error('useIntersectionObserver error:', error)
   }
 
-  return entry;
+  return entry
 }
 
-export default useIntersectionObserver;
+export default useIntersectionObserver

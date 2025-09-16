@@ -1,6 +1,6 @@
-import { AudioProvider } from "@/components/AudioProvider";
-import Aside from "@/components/aside";
-import { AudioPlayer } from "@/components/audio-player/AudioPlayer";
+import { AudioProvider } from '@/components/AudioProvider'
+import Aside from '@/components/aside'
+import { AudioPlayer } from '@/components/audio-player/AudioPlayer'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <AudioPlayer />
       </div>
     </AudioProvider>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

@@ -2,22 +2,22 @@
 // Export all API hooks for easy importing
 
 // Generic hook factory
-export * from "./use-api";
+export * from './use-api'
 
 // Posts hooks
-export * from "./use-posts";
+export * from './use-posts'
 
 // Categories hooks
-export * from "./use-categories";
+export * from './use-categories'
 
 // Scholar Questions hooks
-export * from "./use-scholar-questions";
+export * from './use-scholar-questions'
 
 // Favourite hooks
-export * from "./use-favourite";
+export * from './use-favourite'
 
 // Continue Read hooks
-export * from "./use-continue-read";
+export * from './use-continue-read'
 
 // Re-export types for convenience
-export type { ApiError, ApiResponse, ApiOptions } from "@/lib/client/api";
+export type { ApiError, ApiOptions, ApiResponse } from '@/lib/client/api'

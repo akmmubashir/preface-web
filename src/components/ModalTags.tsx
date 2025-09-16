@@ -1,28 +1,23 @@
-"use client";
+'use client'
 
-import { FC } from "react";
+import { FC } from 'react'
 
-import { TTag } from "@/data/categories";
-import { Button } from "@/shared/Button";
-import Tag from "@/shared/Tag";
-import {
-  Dialog,
-  DialogActions,
-  DialogBody,
-  DialogTitle,
-} from "@/shared/dialog";
-import { Divider } from "@/shared/divider";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { Tag02Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { useState } from "react";
+import { TTag } from '@/data/categories'
+import { Button } from '@/shared/Button'
+import Tag from '@/shared/Tag'
+import { Dialog, DialogActions, DialogBody, DialogTitle } from '@/shared/dialog'
+import { Divider } from '@/shared/divider'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { Tag02Icon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { useState } from 'react'
 
 interface Props {
-  tags: TTag[];
+  tags: TTag[]
 }
 
 const ModalTags: FC<Props> = ({ tags }) => {
-  let [isOpen, setIsOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className="modal-tags">
@@ -38,11 +33,7 @@ const ModalTags: FC<Props> = ({ tags }) => {
           <DialogBody>
             <div className="flex flex-wrap dark:text-neutral-200">
               {tags.map((tag) => (
-                <Tag
-                  key={tag.id}
-                  href={`/tag/${tag.handle}`}
-                  className="me-2 mb-2"
-                >
+                <Tag key={tag.id} href={`/tag/${tag.handle}`} className="me-2 mb-2">
                   {tag.name}
                 </Tag>
               ))}
@@ -57,7 +48,7 @@ const ModalTags: FC<Props> = ({ tags }) => {
         </Dialog>
       </>
     </div>
-  );
-};
+  )
+}
 
-export default ModalTags;
+export default ModalTags

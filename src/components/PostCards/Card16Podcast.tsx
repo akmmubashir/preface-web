@@ -1,28 +1,23 @@
-"use client";
+'use client'
 
-import { TPost } from "@/data/posts";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { FC } from "react";
-import CategoryBadgeList from "../CategoryBadgeList";
-import PostCardLikeBtn from "../PostCardLikeBtn";
-import PostCardSaveBtn from "../PostCardSaveBtn";
+import { TPost } from '@/data/posts'
+import { ArrowRightIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FC } from 'react'
+import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardSaveBtn from '../PostCardSaveBtn'
 
 interface Props {
-  className?: string;
-  post: TPost;
-  ratio?: string;
-  lang?: string;
+  className?: string
+  post: TPost
+  ratio?: string
+  lang?: string
 }
 
-const Card16Podcast: FC<Props> = ({
-  className,
-  post,
-  ratio = "aspect-4/3",
-  lang,
-}) => {
+const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang }) => {
   const {
     title,
     handle,
@@ -38,45 +33,35 @@ const Card16Podcast: FC<Props> = ({
     bookmarked,
     readingTime,
     slug,
-  } = post;
+  } = post
 
   // Build the post URL safely
   const getPostUrl = () => {
     if (category?.slug && category?.parentCategory?.slug) {
-      return `/${category.parentCategory.slug}/${category.slug}/${slug}`;
+      return `/${category.parentCategory.slug}/${category.slug}/${slug}`
     }
     if (category?.slug) {
-      return `/${category.slug}/${slug}`;
+      return `/${category.slug}/${slug}`
     }
-    return `/post/${handle}`;
-  };
+    return `/post/${handle}`
+  }
 
   return (
-    <div
-      className={clsx(
-        "group post-card-16-podcast relative flex flex-col pb-6",
-        className
-      )}
-    >
+    <div className={clsx('group post-card-16-podcast relative flex flex-col pb-6', className)}>
       <div className={`relative w-full shrink-0 ${ratio}`}>
         {(thumbnail || featuredImage) && (
           <Image
             fill
-            alt={title || ""}
+            alt={title || ''}
             sizes="(max-width: 1024px) 100vw, 50vw"
-            src={thumbnail || featuredImage || ""}
+            src={thumbnail || featuredImage || ''}
             className="rounded-3xl object-cover brightness-100 transition-[filter] duration-300 group-hover:brightness-75"
           />
         )}
         {!thumbnail && !featuredImage && (
           <div className="absolute inset-0 flex items-center justify-center rounded-3xl bg-gray-200 dark:bg-gray-800">
             <div className="text-center text-gray-500 dark:text-gray-400">
-              <svg
-                className="mx-auto h-12 w-12"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+              <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -93,10 +78,7 @@ const Card16Podcast: FC<Props> = ({
       {/* ABSOLUTE */}
       {/* <Link href={`/post/${handle}`} className="absolute inset-0"></Link> */}
 
-      <CategoryBadgeList
-        className="absolute inset-x-3 top-3"
-        categories={category}
-      />
+      <CategoryBadgeList className="absolute inset-x-3 top-3" categories={category} />
 
       {/* MAIN CONTENT */}
       <div className="relative -mt-32 w-11/12">
@@ -130,8 +112,8 @@ const Card16Podcast: FC<Props> = ({
             <PostCardSaveBtn className="" bookmarked={bookmarked} />
             <Link
               // href={getPostUrl()}
-              href={lang === "en" ? getPostUrl() : `/${lang}/${getPostUrl()}`}
-              className="border-[#E2E2E2] transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]"
+              href={lang === 'en' ? getPostUrl() : `/${lang}/${getPostUrl()}`}
+              className="ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-transform duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]"
             >
               <ArrowRightIcon
                 strokeWidth={3}
@@ -142,7 +124,7 @@ const Card16Podcast: FC<Props> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Card16Podcast;
+export default Card16Podcast

@@ -1,23 +1,21 @@
-import { TPost } from "@/data/posts";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { FC } from "react";
-import PostCardMeta from "../PostCardMeta/PostCardMeta";
-import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon";
+import { TPost } from '@/data/posts'
+import clsx from 'clsx'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FC } from 'react'
+import PostCardMeta from '../PostCardMeta/PostCardMeta'
+import PostTypeFeaturedIcon from '../PostTypeFeaturedIcon'
 
 interface Props {
-  className?: string;
-  post: TPost;
+  className?: string
+  post: TPost
 }
 
 const Card12: FC<Props> = ({ className, post }) => {
-  const { title, handle, featuredImage, excerpt, postType } = post;
+  const { title, handle, featuredImage, excerpt, postType } = post
 
   return (
-    <div
-      className={clsx("group post-card-12 relative flex flex-col", className)}
-    >
+    <div className={clsx('group post-card-12 relative flex flex-col', className)}>
       <Link
         href={`/post/${handle}`}
         className="relative block aspect-4/3 w-full shrink-0 grow overflow-hidden rounded-3xl"
@@ -51,7 +49,7 @@ const Card12: FC<Props> = ({ className, post }) => {
         <PostCardMeta className="mt-5 text-sm" meta={post} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Card12;
+export default Card12

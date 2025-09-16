@@ -1,20 +1,20 @@
-import NcImage from "@/components/NcImage/NcImage";
-import { TPost } from "@/data/posts";
-import ButtonSecondary from "@/shared/ButtonSecondary";
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
-import clsx from "clsx";
-import Link from "next/link";
-import { FC } from "react";
-import Card5 from "./PostCards/Card5";
+import NcImage from '@/components/NcImage/NcImage'
+import { TPost } from '@/data/posts'
+import ButtonSecondary from '@/shared/ButtonSecondary'
+import { ArrowRightIcon } from '@heroicons/react/24/solid'
+import clsx from 'clsx'
+import Link from 'next/link'
+import { FC } from 'react'
+import Card5 from './PostCards/Card5'
 
 interface Props {
-  posts: TPost[];
-  className?: string;
+  posts: TPost[]
+  className?: string
 }
 
 const SectionHero3: FC<Props> = ({ posts, className }) => {
   const renderMain = () => {
-    const { featuredImage, title, excerpt, handle } = posts[0];
+    const { featuredImage, title, excerpt, handle } = posts[0]
     return (
       <div className="aspect-w-8 aspect-h-8 sm:aspect-w-10 lg:aspect-w-16">
         <NcImage
@@ -42,30 +42,26 @@ const SectionHero3: FC<Props> = ({ posts, className }) => {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   const renderSubPosts = () => {
-    const subPosts = posts.slice(1, 4);
+    const subPosts = posts.slice(1, 4)
     return (
       <div className="mt-6 grid transform gap-4 sm:grid-cols-2 md:-mt-20 md:grid-cols-3 lg:gap-8 lg:px-14 xl:px-20 2xl:px-28">
         {subPosts.map((post) => (
-          <Card5
-            className="rounded-3xl bg-white shadow-2xl dark:bg-neutral-800"
-            key={post.handle}
-            post={post}
-          />
+          <Card5 className="rounded-3xl bg-white shadow-2xl dark:bg-neutral-800" key={post.handle} post={post} />
         ))}
       </div>
-    );
-  };
+    )
+  }
 
   return (
-    <div className={clsx("section-hero-3", className)}>
+    <div className={clsx('section-hero-3', className)}>
       {posts.length && renderMain()}
       {posts.length > 1 && renderSubPosts()}
     </div>
-  );
-};
+  )
+}
 
-export default SectionHero3;
+export default SectionHero3

@@ -11,10 +11,10 @@ export function generateSlug(name: string): string {
   return name
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, "") // Remove special characters except spaces and hyphens
-    .replace(/\s+/g, "-") // Replace spaces with hyphens
-    .replace(/-+/g, "-") // Replace multiple hyphens with single hyphen
-    .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
+    .replace(/[^\w\s-]/g, '') // Remove special characters except spaces and hyphens
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
 }
 
 /**
@@ -24,8 +24,8 @@ export function generateSlug(name: string): string {
  * @returns boolean indicating if the slug is valid for the name
  */
 export function validateSlug(slug: string, name: string): boolean {
-  const expected = generateSlug(name);
-  return slug.toLowerCase() === expected.toLowerCase();
+  const expected = generateSlug(name)
+  return slug.toLowerCase() === expected.toLowerCase()
 }
 
 /**
@@ -34,30 +34,25 @@ export function validateSlug(slug: string, name: string): boolean {
  * @param items - Array of items that have `handle` and `name`
  * @returns The matching item or null
  */
-export function findBySlug<T extends { handle?: string; name: string }>(
-  slug: string,
-  items: T[]
-): T | null {
-  const normalized = slug.toLowerCase().trim();
+export function findBySlug<T extends { handle?: string; name: string }>(slug: string, items: T[]): T | null {
+  const normalized = slug.toLowerCase().trim()
 
   // First try exact handle match
-  let item = items.find((it) => (it.handle ?? "").toLowerCase() === normalized);
+  let item = items.find((it) => (it.handle ?? '').toLowerCase() === normalized)
 
   if (!item) {
     // Try matching by generated slug from name
-    item = items.find(
-      (it) => generateSlug(it.name).toLowerCase() === normalized
-    );
+    item = items.find((it) => generateSlug(it.name).toLowerCase() === normalized)
   }
 
   if (!item) {
     // Try partial/legacy matching
     item = items.find(
       (it) =>
-        it.name.toLowerCase().replace(/\s+/g, "-") === normalized ||
-        it.name.toLowerCase().replace(/\s+/g, "") === normalized
-    );
+        it.name.toLowerCase().replace(/\s+/g, '-') === normalized ||
+        it.name.toLowerCase().replace(/\s+/g, '') === normalized
+    )
   }
 
-  return item ?? null;
+  return item ?? null
 }

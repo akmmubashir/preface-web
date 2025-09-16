@@ -1,45 +1,32 @@
-import CategoryBadgeList from "@/components/CategoryBadgeList";
-import { TPostDetail } from "@/data/posts";
-import { Badge } from "@/shared/Badge";
-import { Divider } from "@/shared/divider";
-import clsx from "clsx";
-import Image from "next/image";
-import { FC } from "react";
-import AudioPlayerButton from "./AudioPlayerButton";
-import GalleryImages from "./GalleryImages";
-import SingleMeta from "./SingleMeta";
-import { SingleMetaAction } from "./SingleMetaAction";
-import SingleTitle from "./SingleTitle";
-import VideoPlayer from "./VideoPlayer";
+import CategoryBadgeList from '@/components/CategoryBadgeList'
+import { TPostDetail } from '@/data/posts'
+import { Badge } from '@/shared/Badge'
+import { Divider } from '@/shared/divider'
+import clsx from 'clsx'
+import Image from 'next/image'
+import { FC } from 'react'
+import AudioPlayerButton from './AudioPlayerButton'
+import GalleryImages from './GalleryImages'
+import SingleMeta from './SingleMeta'
+import { SingleMetaAction } from './SingleMetaAction'
+import SingleTitle from './SingleTitle'
+import VideoPlayer from './VideoPlayer'
 
 interface Props {
-  className?: string;
-  post: TPostDetail | any;
-  headerStyle?: "style1" | "style2" | "style3" | "audio" | "video" | "gallery";
+  className?: string
+  post: TPostDetail | any
+  headerStyle?: 'style1' | 'style2' | 'style3' | 'audio' | 'video' | 'gallery'
 }
 
-const TitleAndMeta = ({ className, post }: Omit<Props, "headerStyle">) => {
-  const {
-    categories,
-    date,
-    author,
-    readingTime,
-    commentCount,
-    handle,
-    likeCount,
-    liked,
-    title,
-    excerpt,
-  } = post;
+const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
+  const { categories, date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
 
   return (
     <div className={`single-header-meta space-y-5 ${className}`}>
       <CategoryBadgeList categories={categories || []} />
       <SingleTitle title={title} />
       {excerpt && (
-        <p className="text-base/relaxed text-neutral-600 md:text-lg/relaxed dark:text-neutral-400">
-          {excerpt}
-        </p>
+        <p className="text-base/relaxed text-neutral-600 md:text-lg/relaxed dark:text-neutral-400">{excerpt}</p>
       )}
       <Divider />
       <div className="flex flex-wrap gap-5">
@@ -54,23 +41,18 @@ const TitleAndMeta = ({ className, post }: Omit<Props, "headerStyle">) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-const HeaderStyle1 = ({ className, post }: Omit<Props, "defaultStyle">) => {
-  const { featuredImage, title } = post;
+const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
+  const { featuredImage, title } = post
 
   return (
     <>
       <div className="container">
         <Divider />
       </div>
-      <header
-        className={clsx(
-          "single-header-style-1 container mt-8 lg:mt-16",
-          className
-        )}
-      >
+      <header className={clsx('single-header-style-1 container mt-8 lg:mt-16', className)}>
         <div className="mx-auto max-w-4xl">
           <TitleAndMeta post={post} />
         </div>
@@ -89,14 +71,14 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, "defaultStyle">) => {
         )}
       </header>
     </>
-  );
-};
+  )
+}
 
-const HeaderStyle2 = ({ className, post }: Omit<Props, "defaultStyle">) => {
+const HeaderStyle2 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
   return (
     <header
       className={clsx(
-        "single-header-style-2 relative flex flex-col gap-5 bg-neutral-900 lg:flex-row dark:bg-neutral-950",
+        'single-header-style-2 relative flex flex-col gap-5 bg-neutral-900 lg:flex-row dark:bg-neutral-950',
         className
       )}
     >
@@ -122,10 +104,10 @@ const HeaderStyle2 = ({ className, post }: Omit<Props, "defaultStyle">) => {
         </div>
       )}
     </header>
-  );
-};
+  )
+}
 
-const HeaderStyle3 = ({ post, className }: Omit<Props, "defaultStyle">) => {
+const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
   const {
     commentCount,
     handle,
@@ -138,20 +120,16 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, "defaultStyle">) => {
     author,
     readingTime,
     featuredImage,
-  } = post;
+  } = post
   return (
-    <header className={clsx("single-header-style-3 relative", className)}>
+    <header className={clsx('single-header-style-3 relative', className)}>
       <div className="absolute inset-x-0 top-0 h-[480px] bg-neutral-900 md:h-[600px] lg:h-[700px] xl:h-[95vh] dark:bg-black/30" />
 
       <div className="relative container rounded-xl pt-10 lg:pt-16">
         <div className="relative mx-auto max-w-4xl space-y-5 text-neutral-100">
           <CategoryBadgeList categories={categories || []} />
           <SingleTitle title={title} />
-          {excerpt && (
-            <p className="text-base text-neutral-300 md:text-lg/relaxed">
-              {excerpt}
-            </p>
-          )}
+          {excerpt && <p className="text-base text-neutral-300 md:text-lg/relaxed">{excerpt}</p>}
         </div>
 
         {/* FEATURED IMAGE */}
@@ -182,27 +160,13 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, "defaultStyle">) => {
         <Divider className="mx-auto mt-10 max-w-4xl" />
       </div>
     </header>
-  );
-};
+  )
+}
 
-const HeaderAudio = ({ className, post }: Omit<Props, "defaultStyle">) => {
-  const {
-    title,
-    author,
-    date,
-    readingTime,
-    commentCount,
-    handle,
-    likeCount,
-    liked,
-  } = post;
+const HeaderAudio = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
+  const { title, author, date, readingTime, commentCount, handle, likeCount, liked } = post
   return (
-    <header
-      className={clsx(
-        "relative bg-neutral-100/90 py-10 sm:py-16 dark:bg-neutral-800",
-        className
-      )}
-    >
+    <header className={clsx('relative bg-neutral-100/90 py-10 sm:py-16 dark:bg-neutral-800', className)}>
       <div className="container flex flex-col gap-x-8 gap-y-8 sm:flex-row sm:items-center xl:gap-x-16">
         <div className="size-40 shrink-0 rounded-full lg:size-56 xl:size-60">
           <AudioPlayerButton post={post} />
@@ -224,32 +188,27 @@ const HeaderAudio = ({ className, post }: Omit<Props, "defaultStyle">) => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-const HeaderVideo = ({ className, post }: Omit<Props, "defaultStyle">) => {
+const HeaderVideo = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
   return (
-    <div className={clsx("single-header-style-video", className)}>
+    <div className={clsx('single-header-style-video', className)}>
       <VideoPlayer videoUrl={post.videoUrl} />
       <div className="container mt-10 pb-5">
         <TitleAndMeta post={post} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-const HeaderGallery = ({ className, post }: Omit<Props, "defaultStyle">) => {
+const HeaderGallery = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
   return (
     <>
       <div className="container">
         <Divider />
       </div>
-      <div
-        className={clsx(
-          "single-header-style-gallery mt-10 lg:mt-16",
-          className
-        )}
-      >
+      <div className={clsx('single-header-style-gallery mt-10 lg:mt-16', className)}>
         <div className="container">
           <div className="mx-auto max-w-4xl">
             <TitleAndMeta post={post} />
@@ -258,42 +217,29 @@ const HeaderGallery = ({ className, post }: Omit<Props, "defaultStyle">) => {
         <GalleryImages images={post.galleryImgs} gridType="grid3" />
       </div>
     </>
-  );
-};
+  )
+}
 
-const SingleHeaderContainerVideo: FC<Props> = ({
-  className,
-  post,
-  headerStyle = "style1",
-}) => {
-  if ((post.postType === "audio" && post.audioUrl) || headerStyle === "audio") {
-    return <HeaderAudio className={className} post={post} />;
+const SingleHeaderContainerVideo: FC<Props> = ({ className, post, headerStyle = 'style1' }) => {
+  if ((post.postType === 'audio' && post.audioUrl) || headerStyle === 'audio') {
+    return <HeaderAudio className={className} post={post} />
   }
 
-  if ((post.postType === "video" && post.videoUrl) || headerStyle === "video") {
-    return <HeaderVideo className={className} post={post} />;
+  if ((post.postType === 'video' && post.videoUrl) || headerStyle === 'video') {
+    return <HeaderVideo className={className} post={post} />
   }
 
-  if (
-    (post.postType === "gallery" && post.galleryImgs) ||
-    headerStyle === "gallery"
-  ) {
-    return <HeaderGallery className={className} post={post} />;
+  if ((post.postType === 'gallery' && post.galleryImgs) || headerStyle === 'gallery') {
+    return <HeaderGallery className={className} post={post} />
   }
 
   return (
     <>
-      {headerStyle === "style1" && (
-        <HeaderStyle1 className={className} post={post} />
-      )}
-      {headerStyle === "style2" && (
-        <HeaderStyle2 className={className} post={post} />
-      )}
-      {headerStyle === "style3" && (
-        <HeaderStyle3 className={className} post={post} />
-      )}
+      {headerStyle === 'style1' && <HeaderStyle1 className={className} post={post} />}
+      {headerStyle === 'style2' && <HeaderStyle2 className={className} post={post} />}
+      {headerStyle === 'style3' && <HeaderStyle3 className={className} post={post} />}
     </>
-  );
-};
+  )
+}
 
-export default SingleHeaderContainerVideo;
+export default SingleHeaderContainerVideo

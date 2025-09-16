@@ -1,13 +1,13 @@
-import { ApplicationLayout } from "@/app/[lang]/application-layout";
-import { ReactNode } from "react";
+import { ApplicationLayout } from '@/app/[lang]/application-layout'
+import { ReactNode } from 'react'
 
 interface Props {
-  children: ReactNode;
-  params: Promise<{ lang: string }>;
+  children: ReactNode
+  params: Promise<{ lang: string }>
 }
 
 const Layout: React.FC<Props> = ({ children, params }) => {
-  return <ApplicationLayout params={params}>{children}</ApplicationLayout>;
-};
+  return <ApplicationLayout params={params}>{children}</ApplicationLayout>
+}
 
-export default Layout;
+export default Layout

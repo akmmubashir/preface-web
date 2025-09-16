@@ -1,50 +1,35 @@
-"use client";
+'use client'
 
-import { TPost } from "@/data/posts";
-import clsx from "clsx";
-import Link from "next/link";
-import { FC, useState } from "react";
-import CategoryBadgeList from "../CategoryBadgeList";
-import PostCardCommentBtn from "../PostCardCommentBtn";
-import PostCardLikeBtn from "../PostCardLikeBtn";
-import PostCardMeta3 from "../PostCardMeta/PostCardMeta3";
-import PostCardSaveBtn from "../PostCardSaveBtn";
-import PostFeaturedMedia from "../PostFeaturedMedia/PostFeaturedMedia";
+import { TPost } from '@/data/posts'
+import clsx from 'clsx'
+import Link from 'next/link'
+import { FC, useState } from 'react'
+import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardCommentBtn from '../PostCardCommentBtn'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardMeta3 from '../PostCardMeta/PostCardMeta3'
+import PostCardSaveBtn from '../PostCardSaveBtn'
+import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 
 interface Props {
-  className?: string;
-  post: TPost;
+  className?: string
+  post: TPost
 }
 
 const Card4: FC<Props> = ({ className, post }) => {
-  const {
-    title,
-    handle,
-    categories,
-    author,
-    date,
-    readingTime,
-    bookmarked,
-    likeCount,
-    liked,
-    commentCount,
-  } = post;
-  const [isHover, setIsHover] = useState(false);
+  const { title, handle, categories, author, date, readingTime, bookmarked, likeCount, liked, commentCount } = post
+  const [isHover, setIsHover] = useState(false)
   return (
     <div
       className={clsx(
-        "group post-card-4 relative flex flex-col rounded-3xl border bg-white dark:bg-white/5",
+        'group post-card-4 relative flex flex-col rounded-3xl border bg-white dark:bg-white/5',
         className
       )}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
       <div className="relative aspect-4/3 w-full shrink-0 overflow-hidden rounded-t-xl">
-        <PostFeaturedMedia
-          post={post}
-          isHover={isHover}
-          className="rounded-t-xl"
-        />
+        <PostFeaturedMedia post={post} isHover={isHover} className="rounded-t-xl" />
 
         <div>
           <div className="absolute inset-x-0 top-0 z-10 flex flex-wrap items-center gap-x-2 gap-y-1 p-3">
@@ -62,15 +47,10 @@ const Card4: FC<Props> = ({ className, post }) => {
             {title}
           </Link>
         </h2>
-        <PostCardMeta3
-          className="mt-auto mb-1"
-          readingTime={readingTime}
-          date={date}
-          author={author}
-        />
+        <PostCardMeta3 className="mt-auto mb-1" readingTime={readingTime} date={date} author={author} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Card4;
+export default Card4

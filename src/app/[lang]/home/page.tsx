@@ -1,54 +1,35 @@
-import BackgroundSection from "@/components/BackgroundSection";
-import SectionMagazine10 from "@/components/SectionMagazine10";
-import SectionMagazine4 from "@/components/SectionMagazine4";
-import SectionMagazine7 from "@/components/SectionMagazine7";
-import SectionSlider from "@/components/SectionSlider";
-import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
-import SectionTrending from "@/components/SectionTrending";
-import SwipableSliderPosts from "@/components/SwipableSliderPosts";
-import VideoHeroBanner from "@/components/VideoHeroBanner";
-import {
-  getBannerHighlightedArticles,
-  getBannerHighlightedVideos,
-} from "@/data/api/banner";
-import {
-  getCategory,
-  getQuranSubcategories,
-  getTopTrendingTopics,
-} from "@/data/api/category";
-import {
-  getIslamForBeginners,
-  getLatestArticles,
-  getLatestVideos,
-  getQuranLatestArticles,
-} from "@/data/api/posts";
-import { getAuthors } from "@/data/authors";
-import { getCategories } from "@/data/categories";
-import { getNavigation } from "@/data/navigation";
-import {
-  getAllPosts,
-  getPostsAudio,
-  getPostsDefault,
-  getPostsGallery,
-  getPostsVideo,
-} from "@/data/posts";
-import { Metadata } from "next";
-import { ApplicationLayout } from "../application-layout";
-import HomeHeader from "./components/homeHeader";
+import BackgroundSection from '@/components/BackgroundSection'
+import SectionMagazine10 from '@/components/SectionMagazine10'
+import SectionMagazine4 from '@/components/SectionMagazine4'
+import SectionMagazine7 from '@/components/SectionMagazine7'
+import SectionSlider from '@/components/SectionSlider'
+import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
+import SectionTrending from '@/components/SectionTrending'
+import SwipableSliderPosts from '@/components/SwipableSliderPosts'
+import VideoHeroBanner from '@/components/VideoHeroBanner'
+import { getBannerHighlightedArticles, getBannerHighlightedVideos } from '@/data/api/banner'
+import { getCategory, getQuranSubcategories, getTopTrendingTopics } from '@/data/api/category'
+import { getIslamForBeginners, getLatestArticles, getLatestVideos, getQuranLatestArticles } from '@/data/api/posts'
+import { getAuthors } from '@/data/authors'
+import { getCategories } from '@/data/categories'
+import { getNavigation } from '@/data/navigation'
+import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
+import { Metadata } from 'next'
+import { ApplicationLayout } from '../application-layout'
+import HomeHeader from './components/homeHeader'
 
 export const metadata: Metadata = {
-  title: "Preface Islam",
-  description:
-    "Preface Islam is a platform for Muslims to learn about Islam and its teachings.",
-};
+  title: 'Preface Islam',
+  description: 'Preface Islam is a platform for Muslims to learn about Islam and its teachings.',
+}
 
 interface HomePageProps {
-  params: Promise<{ lang: string }>;
-  dict: any; // You might want to replace 'any' with a proper type for your dictionary
+  params: Promise<{ lang: string }>
+  dict: any // You might want to replace 'any' with a proper type for your dictionary
 }
 
 const HomePage = async ({ params, dict }: HomePageProps) => {
-  const { lang } = await params;
+  const { lang } = await params
   const [
     posts,
     defaultPosts,
@@ -75,27 +56,27 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
     getPostsGallery(),
     getAuthors(),
     getCategories(),
-    getLatestArticles(lang || "en"),
-    getLatestVideos(lang || "en"),
-    getCategory(lang || "en"),
-    getTopTrendingTopics(lang || "en"),
-    getIslamForBeginners(lang || "en"),
-    getQuranSubcategories(lang || "en", { limit: 6 }),
-    getQuranLatestArticles(lang || "en", { limit: 2 }),
-    getBannerHighlightedVideos(lang || "en"),
+    getLatestArticles(lang || 'en'),
+    getLatestVideos(lang || 'en'),
+    getCategory(lang || 'en'),
+    getTopTrendingTopics(lang || 'en'),
+    getIslamForBeginners(lang || 'en'),
+    getQuranSubcategories(lang || 'en', { limit: 6 }),
+    getQuranLatestArticles(lang || 'en', { limit: 2 }),
+    getBannerHighlightedVideos(lang || 'en'),
     getBannerHighlightedArticles(lang),
     getNavigation(lang),
-  ]);
+  ])
 
-  const featuredPosts = posts.slice(0, 2);
+  const featuredPosts = posts.slice(0, 2)
 
   // Extract the actual data arrays from the API responses
   const videoPostsArray = Array.isArray(bannerHighlightedVideos)
     ? bannerHighlightedVideos
-    : bannerHighlightedVideos?.data || [];
+    : bannerHighlightedVideos?.data || []
   const articlesArray = Array.isArray(bannerHighlightedArticles)
     ? bannerHighlightedArticles
-    : bannerHighlightedArticles?.data || [];
+    : bannerHighlightedArticles?.data || []
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
@@ -107,14 +88,11 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
     defaultPosts[4], // 4th Card18 - Article data
     defaultPosts[5], // 5th Card18 - Article data
     defaultPosts[6], // 6th Card18 - Article data
-  ];
+  ]
 
   return (
     <ApplicationLayout home={true} headerHasBorder={true} params={params}>
-      <div
-        dir={lang === "ar" ? "rtl" : "ltr"}
-        className="relative overflow-hidden pb-10 md:pb-14 lg:pb-20"
-      >
+      <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative overflow-hidden pb-10 md:pb-14 lg:pb-20">
         {/* Video Hero Banner */}
         {/* <VideoHeroBanner /> */}
         {/* <div className="relative">
@@ -124,19 +102,10 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
         {/* <VideoHeroBanner /> */}
         {/* </div> */}
         {/* Parallax Scroll Section - VideoHeroBanner + SectionMagazine10 */}
-        <HomeHeader
-          lang={lang}
-          dict={dict}
-          navigationMenu={navigationMenu}
-          featuredPosts={featuredPosts}
-        />
+        <HomeHeader lang={lang} dict={dict} navigationMenu={navigationMenu} featuredPosts={featuredPosts} />
         <VideoHeroBanner />
         <div className="container pt-10 md:pt-14 lg:pt-20">
-          <SectionMagazine10
-            posts={articlesArray}
-            videoPosts={videoPostsArray}
-            lang={lang}
-          />
+          <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray} lang={lang} />
         </div>
         {/* <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray} /> */}
         <div className="relative container space-y-8 py-10 md:space-y-12 md:py-14 lg:space-y-16 lg:py-20">
@@ -203,11 +172,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
 
         <div className="relative container py-10 md:py-14 lg:py-20">
           <SectionTrending
-            posts={
-              Array.isArray(latestArticles)
-                ? latestArticles.slice(0, 8)
-                : latestArticles.data?.slice(0, 8) || []
-            }
+            posts={Array.isArray(latestArticles) ? latestArticles.slice(0, 8) : latestArticles.data?.slice(0, 8) || []}
             heading={dict.sections.latestarticles.heading}
             subHeading={dict.sections.latestarticles.description}
             lang={lang}
@@ -252,7 +217,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
         </div>
       </div>
     </ApplicationLayout>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

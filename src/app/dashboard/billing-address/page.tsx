@@ -1,16 +1,12 @@
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import { Field, Fieldset, Label } from "@/shared/fieldset";
-import Input from "@/shared/Input";
-import Select from "@/shared/Select";
-import ProtectedPage from "../_components/ProtectedPage";
+import ButtonPrimary from '@/shared/ButtonPrimary'
+import Input from '@/shared/Input'
+import Select from '@/shared/Select'
+import { Field, Fieldset, Label } from '@/shared/fieldset'
+import ProtectedPage from '../_components/ProtectedPage'
 
 function BillingAddressContent() {
   return (
-    <form
-      className="max-w-4xl rounded-xl md:border md:p-6"
-      action="#"
-      method="post"
-    >
+    <form className="max-w-4xl rounded-xl md:border md:p-6" action="#" method="post">
       <Fieldset className="grid gap-6 md:grid-cols-2">
         <Field className="block">
           <Label>Country</Label>
@@ -56,7 +52,7 @@ function BillingAddressContent() {
         </div>
       </Fieldset>
     </form>
-  );
+  )
 }
 
 export default function BillingAddressPage() {
@@ -64,5 +60,5 @@ export default function BillingAddressPage() {
     <ProtectedPage>
       <BillingAddressContent />
     </ProtectedPage>
-  );
+  )
 }

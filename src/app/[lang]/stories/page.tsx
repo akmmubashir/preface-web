@@ -1,14 +1,14 @@
-import Banner from "@/components/Banner";
-import Card11 from "@/components/PostCards/Card11";
-import BannerSkeleton from "@/components/Skeletons/BannerSkeleton";
-import StoriesSkeleton from "@/components/Skeletons/StoriesSkeleton";
-import { getCategory } from "@/data/api/category";
-import { getDictionary } from "@/i18n";
-import ButtonSecondary from "@/shared/ButtonSecondary";
-import { ArrowDownIcon } from "@heroicons/react/24/outline";
+import Banner from '@/components/Banner'
+import Card11 from '@/components/PostCards/Card11'
+import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
+import StoriesSkeleton from '@/components/Skeletons/StoriesSkeleton'
+import { getCategory } from '@/data/api/category'
+import { getDictionary } from '@/i18n'
+import ButtonSecondary from '@/shared/ButtonSecondary'
+import { ArrowDownIcon } from '@heroicons/react/24/outline'
 // import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
-import { Metadata } from "next";
-import { Suspense } from "react";
+import { Metadata } from 'next'
+import { Suspense } from 'react'
 
 // const sortByOptions = [
 //   { name: 'Most recent', value: 'most-recent' },
@@ -29,29 +29,21 @@ import { Suspense } from "react";
 //   { name: 'Authors', value: 'authors', icon: UserListIcon },
 // ]
 
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}): Promise<Metadata> {
-  const { query } = await searchParams;
+export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
+  const { query } = await searchParams
 
   return {
     title: `Search results for ${query}`,
     description: `Search results for ${query}`,
-  };
+  }
 }
 
-const PageStories = async ({
-  params,
-}: {
-  params: Promise<{ query: string; lang: string }>;
-}) => {
-  const resolvedParams = await params;
-  const lang = resolvedParams.lang;
-  const category = await getCategory(lang || "en");
+const PageStories = async ({ params }: { params: Promise<{ query: string; lang: string }> }) => {
+  const resolvedParams = await params
+  const lang = resolvedParams.lang
+  const category = await getCategory(lang || 'en')
   // let searchQuery = (await searchParams)['s']
   // let searchTab = (await searchParams)['tab']
   // example: /search?s=text1&s=text2 => searchQuery = 'text1'
@@ -76,18 +68,14 @@ const PageStories = async ({
           <Card11 key={post._id} post={post} lang={lang} />
         ))}
       </div>
-    );
-  };
-  const dict = await getDictionary(lang);
+    )
+  }
+  const dict = await getDictionary(lang)
 
   return (
-    <div className="stories-page" dir={lang === "ar" ? "rtl" : "ltr"}>
+    <div className="stories-page" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container mx-auto mt-10 md:mt-14 lg:mt-20">
-        <Suspense
-          fallback={
-            <BannerSkeleton className="animate-duration-[2000ms] animate-pulse" />
-          }
-        >
+        <Suspense fallback={<BannerSkeleton className="animate-duration-[2000ms] animate-pulse" />}>
           <Banner
             image="/images/banner/common-banner.png"
             title={dict.navigation.stories}
@@ -99,18 +87,15 @@ const PageStories = async ({
       </div>
 
       <div className="container py-10 md:py-14 lg:py-20">
-        <Suspense fallback={<StoriesSkeleton />}>
-          {renderLoopItems(category, lang)}
-        </Suspense>
+        <Suspense fallback={<StoriesSkeleton />}>{renderLoopItems(category, lang)}</Suspense>
         <div className="mx-auto mt-8 text-center md:mt-10 lg:mt-12">
           <ButtonSecondary>
-            Load More{" "}
-            <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
+            Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
           </ButtonSecondary>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PageStories;
+export default PageStories

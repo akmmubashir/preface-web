@@ -1,16 +1,12 @@
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import { Field, Fieldset, Label } from "@/shared/fieldset";
-import Input from "@/shared/Input";
-import Select from "@/shared/Select";
-import Textarea from "@/shared/Textarea";
+import ButtonPrimary from '@/shared/ButtonPrimary'
+import { Field, Fieldset, Label } from '@/shared/fieldset'
+import Input from '@/shared/Input'
+import Select from '@/shared/Select'
+import Textarea from '@/shared/Textarea'
 
 const Page = () => {
   return (
-    <form
-      className="max-w-5xl rounded-xl md:border md:p-6"
-      action="#"
-      method="post"
-    >
+    <form className="max-w-5xl rounded-xl md:border md:p-6" action="#" method="post">
       <Fieldset className="grid gap-6 md:grid-cols-2">
         <Field className="block md:col-span-2">
           <Label>Post Title *</Label>
@@ -21,9 +17,7 @@ const Page = () => {
           <Label>Post Excerpt</Label>
 
           <Textarea className="mt-1" rows={4} />
-          <p className="mt-1 text-sm text-neutral-500">
-            Brief description for your article. URLs are hyperlinked.
-          </p>
+          <p className="mt-1 text-sm text-neutral-500">Brief description for your article. URLs are hyperlinked.</p>
         </Field>
         <Field className="block">
           <Label>Category</Label>
@@ -66,18 +60,11 @@ const Page = () => {
                   className="relative cursor-pointer rounded-md font-medium text-primary-600 focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-primary-800"
                 >
                   <span>Upload a file</span>
-                  <input
-                    id="file-upload"
-                    name="file-upload"
-                    type="file"
-                    className="sr-only"
-                  />
+                  <input id="file-upload" name="file-upload" type="file" className="sr-only" />
                 </label>
                 <p className="ps-1">or drag and drop</p>
               </div>
-              <p className="text-xs text-neutral-500">
-                PNG, JPG, GIF up to 2MB
-              </p>
+              <p className="text-xs text-neutral-500">PNG, JPG, GIF up to 2MB</p>
             </div>
           </div>
         </div>
@@ -92,7 +79,7 @@ const Page = () => {
         </div>
       </Fieldset>
     </form>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

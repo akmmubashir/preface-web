@@ -1,29 +1,27 @@
-import { TPost, TPostDetail } from "@/data/posts";
-import { Divider } from "@/shared/divider";
-import clsx from "clsx";
-import Image from "next/image";
-import { FC } from "react";
-import SingleMeta from "./SingleMeta";
-import { SingleMetaAction } from "./SingleMetaAction";
-import SingleTitle from "./SingleTitle";
-import VideoPlayer from "./VideoPlayer";
+import { TPost } from '@/data/posts'
+import { Divider } from '@/shared/divider'
+import clsx from 'clsx'
+import Image from 'next/image'
+import { FC } from 'react'
+import SingleMeta from './SingleMeta'
+import { SingleMetaAction } from './SingleMetaAction'
+import SingleTitle from './SingleTitle'
+import VideoPlayer from './VideoPlayer'
 
 interface Props {
-  className?: string;
-  post: TPost | any;
-  headerStyle?: "style1" | "style2" | "style3" | "audio" | "video" | "gallery";
+  className?: string
+  post: TPost | any
+  headerStyle?: 'style1' | 'style2' | 'style3' | 'audio' | 'video' | 'gallery'
 }
 
-const TitleAndMeta = ({ className, post }: Omit<Props, "headerStyle">) => {
-  const { commentCount, handle, likeCount, liked, title, excerpt } = post;
+const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
+  const { commentCount, handle, likeCount, liked, title, excerpt } = post
 
   return (
     <div className={`single-header-meta space-y-5 ${className}`}>
       <SingleTitle title={title} />
       {excerpt && (
-        <p className="text-base/relaxed text-neutral-600 md:text-lg/relaxed dark:text-neutral-400">
-          {excerpt}
-        </p>
+        <p className="text-base/relaxed text-neutral-600 md:text-lg/relaxed dark:text-neutral-400">{excerpt}</p>
       )}
       {/* <Divider /> */}
       <div className="flex flex-wrap items-center gap-4">
@@ -42,34 +40,19 @@ const TitleAndMeta = ({ className, post }: Omit<Props, "headerStyle">) => {
         <Divider />
       </div>
     </div>
-  );
-};
+  )
+}
 
-const HeaderStyle3 = ({ post, className }: Omit<Props, "defaultStyle">) => {
-  const {
-    commentCount,
-    handle,
-    likeCount,
-    liked,
-    title,
-    excerpt,
-    date,
-    author,
-    readingTime,
-    featuredImage,
-  } = post;
+const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
+  const { commentCount, handle, likeCount, liked, title, excerpt, date, author, readingTime, featuredImage } = post
   return (
-    <header className={clsx("single-header-style-3 relative", className)}>
+    <header className={clsx('single-header-style-3 relative', className)}>
       <div className="absolute inset-x-0 top-0 h-[480px] bg-neutral-900 md:h-[600px] lg:h-[700px] xl:h-[95vh] dark:bg-black/30" />
 
       <div className="relative container rounded-xl pt-10 lg:pt-16">
         <div className="relative mx-auto max-w-4xl space-y-5 text-neutral-100">
           <SingleTitle title={title} />
-          {excerpt && (
-            <p className="text-base text-neutral-300 md:text-lg/relaxed">
-              {excerpt}
-            </p>
-          )}
+          {excerpt && <p className="text-base text-neutral-300 md:text-lg/relaxed">{excerpt}</p>}
         </div>
 
         {/* FEATURED IMAGE */}
@@ -100,58 +83,38 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, "defaultStyle">) => {
         <Divider className="mx-auto mt-10 max-w-4xl" />
       </div>
     </header>
-  );
-};
+  )
+}
 
-const HeaderVideo = ({ className, post }: Omit<Props, "defaultStyle">) => {
+const HeaderVideo = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
   // Use video_url if videoUrl is not available
-  const videoSource =
-    post?.video_url ||
-    post?.videoUrl ||
-    post.video_file ||
-    (post as any).video_url;
+  const videoSource = post?.video_url || post?.videoUrl || post.video_file || (post as any).video_url
   // console.log(videoSource, 'videoSource');
 
   if (!videoSource) {
     return (
       <div className="container py-10 text-center">
-        <p className="text-lg text-red-500">
-          No video source found for this post
-        </p>
+        <p className="text-lg text-red-500">No video source found for this post</p>
       </div>
-    );
+    )
   }
 
   return (
-    <div className={clsx("single-header-style-video", className)}>
+    <div className={clsx('single-header-style-video', className)}>
       <VideoPlayer videoUrl={videoSource} />
       <div className="container mt-10 pb-5">
         <TitleAndMeta post={post} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-const SingleHeaderContainerVideo: FC<Props> = ({
-  className,
-  post,
-  headerStyle = "style1",
-}) => {
-  if (
-    (post.postType.name === "Video" &&
-      (post.video_url || (post as any).videoUrl)) ||
-    headerStyle === "video"
-  ) {
-    return <HeaderVideo className={className} post={post} />;
+const SingleHeaderContainerVideo: FC<Props> = ({ className, post, headerStyle = 'style1' }) => {
+  if ((post.postType.name === 'Video' && (post.video_url || (post as any).videoUrl)) || headerStyle === 'video') {
+    return <HeaderVideo className={className} post={post} />
   }
 
-  return (
-    <>
-      {headerStyle === "style3" && (
-        <HeaderStyle3 className={className} post={post} />
-      )}
-    </>
-  );
-};
+  return <>{headerStyle === 'style3' && <HeaderStyle3 className={className} post={post} />}</>
+}
 
-export default SingleHeaderContainerVideo;
+export default SingleHeaderContainerVideo

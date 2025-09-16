@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import { useSubmitScholarQuestion } from "@/hooks/api/use-scholar-questions";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import { AnimatePresence, motion, Variants } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { useSubmitScholarQuestion } from '@/hooks/api/use-scholar-questions'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { AnimatePresence, motion, Variants } from 'framer-motion'
+import { FC, useEffect, useState } from 'react'
 
 interface Props {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean
+  onClose: () => void
 }
 
 // Simple and clean animation variants
@@ -19,67 +19,65 @@ const backdropVariants: Variants = {
     opacity: 1,
     transition: {
       duration: 0.3,
-      ease: "easeOut" as const,
+      ease: 'easeOut' as const,
     },
   },
   exit: {
     opacity: 0,
     transition: {
       duration: 0.2,
-      ease: "easeIn" as const,
+      ease: 'easeIn' as const,
     },
   },
-};
+}
 
 const modalVariants: Variants = {
   hidden: {
-    x: "100%",
+    x: '100%',
     opacity: 0,
   },
   visible: {
     x: 0,
     opacity: 1,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 300,
       damping: 30,
       mass: 0.8,
     },
   },
   exit: {
-    x: "100%",
+    x: '100%',
     opacity: 0,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 400,
       damping: 40,
       mass: 0.8,
     },
   },
-};
+}
 
 const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    question: "",
-  });
+    name: '',
+    email: '',
+    mobile: '',
+    question: '',
+  })
 
-  const { mutate: submitQuestion, isPending } = useSubmitScholarQuestion();
+  const { mutate: submitQuestion, isPending } = useSubmitScholarQuestion()
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     submitQuestion(
       {
         ...formData,
@@ -88,46 +86,46 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
       {
         onSuccess: () => {
           setFormData({
-            name: "",
-            email: "",
-            mobile: "",
-            question: "",
-          });
-          alert("Your question has been submitted successfully!");
-          onClose();
+            name: '',
+            email: '',
+            mobile: '',
+            question: '',
+          })
+          alert('Your question has been submitted successfully!')
+          onClose()
         },
         onError: (error) => {
-          console.error("Submission failed:", error);
-          alert("Failed to submit question. Please try again.");
+          console.error('Submission failed:', error)
+          alert('Failed to submit question. Please try again.')
         },
       }
-    );
-  };
+    )
+  }
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      onClose();
+      onClose()
     }
-  };
+  }
 
   // Handle escape key
   useEffect(() => {
     const handleEscapeKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        onClose();
+      if (e.key === 'Escape' && isOpen) {
+        onClose()
       }
-    };
+    }
 
     if (isOpen) {
-      document.addEventListener("keydown", handleEscapeKey);
-      document.body.style.overflow = "hidden";
+      document.addEventListener('keydown', handleEscapeKey)
+      document.body.style.overflow = 'hidden'
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen, onClose]);
+      document.removeEventListener('keydown', handleEscapeKey)
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen, onClose])
 
   return (
     <AnimatePresence mode="wait">
@@ -158,12 +156,8 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
 
             {/* Header Section */}
             <div className="rounded-[10px] bg-[#00652E] px-6 py-12 text-center text-white">
-              <h2 className="mb-2 text-2xl font-semibold">
-                Ask the scholar what you have!
-              </h2>
-              <p className="text-lg font-light">
-                You will be answered in 48 hours
-              </p>
+              <h2 className="mb-2 text-2xl font-semibold">Ask the scholar what you have!</h2>
+              <p className="text-lg font-light">You will be answered in 48 hours</p>
             </div>
 
             {/* Form Section */}
@@ -223,7 +217,7 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
                     disabled={isPending}
                     className="cursor-pointer rounded-[25px] bg-[#60A43A] px-10 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-green-700 focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
                   >
-                    {isPending ? "Submitting..." : "Submit to the Scholar"}
+                    {isPending ? 'Submitting...' : 'Submit to the Scholar'}
                   </button>
                 </div>
               </form>
@@ -232,7 +226,7 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
         </motion.div>
       )}
     </AnimatePresence>
-  );
-};
+  )
+}
 
-export default ModalAskTheScholar;
+export default ModalAskTheScholar

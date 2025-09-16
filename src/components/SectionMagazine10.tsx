@@ -1,24 +1,19 @@
-import { TPost } from "@/data/posts";
-import clsx from "clsx";
-import { FC } from "react";
-import Card18 from "./PostCards/Card18";
-import Card19 from "./PostCards/Card19";
+import { TPost } from '@/data/posts'
+import clsx from 'clsx'
+import { FC } from 'react'
+import Card18 from './PostCards/Card18'
+import Card19 from './PostCards/Card19'
 
 interface Props {
-  posts: TPost[];
-  videoPosts?: any;
-  className?: string;
-  lang?: string;
+  posts: TPost[]
+  videoPosts?: any
+  className?: string
+  lang?: string
 }
 
-const SectionMagazine10: FC<Props> = ({
-  posts,
-  videoPosts,
-  className,
-  lang,
-}) => {
+const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) => {
   return (
-    <div className={clsx("section-magazine-10 relative", className)}>
+    <div className={clsx('section-magazine-10 relative', className)}>
       {!posts.length && <span>Nothing we found!</span>}
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
         {videoPosts[0] && (
@@ -46,18 +41,12 @@ const SectionMagazine10: FC<Props> = ({
           {posts
             .filter((_, i) => i < 3 && i >= 1)
             .map((item, index) => (
-              <Card18
-                className="col-span-1 sm:row-span-3"
-                key={index}
-                post={item}
-                lang={lang}
-                yellowColor={true}
-              />
+              <Card18 className="col-span-1 sm:row-span-3" key={index} post={item} lang={lang} yellowColor={true} />
             ))}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SectionMagazine10;
+export default SectionMagazine10

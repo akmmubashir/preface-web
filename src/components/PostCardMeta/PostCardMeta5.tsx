@@ -1,37 +1,23 @@
-import clsx from "clsx";
-import Link from "next/link";
-import { FC } from "react";
+import clsx from 'clsx'
+import Link from 'next/link'
+import { FC } from 'react'
 
 interface Props {
-  meta: any;
-  className?: string;
-  avatarSize?: string;
-  timeDuration?: boolean;
-  lang?: string;
+  meta: any
+  className?: string
+  avatarSize?: string
+  timeDuration?: boolean
+  lang?: string
 }
 
-const PostCardMeta5: FC<Props> = ({
-  meta,
-  className,
-  avatarSize,
-  timeDuration = false,
-  lang,
-}) => {
-  const { date, author, title, handle, categories, slug } = meta;
+const PostCardMeta5: FC<Props> = ({ meta, className, avatarSize, timeDuration = false, lang }) => {
+  const { date, author, title, handle, categories, slug } = meta
 
   return (
-    <div
-      className={clsx(
-        "post-card-meta-2 relative flex gap-2 text-xs/6",
-        className
-      )}
-    >
+    <div className={clsx('post-card-meta-2 relative flex gap-2 text-xs/6', className)}>
       <div>
-        <h2 className={clsx("block text-base font-medium")}>
-          <Link
-            href={lang === "en" ? `/video/${slug}` : `/${lang}/video/${slug}`}
-            className="line-clamp-2"
-          >
+        <h2 className={clsx('block text-base font-medium')}>
+          <Link href={lang === 'en' ? `/video/${slug}` : `/${lang}/video/${slug}`} className="line-clamp-2">
             {title}
           </Link>
         </h2>
@@ -47,18 +33,14 @@ const PostCardMeta5: FC<Props> = ({
               stroke="currentColor"
               className="size-4"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             1hr 16mins
           </span>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PostCardMeta5;
+export default PostCardMeta5

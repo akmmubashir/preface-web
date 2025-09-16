@@ -1,18 +1,18 @@
-import PostCardMeta from "@/components/PostCardMeta/PostCardMeta";
-import { TPost } from "@/data/posts";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { FC } from "react";
-import CategoryBadgeList from "../CategoryBadgeList";
-import PostCardCommentBtn from "../PostCardCommentBtn";
-import PostCardLikeBtn from "../PostCardLikeBtn";
-import PostCardSaveBtn from "../PostCardSaveBtn";
-import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon";
+import PostCardMeta from '@/components/PostCardMeta/PostCardMeta'
+import { TPost } from '@/data/posts'
+import clsx from 'clsx'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FC } from 'react'
+import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardCommentBtn from '../PostCardCommentBtn'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardSaveBtn from '../PostCardSaveBtn'
+import PostTypeFeaturedIcon from '../PostTypeFeaturedIcon'
 
 interface Props {
-  className?: string;
-  post: TPost;
+  className?: string
+  post: TPost
 }
 
 const Card3: FC<Props> = ({ className, post }) => {
@@ -28,41 +28,26 @@ const Card3: FC<Props> = ({ className, post }) => {
     liked,
     commentCount,
     bookmarked,
-  } = post;
+  } = post
 
   return (
-    <div
-      className={clsx(
-        "group post-card-3 flex flex-wrap items-center gap-x-7 gap-y-5 sm:flex-nowrap",
-        className
-      )}
-    >
+    <div className={clsx('group post-card-3 flex flex-wrap items-center gap-x-7 gap-y-5 sm:flex-nowrap', className)}>
       <div className="flex grow flex-col">
         <div className="space-y-3.5">
           <CategoryBadgeList categories={categories} />
           <h2 className="nc-card-title block text-base font-medium sm:font-semibold xl:text-lg">
-            <Link
-              href={`/post/${handle}`}
-              className="line-clamp-2"
-              title={title}
-            >
+            <Link href={`/post/${handle}`} className="line-clamp-2" title={title}>
               {title}
             </Link>
           </h2>
-          <p className="line-clamp-2 text-sm/6 text-neutral-600 dark:text-neutral-400">
-            {excerpt}
-          </p>
+          <p className="line-clamp-2 text-sm/6 text-neutral-600 dark:text-neutral-400">{excerpt}</p>
 
           <PostCardMeta meta={post} />
         </div>
         <div className="relative mt-5 flex flex-wrap gap-x-2 gap-y-1">
           <PostCardLikeBtn likeCount={likeCount} liked={liked} />
           <PostCardCommentBtn commentCount={commentCount} handle={handle} />
-          <PostCardSaveBtn
-            className="ms-auto"
-            readingTime={readingTime}
-            bookmarked={bookmarked}
-          />
+          <PostCardSaveBtn className="ms-auto" readingTime={readingTime} bookmarked={bookmarked} />
         </div>
       </div>
 
@@ -82,7 +67,7 @@ const Card3: FC<Props> = ({ className, post }) => {
         <Link href={`/post/${handle}`} className="absolute inset-0"></Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Card3;
+export default Card3

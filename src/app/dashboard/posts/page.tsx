@@ -1,11 +1,10 @@
-import dynamic from "next/dynamic";
-import LocalDate from "@/components/LocalDate";
-import PaginationWrapper from "@/components/PaginationWrapper";
-import { getAllPosts } from "@/data/posts";
-import { Badge } from "@/shared/Badge";
-import Image from "next/image";
-import Link from "next/link";
-import { ProtectedRoute } from "@/contexts/AuthContext";
+import LocalDate from '@/components/LocalDate'
+import PaginationWrapper from '@/components/PaginationWrapper'
+import { ProtectedRoute } from '@/contexts/AuthContext'
+import { getAllPosts } from '@/data/posts'
+import { Badge } from '@/shared/Badge'
+import Image from 'next/image'
+import Link from 'next/link'
 
 // Dynamically import with no SSR
 // const ProtectedRoute = dynamic(
@@ -14,12 +13,12 @@ import { ProtectedRoute } from "@/contexts/AuthContext";
 // )
 
 export const metadata = {
-  title: "Dashboard - Posts",
-  description: "Dashboard - Posts",
-};
+  title: 'Dashboard - Posts',
+  description: 'Dashboard - Posts',
+}
 
 async function DashboardPostsPage() {
-  const posts = (await getAllPosts()).slice(0, 10);
+  const posts = (await getAllPosts()).slice(0, 10)
   return (
     <div className="flow-root">
       <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -27,28 +26,16 @@ async function DashboardPostsPage() {
           <table className="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
             <thead>
               <tr>
-                <th
-                  scope="col"
-                  className="py-3.5 ps-3 pe-4 text-left text-sm font-semibold sm:ps-0 rtl:text-right"
-                >
+                <th scope="col" className="py-3.5 ps-3 pe-4 text-left text-sm font-semibold sm:ps-0 rtl:text-right">
                   Post
                 </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold rtl:text-right"
-                >
+                <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold rtl:text-right">
                   Stats
                 </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold rtl:text-right"
-                >
+                <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold rtl:text-right">
                   Status
                 </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold rtl:text-right"
-                >
+                <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold rtl:text-right">
                   Date created
                 </th>
                 <th scope="col" className="relative py-3.5 ps-3 pe-4 sm:pe-0">
@@ -72,25 +59,19 @@ async function DashboardPostsPage() {
                       </div>
                       <div className="ms-4">
                         <div className="font-medium">{post.title}</div>
-                        <div className="mt-1 text-gray-500 dark:text-gray-400">
-                          {post.categories[0].name}
-                        </div>
+                        <div className="mt-1 text-gray-500 dark:text-gray-400">{post.categories[0].name}</div>
                       </div>
                     </div>
                   </td>
 
                   <td className="px-3 py-5 text-sm whitespace-nowrap">
                     <div className="">{post.viewCount} views</div>
-                    <div className="mt-1 text-gray-500 dark:text-gray-400">
-                      {post.commentCount} comments
-                    </div>
+                    <div className="mt-1 text-gray-500 dark:text-gray-400">{post.commentCount} comments</div>
                   </td>
 
                   <td className="px-3 py-5 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                    <Badge
-                      color={post.status === "published" ? "green" : "red"}
-                    >
-                      {post.status === "published" ? "Published" : "Draft"}
+                    <Badge color={post.status === 'published' ? 'green' : 'red'}>
+                      {post.status === 'published' ? 'Published' : 'Draft'}
                     </Badge>
                   </td>
                   <td className="px-3 py-5 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
@@ -110,7 +91,7 @@ async function DashboardPostsPage() {
 
       <PaginationWrapper className="mt-16" />
     </div>
-  );
+  )
 }
 
 export default function Page() {
@@ -118,5 +99,5 @@ export default function Page() {
     <ProtectedRoute>
       <DashboardPostsPage />
     </ProtectedRoute>
-  );
+  )
 }

@@ -1,31 +1,26 @@
-import { TPost } from "@/data/posts";
-import clsx from "clsx";
-import { FC } from "react";
+import { TPost } from '@/data/posts'
+import clsx from 'clsx'
+import { FC } from 'react'
 
 interface Props {
-  className?: string;
-  postType?: TPost["postType"];
-  wrapSize?: string;
-  iconSize?: string;
-  onClick?: () => void;
+  className?: string
+  postType?: TPost['postType']
+  wrapSize?: string
+  iconSize?: string
+  onClick?: () => void
 }
 
 const PostTypeFeaturedIcon: FC<Props> = ({
   className,
-  postType = "standard",
+  postType = 'standard',
   onClick,
-  wrapSize = "size-11",
-  iconSize = "size-6",
+  wrapSize = 'size-11',
+  iconSize = 'size-6',
 }) => {
   const renderMediaIcon = () => {
-    if (postType?.name === "Video") {
+    if (postType?.name === 'Video') {
       return (
-        <svg
-          className={iconSize}
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg className={iconSize} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M17.13 7.9799C20.96 10.1899 20.96 13.8099 17.13 16.0199L14.04 17.7999L10.95 19.5799C7.13 21.7899 4 19.9799 4 15.5599V11.9999V8.43989C4 4.01989 7.13 2.2099 10.96 4.4199L13.21 5.7199"
             stroke="currentColor"
@@ -35,17 +30,12 @@ const PostTypeFeaturedIcon: FC<Props> = ({
             strokeLinejoin="round"
           />
         </svg>
-      );
+      )
     }
 
-    if (postType === "audio") {
+    if (postType === 'audio') {
       return (
-        <svg
-          className={iconSize}
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg className={iconSize} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M6.28016 22C8.00328 22 9.40016 20.6031 9.40016 18.88C9.40016 17.1569 8.00328 15.76 6.28016 15.76C4.55703 15.76 3.16016 17.1569 3.16016 18.88C3.16016 20.6031 4.55703 22 6.28016 22Z"
             stroke="currentColor"
@@ -82,17 +72,12 @@ const PostTypeFeaturedIcon: FC<Props> = ({
             strokeLinejoin="round"
           />
         </svg>
-      );
+      )
     }
 
-    if (postType === "gallery") {
+    if (postType === 'gallery') {
       return (
-        <svg
-          className={iconSize}
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg className={iconSize} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M2 12.99V15C2 20 4 22 9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9"
             stroke="currentColor"
@@ -115,18 +100,18 @@ const PostTypeFeaturedIcon: FC<Props> = ({
             strokeLinejoin="round"
           />
         </svg>
-      );
+      )
     }
 
-    return null;
-  };
+    return null
+  }
 
   return (
     <div className={clsx(className)} onClick={onClick}>
-      {!!postType && postType !== "standard" ? (
+      {!!postType && postType !== 'standard' ? (
         <span
           className={clsx(
-            "flex items-center justify-center rounded-full border border-white bg-neutral-900/60 text-xl text-white rtl:rotate-180",
+            'flex items-center justify-center rounded-full border border-white bg-neutral-900/60 text-xl text-white rtl:rotate-180',
             wrapSize
           )}
         >
@@ -134,7 +119,7 @@ const PostTypeFeaturedIcon: FC<Props> = ({
         </span>
       ) : null}
     </div>
-  );
-};
+  )
+}
 
-export default PostTypeFeaturedIcon;
+export default PostTypeFeaturedIcon

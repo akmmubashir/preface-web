@@ -1,19 +1,16 @@
-import dogPng from "@/images/dog.png";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { FC } from "react";
+import dogPng from '@/images/dog.png'
+import ButtonPrimary from '@/shared/ButtonPrimary'
+import clsx from 'clsx'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FC } from 'react'
 
 type Props = {
-  className?: string;
-};
+  className?: string
+}
 const CardCategory3: FC<Props> = ({ className }) => {
   return (
-    <Link
-      href={"/archive/demo-slug"}
-      className={clsx("card-category-3 block", className)}
-    >
+    <Link href={'/archive/demo-slug'} className={clsx('card-category-3 block', className)}>
       <div
         className={`group aspect-w-16 relative h-0 w-full overflow-hidden rounded-2xl bg-sky-100 aspect-h-11 sm:aspect-h-9`}
       >
@@ -31,12 +28,8 @@ const CardCategory3: FC<Props> = ({ className }) => {
         <div>
           <div className="absolute inset-5 flex flex-col sm:inset-8">
             <div className="max-w-xs">
-              <span className={`mb-2 block text-sm text-slate-700`}>
-                Sponsored
-              </span>
-              <h2
-                className={`text-xl font-semibold text-slate-900 md:text-2xl`}
-              >
+              <span className={`mb-2 block text-sm text-slate-700`}>Sponsored</span>
+              <h2 className={`text-xl font-semibold text-slate-900 md:text-2xl`}>
                 Up to <br /> 80% off retail
               </h2>
             </div>
@@ -47,7 +40,7 @@ const CardCategory3: FC<Props> = ({ className }) => {
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}
 
-export default CardCategory3;
+export default CardCategory3

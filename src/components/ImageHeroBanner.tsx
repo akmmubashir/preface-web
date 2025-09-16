@@ -1,80 +1,79 @@
-"use client";
-import { PlayIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { FC, useEffect, useState, useRef } from "react";
+'use client'
+import { PlayIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
+import { FC, useEffect, useRef, useState } from 'react'
 
 interface SlideContent {
-  _id: string;
-  title: string;
-  content?: string;
-  thumbnail: string;
-  video_url?: string;
-  video_file?: string;
-  slug: string;
-  views: number;
-  createdAt: string;
-  updatedAt: string;
+  _id: string
+  title: string
+  content?: string
+  thumbnail: string
+  video_url?: string
+  video_file?: string
+  slug: string
+  views: number
+  createdAt: string
+  updatedAt: string
 }
 
 interface ImageHeroBannerProps {
-  imageUrl?: string;
-  heading?: string;
-  className?: string;
-  alt?: string;
-  posts?: SlideContent[];
+  imageUrl?: string
+  heading?: string
+  className?: string
+  alt?: string
+  posts?: SlideContent[]
 }
 
 // Fallback slides in case no posts provided
 const defaultSlides: SlideContent[] = [
   {
-    _id: "1",
-    title:
-      "How to Pray that cleanses your soul to Pray that cleanses your body",
-    thumbnail: "/images/banner/visual-banner.png",
-    video_url: "https://www.youtube.com/watch?v=VJg37fVPy9I",
-    slug: "default-slide-1",
+    _id: '1',
+    title: 'How to Pray that cleanses your soul to Pray that cleanses your body',
+    thumbnail: '/images/banner/visual-banner.png',
+    video_url: 'https://www.youtube.com/watch?v=VJg37fVPy9I',
+    slug: 'default-slide-1',
     views: 0,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
-    _id: "2",
-    title: "Understanding the spiritual aspects of prayer",
-    thumbnail: "/images/banner/common-banner.png",
-    video_url: "https://www.youtube.com/watch?v=example2",
-    slug: "default-slide-2",
+    _id: '2',
+    title: 'Understanding the spiritual aspects of prayer',
+    thumbnail: '/images/banner/common-banner.png',
+    video_url: 'https://www.youtube.com/watch?v=example2',
+    slug: 'default-slide-2',
     views: 0,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
-];
+]
 
 // Function to convert YouTube URL to embed URL
 const getYouTubeEmbedUrl = (url: string): string => {
-  if (!url) return "";
+  if (!url) return ''
 
-  const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/;
-  const match = url.match(regex);
+  const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/
+  const match = url.match(regex)
 
   if (match && match[1]) {
-    return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${match[1]}`;
+    return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${match[1]}`
   }
 
-  return url;
-};
+  return url
+}
 
 const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
-  imageUrl = "/images/banner/visual-banner.png",
-  heading = "The Message of Mohammads PBUH Life",
-  className = "",
-  alt = "Hero Banner",
+  imageUrl = '/images/banner/visual-banner.png',
+  heading = 'The Message of Mohammads PBUH Life',
+  className = '',
+  alt = 'Hero Banner',
   posts = defaultSlides,
 }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [slides, setSlides] = useState<SlideContent[]>(defaultSlides);
-  const [isHoveringPlayButton, setIsHoveringPlayButton] = useState(false);
-  const videoRef = useRef<HTMLIFrameElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [slides, setSlides] = useState<SlideContent[]>(defaultSlides)
+  const [isHoveringPlayButton, setIsHoveringPlayButton] = useState(false)
+  const videoRef = useRef<HTMLIFrameElement>(null)
 
   // Process posts data
   useEffect(() => {
@@ -82,50 +81,50 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
       // Map posts data to our SlideContent interface
       const mappedSlides: SlideContent[] = posts.map((item: any) => ({
         _id: item._id || item.id || Math.random().toString(),
-        title: item.title || "Untitled",
-        content: item.content || item.description || "",
+        title: item.title || 'Untitled',
+        content: item.content || item.description || '',
         thumbnail: item.thumbnail || item.image || imageUrl,
-        video_url: item.video_url || item.videoUrl || "",
-        video_file: item.video_file || item.videoFile || "",
-        slug: item.slug || "",
+        video_url: item.video_url || item.videoUrl || '',
+        video_file: item.video_file || item.videoFile || '',
+        slug: item.slug || '',
         views: item.views || 0,
         createdAt: item.createdAt || new Date().toISOString(),
         updatedAt: item.updatedAt || new Date().toISOString(),
-      }));
+      }))
 
-      setSlides(mappedSlides);
+      setSlides(mappedSlides)
     } else {
-      setSlides(defaultSlides);
+      setSlides(defaultSlides)
     }
-  }, [posts, imageUrl]);
+  }, [posts, imageUrl])
 
   // console.log(slides, 'slides')
 
   // Auto-slide functionality with hover pause
   useEffect(() => {
-    if (!isAutoPlaying || slides.length <= 1 || isHoveringPlayButton) return;
+    if (!isAutoPlaying || slides.length <= 1 || isHoveringPlayButton) return
 
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000); // Change slide every 5 seconds
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000) // Change slide every 5 seconds
 
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, slides.length, isHoveringPlayButton]);
+    return () => clearInterval(interval)
+  }, [isAutoPlaying, slides.length, isHoveringPlayButton])
 
   const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-    setIsAutoPlaying(false); // Stop auto-play when user manually navigates
-  };
+    setCurrentSlide(index)
+    setIsAutoPlaying(false) // Stop auto-play when user manually navigates
+  }
 
   const handlePlayButtonHover = () => {
-    setIsHoveringPlayButton(true);
-  };
+    setIsHoveringPlayButton(true)
+  }
 
   const handlePlayButtonLeave = () => {
-    setIsHoveringPlayButton(false);
-  };
+    setIsHoveringPlayButton(false)
+  }
 
-  const currentSlideData = slides[currentSlide];
+  const currentSlideData = slides[currentSlide]
 
   return (
     <div className={`relative h-screen w-full overflow-hidden ${className}`}>
@@ -135,7 +134,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
           <div
             key={slide._id}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <Image
@@ -156,7 +155,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
           <iframe
             ref={videoRef}
             src={getYouTubeEmbedUrl(currentSlideData.video_url)}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -168,19 +167,15 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
       {/* Linear Gradient Overlay - Center to Bottom */}
       <div
         className={`absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 ${
-          isHoveringPlayButton ? "z-30" : "z-10"
+          isHoveringPlayButton ? 'z-30' : 'z-10'
         }`}
       />
 
       {/* Main Content */}
-      <div
-        className={`absolute inset-0 container flex items-end pb-24 ${
-          isHoveringPlayButton ? "z-40" : "z-20"
-        }`}
-      >
+      <div className={`absolute inset-0 container flex items-end pb-24 ${isHoveringPlayButton ? 'z-40' : 'z-20'}`}>
         {/* Left Content */}
         <div className="flex flex-1 flex-col pr-2 md:pr-8">
-          <h1 className="mb-4 text-2xl font-semibold tracking-wider text-white md:text-3xl md:font-bold max-w-full md:max-w-2xl">
+          <h1 className="mb-4 max-w-full text-2xl font-semibold tracking-wider text-white md:max-w-2xl md:text-3xl md:font-bold">
             {currentSlideData?.title || heading}
           </h1>
           {/* <p className="mb-6 max-w-md text-sm leading-relaxed text-white/90 md:text-base">
@@ -195,7 +190,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
 
           {/* Animated Play Now Button */}
           <button
-            className="animated-play-button inline-flex cursor-pointer w-fit items-center gap-2 text-white whitespace-nowrap relative font-medium text-lg px-4 py-3"
+            className="animated-play-button relative inline-flex w-fit cursor-pointer items-center gap-2 px-4 py-3 text-lg font-medium whitespace-nowrap text-white"
             onMouseEnter={handlePlayButtonHover}
             onMouseLeave={handlePlayButtonLeave}
           >
@@ -205,7 +200,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
         </div>
 
         {/* Right Side - Content Info */}
-        <div className="hidden md:flex flex-1 justify-end">
+        <div className="hidden flex-1 justify-end md:flex">
           <div className="relative">
             {/* Pagination Dots */}
             {slides.length > 1 && (
@@ -215,9 +210,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
                     key={index}
                     onClick={() => goToSlide(index)}
                     className={`h-2 rounded-full transition-all duration-200 ${
-                      currentSlide === index
-                        ? "w-6 bg-[#60A43A]"
-                        : "w-2 bg-white/50 hover:bg-white/70"
+                      currentSlide === index ? 'w-6 bg-[#60A43A]' : 'w-2 bg-white/50 hover:bg-white/70'
                     }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
@@ -236,7 +229,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
         }
 
         .animated-play-button::after {
-          content: "";
+          content: '';
           background: #60a43a;
           position: absolute;
           bottom: 0;
@@ -257,7 +250,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
         }
       `}</style>
     </div>
-  );
-};
+  )
+}
 
-export default ImageHeroBanner;
+export default ImageHeroBanner

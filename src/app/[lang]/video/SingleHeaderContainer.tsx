@@ -1,40 +1,24 @@
-import { TPostDetail } from "@/data/posts";
-import { Divider } from "@/shared/divider";
-import clsx from "clsx";
-import Image from "next/image";
-import { FC } from "react";
-import { SingleMetaAction } from "./SingleMetaAction";
-import SingleTitle from "./SingleTitle";
+import { TPostDetail } from '@/data/posts'
+import { Divider } from '@/shared/divider'
+import clsx from 'clsx'
+import Image from 'next/image'
+import { FC } from 'react'
+import { SingleMetaAction } from './SingleMetaAction'
+import SingleTitle from './SingleTitle'
 
 interface Props {
-  className?: string;
-  post: TPostDetail | any;
-  headerStyle?: "style1" | "style2" | "style3" | "audio" | "video" | "gallery";
+  className?: string
+  post: TPostDetail | any
+  headerStyle?: 'style1' | 'style2' | 'style3' | 'audio' | 'video' | 'gallery'
 }
 
-const TitleAndMeta = ({ className, post }: Omit<Props, "headerStyle">) => {
-  const {
-    categories,
-    date,
-    author,
-    readingTime,
-    commentCount,
-    handle,
-    likeCount,
-    liked,
-    title,
-    excerpt,
-  } = post;
+const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
+  const { categories, date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
 
   return (
     <div className={`text-white ${className}`}>
-      <div className="mb-4">
-        {/* <CategoryBadgeList categories={categories || []} /> */}
-      </div>
-      <SingleTitle
-        title={title}
-        className="mb-4 text-2xl font-semibold sm:font-bold md:text-4xl lg:text-5xl"
-      />
+      <div className="mb-4">{/* <CategoryBadgeList categories={categories || []} /> */}</div>
+      <SingleTitle title={title} className="mb-4 text-2xl font-semibold sm:font-bold md:text-4xl lg:text-5xl" />
       {/* {excerpt && (
         <p className="text-base/relaxed text-white/80 mb-6 md:text-lg/relaxed">
           {excerpt}
@@ -60,20 +44,20 @@ const TitleAndMeta = ({ className, post }: Omit<Props, "headerStyle">) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const HeaderStyle1 = ({ className, post }: Omit<Props, "defaultStyle">) => {
-  const { featuredImage, title } = post;
+const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
+  const { featuredImage, title } = post
 
   return (
     <>
       <div className="container">
         <Divider />
       </div>
-      <header className={clsx("single-header-style-1", className)}>
+      <header className={clsx('single-header-style-1', className)}>
         {featuredImage.src && (
-          <div className="aspect-square relative w-full sm:aspect-15/5">
+          <div className="relative aspect-square w-full sm:aspect-15/5">
             <Image
               alt={title}
               className="object-cover"
@@ -86,12 +70,11 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, "defaultStyle">) => {
             <div
               className="absolute inset-0"
               style={{
-                background:
-                  "linear-gradient(0deg, #000000D9 0%, #61616100 100%)",
+                background: 'linear-gradient(0deg, #000000D9 0%, #61616100 100%)',
               }}
             />
-            <div className="container absolute right-0 bottom-0 left-0">
-              <div className=" mx-auto  pb-8">
+            <div className="absolute right-0 bottom-0 left-0 container">
+              <div className="mx-auto pb-8">
                 <TitleAndMeta post={post} />
               </div>
             </div>
@@ -99,21 +82,11 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, "defaultStyle">) => {
         )}
       </header>
     </>
-  );
-};
+  )
+}
 
-const SingleHeaderContainer: FC<Props> = ({
-  className,
-  post,
-  headerStyle = "style1",
-}) => {
-  return (
-    <>
-      {headerStyle === "style1" && (
-        <HeaderStyle1 className={className} post={post} />
-      )}
-    </>
-  );
-};
+const SingleHeaderContainer: FC<Props> = ({ className, post, headerStyle = 'style1' }) => {
+  return <>{headerStyle === 'style1' && <HeaderStyle1 className={className} post={post} />}</>
+}
 
-export default SingleHeaderContainer;
+export default SingleHeaderContainer

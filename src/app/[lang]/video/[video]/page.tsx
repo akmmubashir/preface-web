@@ -1,33 +1,16 @@
-import WidgetAuthors from "@/components/WidgetAuthors";
-import WidgetCategories from "@/components/WidgetCategories";
-import WidgetPosts from "@/components/WidgetPosts";
-import WidgetTags from "@/components/WidgetTags";
-import { getAuthors } from "@/data/authors";
-import { getCategories, getTags } from "@/data/categories";
-import {
-  getAllPosts,
-  getCommentsByPostId,
-  getPostBySlug,
-  TPost,
-} from "@/data/posts";
-import { Metadata } from "next";
-import SingleContentContainer from "../SingleContentContainer";
-import SingleHeaderContainer from "../SingleHeaderContainer";
-import SingleRelatedPosts from "../SingleRelatedPosts";
-import SingleHeaderContainerVideo from "../SingleHeaderContainerVideo";
+import { TPost, getPostBySlug } from '@/data/posts'
+import { Metadata } from 'next'
+import SingleHeaderContainerVideo from '../SingleHeaderContainerVideo'
+import SingleRelatedPosts from '../SingleRelatedPosts'
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ video: string }>;
-}): Promise<Metadata> {
-  const resolvedParams = await params;
-  const post = await getPostBySlug(resolvedParams.video);
+export async function generateMetadata({ params }: { params: Promise<{ video: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
+  const post = await getPostBySlug(resolvedParams.video)
   if (!post) {
     return {
-      title: "Video not found",
-      description: "The requested video could not be found",
-    };
+      title: 'Video not found',
+      description: 'The requested video could not be found',
+    }
   }
   return {
     title: post.title,
@@ -37,27 +20,24 @@ export async function generateMetadata({
       description: post.excerpt || post.title,
       images: [
         {
-          url:
-            (typeof post.thumbnail === "string"
-              ? post.thumbnail
-              : post.thumbnail?.src) || "",
+          url: (typeof post.thumbnail === 'string' ? post.thumbnail : post.thumbnail?.src) || '',
           width: 1200,
           height: 630,
           alt: post.title,
         },
       ],
     },
-  };
+  }
 }
 
 interface PageProps {
-  params: Promise<{ video: string }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: Promise<{ video: string }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 const Page = async ({ params }: PageProps) => {
-  const resolvedParams = await params;
-  const post = (await getPostBySlug(resolvedParams.video)) as TPost | null;
+  const resolvedParams = await params
+  const post = (await getPostBySlug(resolvedParams.video)) as TPost | null
 
   if (!post) {
     return (
@@ -65,7 +45,7 @@ const Page = async ({ params }: PageProps) => {
         <h1 className="text-2xl font-bold">Video not found</h1>
         <p className="mt-4">The requested video could not be found.</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -89,7 +69,7 @@ const Page = async ({ params }: PageProps) => {
 
       <SingleRelatedPosts />
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

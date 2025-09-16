@@ -1,31 +1,31 @@
-"use client";
+'use client'
 
-import { FC, useEffect, useRef, useState } from "react";
-import ReactPlayer from "react-player";
+import { FC, useEffect, useRef, useState } from 'react'
+import ReactPlayer from 'react-player'
 
 interface VideoHeroBannerProps {
-  videoUrl?: string;
-  heading?: string;
-  className?: string;
+  videoUrl?: string
+  heading?: string
+  className?: string
 }
 
 const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
   // videoUrl = 'https://www.youtube.com/watch?v=vHBodN0Mirs',
   // videoUrl = 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/PREFACE_(A%20STREAM%20WITH%20MANY%20CURRENTS%20)%20(2).mp4',
-  videoUrl = "https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/PREFACE_SEP_04(A%20STREAM%20WITH%20MANY%20CURRENTS_FINAL%20).mp4",
-  heading = "VIDEO",
-  className = "",
+  videoUrl = 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/PREFACE_SEP_04(A%20STREAM%20WITH%20MANY%20CURRENTS_FINAL%20).mp4',
+  heading = 'VIDEO',
+  className = '',
 }) => {
   // const [isMuted, setIsMuted] = useState(true)
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isRendered, setIsRendered] = useState(false);
-  const playerRef = useRef<ReactPlayer | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isRendered, setIsRendered] = useState(false)
+  const playerRef = useRef<ReactPlayer | null>(null)
 
   useEffect(() => {
     // Render player immediately for autoplay
-    setIsRendered(true);
-    setIsPlaying(true);
-  }, []);
+    setIsRendered(true)
+    setIsPlaying(true)
+  }, [])
 
   return (
     <div className={`relative h-screen w-full overflow-hidden ${className}`}>
@@ -47,12 +47,12 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
           width="100%"
           height="100%"
           onStart={() => {
-            setIsPlaying(true);
+            setIsPlaying(true)
           }}
           config={{
             file: {
               attributes: {
-                controlsList: "nodownload nofullscreen noremoteplayback",
+                controlsList: 'nodownload nofullscreen noremoteplayback',
                 disablePictureInPicture: true,
                 playsInline: true,
               },
@@ -91,7 +91,7 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
         </button>
       )} */}
     </div>
-  );
-};
+  )
+}
 
-export default VideoHeroBanner;
+export default VideoHeroBanner

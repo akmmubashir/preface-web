@@ -1,23 +1,23 @@
-import { Button } from "@/shared/Button";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import Textarea from "@/shared/Textarea";
-import React, { FC } from "react";
+import { Button } from '@/shared/Button'
+import ButtonPrimary from '@/shared/ButtonPrimary'
+import Textarea from '@/shared/Textarea'
+import React, { FC } from 'react'
 
 interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
-  className?: string;
-  onClickSubmit?: () => void;
-  onClickCancel?: () => void;
-  textareaRef?: React.RefObject<HTMLTextAreaElement | null>;
-  defaultValue?: string;
-  rows?: number;
+  className?: string
+  onClickSubmit?: () => void
+  onClickCancel?: () => void
+  textareaRef?: React.RefObject<HTMLTextAreaElement | null>
+  defaultValue?: string
+  rows?: number
 }
 
 const SingleCommentForm: FC<Props> = ({
-  className = "mt-5",
+  className = 'mt-5',
   onClickSubmit,
   onClickCancel,
   textareaRef,
-  defaultValue = "",
+  defaultValue = '',
   rows = 4,
   ...props
 }) => {
@@ -40,7 +40,7 @@ const SingleCommentForm: FC<Props> = ({
         </ButtonPrimary>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default SingleCommentForm;
+export default SingleCommentForm

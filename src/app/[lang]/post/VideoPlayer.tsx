@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
+import { useEffect, useState } from 'react'
+import ReactPlayer from 'react-player'
 
 const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
-  const [isRendered, setIsRendered] = useState(false);
+  const [isRendered, setIsRendered] = useState(false)
 
   useEffect(() => {
-    setIsRendered(true);
-  }, []);
+    setIsRendered(true)
+  }, [])
 
   return (
     <div className="container">
@@ -26,7 +26,7 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
         ) : null}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default VideoPlayer;
+export default VideoPlayer

@@ -1,25 +1,20 @@
-import clsx from "clsx";
-import { FC } from "react";
+import clsx from 'clsx'
+import { FC } from 'react'
 
 interface Props {
-  meta: any;
-  className?: string;
-  avatarSize?: string;
+  meta: any
+  className?: string
+  avatarSize?: string
 }
 
 const PostCardMeta4: FC<Props> = ({ meta, className, avatarSize }) => {
-  const { date, author, title, handle, categories } = meta;
+  const { date, author, title, handle, categories } = meta
 
   return (
-    <div
-      className={clsx(
-        "post-card-meta-2 relative flex gap-2 text-xs/6",
-        className
-      )}
-    >
+    <div className={clsx('post-card-meta-2 relative flex gap-2 text-xs/6', className)}>
       {/* <Avatar className={clsx(avatarSize, 'mt-1 size-9 shrink-0')} src={author.avatar.src} /> */}
       <div>
-        <h2 className={clsx("block text-base font-medium")}>
+        <h2 className={clsx('block text-base font-medium')}>
           {/* <Link href={`/post/${handle}`} className="line-clamp-1">
             {title}
           </Link> */}
@@ -37,7 +32,7 @@ const PostCardMeta4: FC<Props> = ({ meta, className, avatarSize }) => {
         </Link> */}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PostCardMeta4;
+export default PostCardMeta4

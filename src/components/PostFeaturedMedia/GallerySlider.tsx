@@ -1,68 +1,60 @@
-"use client";
+'use client'
 
-import { variants } from "@/utils/animationVariants";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import { AnimatePresence, MotionConfig, motion } from "framer-motion";
-import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
-import { FC, useState } from "react";
-import { useSwipeable } from "react-swipeable";
+import { variants } from '@/utils/animationVariants'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
+import Image, { StaticImageData } from 'next/image'
+import Link from 'next/link'
+import { FC, useState } from 'react'
+import { useSwipeable } from 'react-swipeable'
 
 interface Props {
-  className?: string;
-  galleryImgs: (StaticImageData | string)[];
-  handle: string;
-  navigation?: boolean;
+  className?: string
+  galleryImgs: (StaticImageData | string)[]
+  handle: string
+  navigation?: boolean
 }
 
-const GallerySlider: FC<Props> = ({
-  className,
-  galleryImgs,
-  handle,
-  navigation = true,
-}) => {
-  const [loaded, setLoaded] = useState(false);
-  const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const images = galleryImgs;
+const GallerySlider: FC<Props> = ({ className, galleryImgs, handle, navigation = true }) => {
+  const [loaded, setLoaded] = useState(false)
+  const [index, setIndex] = useState(0)
+  const [direction, setDirection] = useState(0)
+  const images = galleryImgs
 
   function changePhotoId(newVal: number) {
     if (newVal > index) {
-      setDirection(1);
+      setDirection(1)
     } else {
-      setDirection(-1);
+      setDirection(-1)
     }
-    setIndex(newVal);
+    setIndex(newVal)
   }
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
       if (index < images?.length - 1) {
-        changePhotoId(index + 1);
+        changePhotoId(index + 1)
       }
     },
     onSwipedRight: () => {
       if (index > 0) {
-        changePhotoId(index - 1);
+        changePhotoId(index - 1)
       }
     },
     trackMouse: true,
-  });
+  })
 
-  let currentImage = images[index];
+  let currentImage = images[index]
 
   return (
     <MotionConfig
       transition={{
-        x: { type: "spring", stiffness: 300, damping: 30 },
+        x: { type: 'spring', stiffness: 300, damping: 30 },
         opacity: { duration: 0.2 },
       }}
     >
-      <div
-        className={clsx("group/cardGallerySlider absolute inset-0", className)}
-        {...handlers}
-      >
+      <div className={clsx('group/cardGallerySlider absolute inset-0', className)} {...handlers}>
         {/* Main image */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
           <AnimatePresence initial={false} custom={direction}>
@@ -76,7 +68,7 @@ const GallerySlider: FC<Props> = ({
               className="absolute inset-0"
             >
               <Image
-                src={currentImage || ""}
+                src={currentImage || ''}
                 fill
                 alt=""
                 className="object-cover"
@@ -117,9 +109,7 @@ const GallerySlider: FC<Props> = ({
           <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 items-center justify-center gap-x-1.5">
             {images.map((_, i) => (
               <button
-                className={`size-1.5 rounded-full ${
-                  i === index ? "bg-white" : "bg-white/60"
-                }`}
+                className={`size-1.5 rounded-full ${i === index ? 'bg-white' : 'bg-white/60'}`}
                 onClick={() => changePhotoId(i)}
                 key={i}
               />
@@ -128,7 +118,7 @@ const GallerySlider: FC<Props> = ({
         </>
       </div>
     </MotionConfig>
-  );
-};
+  )
+}
 
-export default GallerySlider;
+export default GallerySlider

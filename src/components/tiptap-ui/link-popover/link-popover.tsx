@@ -1,166 +1,149 @@
-"use client";
+'use client'
 
-import { isNodeSelection, type Editor } from "@tiptap/react";
-import * as React from "react";
+import { isNodeSelection, type Editor } from '@tiptap/react'
+import * as React from 'react'
 
 // --- Hooks ---
-import { useTiptapEditor } from "@/hooks/use-tiptap-editor";
+import { useTiptapEditor } from '@/hooks/use-tiptap-editor'
 
 // --- Icons ---
-import { CornerDownLeftIcon } from "@/components/tiptap-icons/corner-down-left-icon";
-import { ExternalLinkIcon } from "@/components/tiptap-icons/external-link-icon";
-import { LinkIcon } from "@/components/tiptap-icons/link-icon";
-import { TrashIcon } from "@/components/tiptap-icons/trash-icon";
+import { CornerDownLeftIcon } from '@/components/tiptap-icons/corner-down-left-icon'
+import { ExternalLinkIcon } from '@/components/tiptap-icons/external-link-icon'
+import { LinkIcon } from '@/components/tiptap-icons/link-icon'
+import { TrashIcon } from '@/components/tiptap-icons/trash-icon'
 
 // --- Lib ---
-import { isMarkInSchema } from "@/lib/tiptap-utils";
+import { isMarkInSchema } from '@/lib/tiptap-utils'
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@/components/tiptap-ui-primitive/button";
-import { Button } from "@/components/tiptap-ui-primitive/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/tiptap-ui-primitive/popover";
-import { Separator } from "@/components/tiptap-ui-primitive/separator";
+import type { ButtonProps } from '@/components/tiptap-ui-primitive/button'
+import { Button } from '@/components/tiptap-ui-primitive/button'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/tiptap-ui-primitive/popover'
+import { Separator } from '@/components/tiptap-ui-primitive/separator'
 
 // --- Styles ---
-import "@/components/tiptap-ui/link-popover/link-popover.scss";
+import '@/components/tiptap-ui/link-popover/link-popover.scss'
 
 export interface LinkHandlerProps {
-  editor: Editor | null;
-  onSetLink?: () => void;
-  onLinkActive?: () => void;
+  editor: Editor | null
+  onSetLink?: () => void
+  onLinkActive?: () => void
 }
 
 export interface LinkMainProps {
-  url: string;
-  setUrl: React.Dispatch<React.SetStateAction<string>>;
-  setLink: () => void;
-  removeLink: () => void;
-  isActive: boolean;
+  url: string
+  setUrl: React.Dispatch<React.SetStateAction<string>>
+  setLink: () => void
+  removeLink: () => void
+  isActive: boolean
 }
 
 export const useLinkHandler = (props: LinkHandlerProps) => {
-  const { editor, onSetLink, onLinkActive } = props;
-  const [url, setUrl] = React.useState<string>("");
+  const { editor, onSetLink, onLinkActive } = props
+  const [url, setUrl] = React.useState<string>('')
 
   React.useEffect(() => {
-    if (!editor) return;
+    if (!editor) return
 
     // Get URL immediately on mount
-    const { href } = editor.getAttributes("link");
+    const { href } = editor.getAttributes('link')
 
-    if (editor.isActive("link") && !url) {
-      setUrl(href || "");
-      onLinkActive?.();
+    if (editor.isActive('link') && !url) {
+      setUrl(href || '')
+      onLinkActive?.()
     }
-  }, [editor, onLinkActive, url]);
+  }, [editor, onLinkActive, url])
 
   React.useEffect(() => {
-    if (!editor) return;
+    if (!editor) return
 
     const updateLinkState = () => {
-      const { href } = editor.getAttributes("link");
-      setUrl(href || "");
+      const { href } = editor.getAttributes('link')
+      setUrl(href || '')
 
-      if (editor.isActive("link") && !url) {
-        onLinkActive?.();
+      if (editor.isActive('link') && !url) {
+        onLinkActive?.()
       }
-    };
+    }
 
-    editor.on("selectionUpdate", updateLinkState);
+    editor.on('selectionUpdate', updateLinkState)
     return () => {
-      editor.off("selectionUpdate", updateLinkState);
-    };
-  }, [editor, onLinkActive, url]);
+      editor.off('selectionUpdate', updateLinkState)
+    }
+  }, [editor, onLinkActive, url])
 
   const setLink = React.useCallback(() => {
-    if (!url || !editor) return;
+    if (!url || !editor) return
 
-    const { from, to } = editor.state.selection;
-    const text = editor.state.doc.textBetween(from, to);
+    const { from, to } = editor.state.selection
+    const text = editor.state.doc.textBetween(from, to)
 
     editor
       .chain()
       .focus()
-      .extendMarkRange("link")
+      .extendMarkRange('link')
       .insertContent({
-        type: "text",
+        type: 'text',
         text: text || url,
-        marks: [{ type: "link", attrs: { href: url } }],
+        marks: [{ type: 'link', attrs: { href: url } }],
       })
-      .run();
+      .run()
 
-    onSetLink?.();
-  }, [editor, onSetLink, url]);
+    onSetLink?.()
+  }, [editor, onSetLink, url])
 
   const removeLink = React.useCallback(() => {
-    if (!editor) return;
-    editor
-      .chain()
-      .focus()
-      .unsetMark("link", { extendEmptyMarkRange: true })
-      .setMeta("preventAutolink", true)
-      .run();
-    setUrl("");
-  }, [editor]);
+    if (!editor) return
+    editor.chain().focus().unsetMark('link', { extendEmptyMarkRange: true }).setMeta('preventAutolink', true).run()
+    setUrl('')
+  }, [editor])
 
   return {
     url,
     setUrl,
     setLink,
     removeLink,
-    isActive: editor?.isActive("link") || false,
-  };
-};
-
-export const LinkButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <Button
-        type="button"
-        className={className}
-        data-style="ghost"
-        role="button"
-        tabIndex={-1}
-        aria-label="Link"
-        tooltip="Link"
-        ref={ref}
-        {...props}
-      >
-        {children || <LinkIcon className="tiptap-button-icon" />}
-      </Button>
-    );
+    isActive: editor?.isActive('link') || false,
   }
-);
+}
+
+export const LinkButton = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, children, ...props }, ref) => {
+  return (
+    <Button
+      type="button"
+      className={className}
+      data-style="ghost"
+      role="button"
+      tabIndex={-1}
+      aria-label="Link"
+      tooltip="Link"
+      ref={ref}
+      {...props}
+    >
+      {children || <LinkIcon className="tiptap-button-icon" />}
+    </Button>
+  )
+})
 
 export const LinkContent: React.FC<{
-  editor?: Editor | null;
+  editor?: Editor | null
 }> = ({ editor: providedEditor }) => {
-  const editor = useTiptapEditor(providedEditor);
+  const editor = useTiptapEditor(providedEditor)
 
   const linkHandler = useLinkHandler({
     editor: editor,
-  });
+  })
 
-  return <LinkMain {...linkHandler} />;
-};
+  return <LinkMain {...linkHandler} />
+}
 
-const LinkMain: React.FC<LinkMainProps> = ({
-  url,
-  setUrl,
-  setLink,
-  removeLink,
-  isActive,
-}) => {
+const LinkMain: React.FC<LinkMainProps> = ({ url, setUrl, setLink, removeLink, isActive }) => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      setLink();
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      setLink()
     }
-  };
+  }
 
   return (
     <>
@@ -177,13 +160,7 @@ const LinkMain: React.FC<LinkMainProps> = ({
       />
 
       <div className="tiptap-button-group" data-orientation="horizontal">
-        <Button
-          type="button"
-          onClick={setLink}
-          title="Apply link"
-          disabled={!url && !isActive}
-          data-style="ghost"
-        >
+        <Button type="button" onClick={setLink} title="Apply link" disabled={!url && !isActive} data-style="ghost">
           <CornerDownLeftIcon className="tiptap-button-icon" />
         </Button>
       </div>
@@ -193,7 +170,7 @@ const LinkMain: React.FC<LinkMainProps> = ({
       <div className="tiptap-button-group" data-orientation="horizontal">
         <Button
           type="button"
-          onClick={() => window.open(url, "_blank")}
+          onClick={() => window.open(url, '_blank')}
           title="Open in new window"
           disabled={!url && !isActive}
           data-style="ghost"
@@ -201,39 +178,33 @@ const LinkMain: React.FC<LinkMainProps> = ({
           <ExternalLinkIcon className="tiptap-button-icon" />
         </Button>
 
-        <Button
-          type="button"
-          onClick={removeLink}
-          title="Remove link"
-          disabled={!url && !isActive}
-          data-style="ghost"
-        >
+        <Button type="button" onClick={removeLink} title="Remove link" disabled={!url && !isActive} data-style="ghost">
           <TrashIcon className="tiptap-button-icon" />
         </Button>
       </div>
     </>
-  );
-};
+  )
+}
 
-export interface LinkPopoverProps extends Omit<ButtonProps, "type"> {
+export interface LinkPopoverProps extends Omit<ButtonProps, 'type'> {
   /**
    * The TipTap editor instance.
    */
-  editor?: Editor | null;
+  editor?: Editor | null
   /**
    * Whether to hide the link popover.
    * @default false
    */
-  hideWhenUnavailable?: boolean;
+  hideWhenUnavailable?: boolean
   /**
    * Callback for when the popover opens or closes.
    */
-  onOpenChange?: (isOpen: boolean) => void;
+  onOpenChange?: (isOpen: boolean) => void
   /**
    * Whether to automatically open the popover when a link is active.
    * @default true
    */
-  autoOpenOnLinkActive?: boolean;
+  autoOpenOnLinkActive?: boolean
 }
 
 export function LinkPopover({
@@ -243,65 +214,65 @@ export function LinkPopover({
   autoOpenOnLinkActive = true,
   ...props
 }: LinkPopoverProps) {
-  const editor = useTiptapEditor(providedEditor);
+  const editor = useTiptapEditor(providedEditor)
 
-  const linkInSchema = isMarkInSchema("link", editor);
+  const linkInSchema = isMarkInSchema('link', editor)
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false)
 
   const onSetLink = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
-  const onLinkActive = () => setIsOpen(autoOpenOnLinkActive);
+  const onLinkActive = () => setIsOpen(autoOpenOnLinkActive)
 
   const linkHandler = useLinkHandler({
     editor: editor,
     onSetLink,
     onLinkActive,
-  });
+  })
 
   const isDisabled = React.useMemo(() => {
-    if (!editor) return true;
-    if (editor.isActive("codeBlock")) return true;
-    return !editor.can().setLink?.({ href: "" });
-  }, [editor]);
+    if (!editor) return true
+    if (editor.isActive('codeBlock')) return true
+    return !editor.can().setLink?.({ href: '' })
+  }, [editor])
 
   const canSetLink = React.useMemo(() => {
-    if (!editor) return false;
+    if (!editor) return false
     try {
-      return editor.can().setMark("link");
+      return editor.can().setMark('link')
     } catch {
-      return false;
+      return false
     }
-  }, [editor]);
+  }, [editor])
 
-  const isActive = editor?.isActive("link") ?? false;
+  const isActive = editor?.isActive('link') ?? false
 
   const handleOnOpenChange = React.useCallback(
     (nextIsOpen: boolean) => {
-      setIsOpen(nextIsOpen);
-      onOpenChange?.(nextIsOpen);
+      setIsOpen(nextIsOpen)
+      onOpenChange?.(nextIsOpen)
     },
     [onOpenChange]
-  );
+  )
 
   const show = React.useMemo(() => {
     if (!linkInSchema || !editor) {
-      return false;
+      return false
     }
 
     if (hideWhenUnavailable) {
       if (isNodeSelection(editor.state.selection) || !canSetLink) {
-        return false;
+        return false
       }
     }
 
-    return true;
-  }, [linkInSchema, hideWhenUnavailable, editor, canSetLink]);
+    return true
+  }, [linkInSchema, hideWhenUnavailable, editor, canSetLink])
 
   if (!show || !editor || !editor.isEditable) {
-    return null;
+    return null
   }
 
   return (
@@ -309,7 +280,7 @@ export function LinkPopover({
       <PopoverTrigger asChild>
         <LinkButton
           disabled={isDisabled}
-          data-active-state={isActive ? "on" : "off"}
+          data-active-state={isActive ? 'on' : 'off'}
           data-disabled={isDisabled}
           {...props}
         />
@@ -319,7 +290,7 @@ export function LinkPopover({
         <LinkMain {...linkHandler} />
       </PopoverContent>
     </Popover>
-  );
+  )
 }
 
-LinkButton.displayName = "LinkButton";
+LinkButton.displayName = 'LinkButton'

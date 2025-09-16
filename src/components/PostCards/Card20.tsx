@@ -1,28 +1,14 @@
-import { TPost } from "@/data/posts";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import CategoryBadgeList from "../CategoryBadgeList";
-import LocalDate from "../LocalDate";
+import { TPost } from '@/data/posts'
+import clsx from 'clsx'
+import Image from 'next/image'
+import Link from 'next/link'
+import CategoryBadgeList from '../CategoryBadgeList'
+import LocalDate from '../LocalDate'
 
 const Card20 = ({ post, className }: { post: TPost; className?: string }) => {
-  const {
-    title,
-    featuredImage,
-    categories = [],
-    date,
-    readingTime,
-    handle,
-    excerpt,
-  } = post || {};
+  const { title, featuredImage, categories = [], date, readingTime, handle, excerpt } = post || {}
   return (
-    <article
-      key={post.id}
-      className={clsx(
-        "group flex flex-col items-start justify-between",
-        className
-      )}
-    >
+    <article key={post.id} className={clsx('group flex flex-col items-start justify-between', className)}>
       <div className="relative w-full">
         {featuredImage.src && (
           <Image
@@ -45,13 +31,11 @@ const Card20 = ({ post, className }: { post: TPost; className?: string }) => {
               {title}
             </Link>
           </h3>
-          <p className="mt-2.5 line-clamp-2 text-sm/6 text-neutral-600 dark:text-neutral-400">
-            {excerpt}
-          </p>
+          <p className="mt-2.5 line-clamp-2 text-sm/6 text-neutral-600 dark:text-neutral-400">{excerpt}</p>
         </div>
       </div>
     </article>
-  );
-};
+  )
+}
 
-export default Card20;
+export default Card20

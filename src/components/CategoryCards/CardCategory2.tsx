@@ -1,14 +1,14 @@
-import NcImage from "@/components/NcImage/NcImage";
-import { TCategory } from "@/data/categories";
-import { Link } from "@/shared/link";
-import clsx from "clsx";
-import { FC } from "react";
+import NcImage from '@/components/NcImage/NcImage'
+import { TCategory } from '@/data/categories'
+import { Link } from '@/shared/link'
+import clsx from 'clsx'
+import { FC } from 'react'
 
 interface Props {
-  className?: string;
-  category: TCategory | any;
-  badge?: string;
-  lang?: string;
+  className?: string
+  category: TCategory | any
+  badge?: string
+  lang?: string
 }
 
 const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
@@ -24,7 +24,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
     featuredImage,
     featuredIcon,
     postCount,
-  } = category;
+  } = category
   // console.log(category,"category432")
   // console.log(parentCategory,"parentCategory")
 
@@ -42,32 +42,22 @@ const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
       )} */}
       <NcImage
         containerClassName="relative shrink-0 size-12 "
-        src={featuredIcon || ""}
+        src={featuredIcon || ''}
         fill
         sizes="80px"
-        alt={categoryName || ""}
+        alt={categoryName || ''}
         className="h-full w-full object-contain"
       />
       <div className="mt-3">
-        <h2 className={`line-clamp-1 text-base font-semibold`}>
-          {categoryName}
-        </h2>
+        <h2 className={`line-clamp-1 text-base font-semibold`}>{categoryName}</h2>
         <Link
           className="absolute inset-0"
-          href={
-            lang === "en"
-              ? `/${parentCategory?.slug}/${slug}`
-              : `/${lang}/${parentCategory?.slug}/${slug}`
-          }
+          href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
         />
-        <span
-          className={`mt-1 block text-xs text-[#666666] dark:text-[#DFDFDF]`}
-        >
-          {postCount} articles
-        </span>
+        <span className={`mt-1 block text-xs text-[#666666] dark:text-[#DFDFDF]`}>{postCount} articles</span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardCategory2;
+export default CardCategory2

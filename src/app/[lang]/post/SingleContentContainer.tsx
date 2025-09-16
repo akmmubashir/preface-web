@@ -1,133 +1,122 @@
-"use client";
+'use client'
 
-import PostCardLikeBtn from "@/components/PostCardLikeBtn";
-import { TComment, TPostDetail } from "@/data/posts";
-import useIntersectionObserver from "@/hooks/useIntersectionObserver";
-import { ArrowUp02Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { FC, useEffect, useMemo, useRef, useState } from "react";
-import { ShareDropdown } from "./SingleMetaAction";
-import draftToHtml from "draftjs-to-html";
-import { Noto_Serif } from "next/font/google";
+import PostCardLikeBtn from '@/components/PostCardLikeBtn'
+import { TComment, TPostDetail } from '@/data/posts'
+import useIntersectionObserver from '@/hooks/useIntersectionObserver'
+import { ArrowUp02Icon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+import draftToHtml from 'draftjs-to-html'
+import { Noto_Serif } from 'next/font/google'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
+import { ShareDropdown } from './SingleMetaAction'
 
 const notoSerif = Noto_Serif({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
 
 interface RawDraftInlineStyleRange {
-  offset: number;
-  length: number;
-  style: string;
+  offset: number
+  length: number
+  style: string
 }
 
 interface RawDraftEntityRange {
-  key: number;
-  length: number;
-  offset: number;
+  key: number
+  length: number
+  offset: number
 }
 
 interface RawDraftContentBlock {
-  key: string;
-  text: string;
-  type: string;
-  depth: number;
-  inlineStyleRanges: RawDraftInlineStyleRange[];
-  entityRanges: RawDraftEntityRange[];
-  data?: Record<string, unknown>;
+  key: string
+  text: string
+  type: string
+  depth: number
+  inlineStyleRanges: RawDraftInlineStyleRange[]
+  entityRanges: RawDraftEntityRange[]
+  data?: Record<string, unknown>
 }
 
 interface RawDraftContentState {
-  blocks: RawDraftContentBlock[];
-  entityMap: Record<string, unknown>;
+  blocks: RawDraftContentBlock[]
+  entityMap: Record<string, unknown>
 }
 
 interface Props {
-  post: TPostDetail | any;
-  comments?: TComment[];
-  className?: string;
-  lang?: string;
+  post: TPostDetail | any
+  comments?: TComment[]
+  className?: string
+  lang?: string
 }
 
-const SingleContentContainer: FC<Props> = ({
-  post,
-  comments,
-  className,
-  lang,
-}) => {
-  const endedAnchorRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLButtonElement>(null);
+const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) => {
+  const endedAnchorRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const progressRef = useRef<HTMLButtonElement>(null)
   //
-  const [isShowScrollToTop, setIsShowScrollToTop] = useState<boolean>(false);
+  const [isShowScrollToTop, setIsShowScrollToTop] = useState<boolean>(false)
   //
 
-  const { tags, author, content, likeCount, commentCount, liked, handle } =
-    post;
+  const { tags, author, content, likeCount, commentCount, liked, handle } = post
   const renderedHtml = useMemo(() => {
-    const str = typeof content === "string" ? content : String(content ?? "");
+    const str = typeof content === 'string' ? content : String(content ?? '')
     try {
-      const parsed = JSON.parse(str) as unknown;
-      if (
-        parsed &&
-        typeof parsed === "object" &&
-        Array.isArray((parsed as { blocks?: unknown }).blocks)
-      ) {
-        return draftToHtml(parsed as unknown as RawDraftContentState);
+      const parsed = JSON.parse(str) as unknown
+      if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
+        return draftToHtml(parsed as unknown as RawDraftContentState)
       }
-      return str;
+      return str
     } catch {
-      return str;
+      return str
     }
-  }, [content]);
+  }, [content])
 
   const endedAnchorEntry = useIntersectionObserver(endedAnchorRef, {
     threshold: 0,
     root: null,
-    rootMargin: "0%",
+    rootMargin: '0%',
     freezeOnceVisible: false,
-  });
+  })
 
   useEffect(() => {
     const handleProgressIndicator = () => {
-      const entryContent = contentRef.current;
-      const progressBarContent = progressRef.current;
+      const entryContent = contentRef.current
+      const progressBarContent = progressRef.current
 
       if (!entryContent || !progressBarContent) {
-        return;
+        return
       }
 
-      const winScroll = window.scrollY || document.documentElement.scrollTop;
-      const entryContentRect = entryContent.getBoundingClientRect();
-      const entryContentTop = entryContentRect.top;
-      const entryContentHeight = entryContentRect.height;
+      const winScroll = window.scrollY || document.documentElement.scrollTop
+      const entryContentRect = entryContent.getBoundingClientRect()
+      const entryContentTop = entryContentRect.top
+      const entryContentHeight = entryContentRect.height
 
-      const totalEntryH = entryContentTop + window.scrollY + entryContentHeight;
-      const scrolled = (winScroll / totalEntryH) * 100;
+      const totalEntryH = entryContentTop + window.scrollY + entryContentHeight
+      const scrolled = (winScroll / totalEntryH) * 100
 
-      progressBarContent.innerText = scrolled.toFixed(0) + "%";
+      progressBarContent.innerText = scrolled.toFixed(0) + '%'
 
       if (scrolled >= 50) {
-        setIsShowScrollToTop(true);
+        setIsShowScrollToTop(true)
       } else {
-        setIsShowScrollToTop(false);
+        setIsShowScrollToTop(false)
       }
-    };
+    }
 
     const handleProgressIndicatorHeadeEvent = () => {
-      window?.requestAnimationFrame(handleProgressIndicator);
-    };
-    handleProgressIndicator();
-    window?.addEventListener("scroll", handleProgressIndicatorHeadeEvent);
+      window?.requestAnimationFrame(handleProgressIndicator)
+    }
+    handleProgressIndicator()
+    window?.addEventListener('scroll', handleProgressIndicatorHeadeEvent)
     return () => {
-      window?.removeEventListener("scroll", handleProgressIndicatorHeadeEvent);
-    };
-  }, []);
+      window?.removeEventListener('scroll', handleProgressIndicatorHeadeEvent)
+    }
+  }, [])
 
   const showLikeAndCommentSticky =
-    !endedAnchorEntry?.intersectionRatio &&
-    (endedAnchorEntry?.boundingClientRect.top || 0) > 0;
+    !endedAnchorEntry?.intersectionRatio && (endedAnchorEntry?.boundingClientRect.top || 0) > 0
 
   return (
     <div className={`relative ${className}`}>
@@ -152,11 +141,7 @@ const SingleContentContainer: FC<Props> = ({
       </div>
 
       {/* LIKE AND COMMENT STICKY */}
-      <div
-        className={`sticky bottom-8 z-11 mt-8 justify-center ${
-          showLikeAndCommentSticky ? "flex" : "hidden"
-        }`}
-      >
+      <div className={`sticky bottom-8 z-11 mt-8 justify-center ${showLikeAndCommentSticky ? 'flex' : 'hidden'}`}>
         <div className="flex items-center justify-center gap-x-2 rounded-full bg-white p-1.5 text-xs shadow-lg ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
           <PostCardLikeBtn likeCount={likeCount} liked={liked} />
           {/* <div className="h-4 border-s border-neutral-200 dark:border-neutral-700"></div>
@@ -167,10 +152,10 @@ const SingleContentContainer: FC<Props> = ({
 
           <button
             className={`size-8.5 items-center justify-center rounded-full bg-neutral-50 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20 ${
-              isShowScrollToTop ? "flex" : "hidden"
+              isShowScrollToTop ? 'flex' : 'hidden'
             }`}
             onClick={() => {
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
             title="Go to top"
           >
@@ -179,9 +164,7 @@ const SingleContentContainer: FC<Props> = ({
 
           <button
             ref={progressRef}
-            className={`size-8.5 items-center justify-center ${
-              isShowScrollToTop ? "hidden" : "flex"
-            }`}
+            className={`size-8.5 items-center justify-center ${isShowScrollToTop ? 'hidden' : 'flex'}`}
             title="Go to top"
           >
             %
@@ -189,7 +172,7 @@ const SingleContentContainer: FC<Props> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SingleContentContainer;
+export default SingleContentContainer

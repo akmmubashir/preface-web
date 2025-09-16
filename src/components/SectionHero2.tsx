@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import { Button } from "@/shared/Button";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import { Dialog, DialogBody } from "@/shared/dialog";
-import { PlayIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
-import { FC, useState } from "react";
+import { Button } from '@/shared/Button'
+import ButtonPrimary from '@/shared/ButtonPrimary'
+import { Dialog, DialogBody } from '@/shared/dialog'
+import { PlayIcon } from '@heroicons/react/24/solid'
+import Image from 'next/image'
+import { FC, useState } from 'react'
 
 export interface SectionHero2Props {}
 const SectionHero2: FC<SectionHero2Props> = ({}) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
@@ -27,13 +27,10 @@ const SectionHero2: FC<SectionHero2Props> = ({}) => {
         </div>
         <div className="relative z-1 container text-neutral-100">
           <div className="max-w-3xl">
-            <h1 className="mt-3 text-4xl font-bold md:text-5xl/[1.1] xl:text-6xl">
-              The hidden world of whale culture
-            </h1>
+            <h1 className="mt-3 text-4xl font-bold md:text-5xl/[1.1] xl:text-6xl">The hidden world of whale culture</h1>
             <p className="mt-7 text-base text-neutral-300 lg:text-xl">
-              From singing competitions to food preferences, scientists are
-              learning whales have cultural differences once thought to be
-              unique to humans.
+              From singing competitions to food preferences, scientists are learning whales have cultural differences
+              once thought to be unique to humans.
             </p>
             <div className="mt-11 flex space-x-4 rtl:space-x-reverse">
               <ButtonPrimary href="#">Read more</ButtonPrimary>
@@ -63,7 +60,7 @@ const SectionHero2: FC<SectionHero2Props> = ({}) => {
         </Dialog>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SectionHero2;
+export default SectionHero2

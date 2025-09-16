@@ -1,63 +1,55 @@
-import ArchiveSortByListBox from "@/components/ArchiveSortByListBox";
-import ArchiveTabs from "@/components/ArchiveTabs";
-import PaginationWrapper from "@/components/PaginationWrapper";
-import Card11 from "@/components/PostCards/Card11";
-import { getAuthorByHandle } from "@/data/authors";
-import { getAllPosts } from "@/data/posts";
-import {
-  AllBookmarkIcon,
-  FolderFavouriteIcon,
-  LicenseIcon,
-} from "@hugeicons/core-free-icons";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import PageHeader from "../page-header";
+import ArchiveSortByListBox from '@/components/ArchiveSortByListBox'
+import ArchiveTabs from '@/components/ArchiveTabs'
+import PaginationWrapper from '@/components/PaginationWrapper'
+import Card11 from '@/components/PostCards/Card11'
+import { getAuthorByHandle } from '@/data/authors'
+import { getAllPosts } from '@/data/posts'
+import { AllBookmarkIcon, FolderFavouriteIcon, LicenseIcon } from '@hugeicons/core-free-icons'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import PageHeader from '../page-header'
 
 const sortByOptions = [
-  { name: "Most recent", value: "most-recent" },
-  { name: "Curated by admin", value: "curated-by-admin" },
-  { name: "Most appreciated", value: "most-appreciated" },
-  { name: "Most discussed", value: "most-discussed" },
-  { name: "Most viewed", value: "most-viewed" },
-  { name: "Most liked", value: "most-liked" },
-];
+  { name: 'Most recent', value: 'most-recent' },
+  { name: 'Curated by admin', value: 'curated-by-admin' },
+  { name: 'Most appreciated', value: 'most-appreciated' },
+  { name: 'Most discussed', value: 'most-discussed' },
+  { name: 'Most viewed', value: 'most-viewed' },
+  { name: 'Most liked', value: 'most-liked' },
+]
 const filterTabs = [
   {
-    name: "Articles",
-    value: "articles",
+    name: 'Articles',
+    value: 'articles',
     icon: LicenseIcon,
   },
-  { name: "Favorites", value: "favorites", icon: FolderFavouriteIcon },
-  { name: "Saved", value: "saved", icon: AllBookmarkIcon },
-];
+  { name: 'Favorites', value: 'favorites', icon: FolderFavouriteIcon },
+  { name: 'Saved', value: 'saved', icon: AllBookmarkIcon },
+]
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ handle: string }>;
-}): Promise<Metadata> {
-  const { handle } = await params;
-  const author = await getAuthorByHandle(handle);
+export async function generateMetadata({ params }: { params: Promise<{ handle: string }> }): Promise<Metadata> {
+  const { handle } = await params
+  const author = await getAuthorByHandle(handle)
   if (!author?.id) {
     return {
-      title: "Author not found",
-      description: "Author not found",
-    };
+      title: 'Author not found',
+      description: 'Author not found',
+    }
   }
   return {
     title: author?.name,
     description: author?.description,
-  };
+  }
 }
 
 const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
-  const { handle } = await params;
+  const { handle } = await params
 
-  const author = await getAuthorByHandle(handle);
-  const posts = (await getAllPosts()).slice(0, 12);
+  const author = await getAuthorByHandle(handle)
+  const posts = (await getAllPosts()).slice(0, 12)
 
   if (!author?.id) {
-    return notFound();
+    return notFound()
   }
 
   return (
@@ -68,10 +60,7 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
         {/* TABS FILTER */}
         <div className="flex flex-wrap items-center gap-4">
           <ArchiveTabs tabs={filterTabs} />
-          <ArchiveSortByListBox
-            className="ms-auto shrink-0"
-            filterOptions={sortByOptions}
-          />
+          <ArchiveSortByListBox className="ms-auto shrink-0" filterOptions={sortByOptions} />
         </div>
 
         {/* LOOP ITEMS */}
@@ -85,7 +74,7 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
         <PaginationWrapper className="mt-20" totalPages={10} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

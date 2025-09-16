@@ -1,16 +1,16 @@
-"use client";
-import { TPost } from "@/data/posts";
-import clsx from "clsx";
-import Link from "next/link";
-import { FC, useState } from "react";
-import NcImage from "../NcImage/NcImage";
-import PostFeaturedMedia from "../PostFeaturedMedia/PostFeaturedMedia";
+'use client'
+import { TPost } from '@/data/posts'
+import clsx from 'clsx'
+import Link from 'next/link'
+import { FC, useState } from 'react'
+import NcImage from '../NcImage/NcImage'
+import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 
 interface Props {
-  className?: string;
-  post: TPost;
-  lang?: string;
-  galleryType?: 1 | 2;
+  className?: string
+  post: TPost
+  lang?: string
+  galleryType?: 1 | 2
 }
 
 const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
@@ -27,11 +27,11 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
     date,
     readingTime,
     bookmarked,
-  } = post;
-  const [isHover, setIsHover] = useState(false);
+  } = post
+  const [isHover, setIsHover] = useState(false)
 
   const renderGallery2 = () => {
-    if (!galleryImgs) return null;
+    if (!galleryImgs) return null
     return (
       <div className="grid size-full gap-2">
         {/* <div className="grid grid-cols-3 gap-2">
@@ -60,11 +60,11 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
           className="size-full object-cover"
         />
       </div>
-    );
-  };
+    )
+  }
 
   const renderGallery = () => {
-    if (!galleryImgs) return null;
+    if (!galleryImgs) return null
     return (
       <div className="grid size-full gap-2">
         {/* <div className="grid grid-cols-3 gap-2">
@@ -93,20 +93,17 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
           className="size-full object-cover"
         />
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div
-      className={clsx(
-        "group post-card-10-v3 relative flex flex-col",
-        className
-      )}
+      className={clsx('group post-card-10-v3 relative flex flex-col', className)}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
       <div className="relative aspect-square w-full overflow-hidden rounded-3xl sm:aspect-16/9">
-        {postType !== "gallery" || !galleryImgs?.length ? (
+        {postType !== 'gallery' || !galleryImgs?.length ? (
           <PostFeaturedMedia
             post={post}
             isHover={isHover}
@@ -118,10 +115,10 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
           renderGallery2()
         )}
 
-        {postType === "gallery" && galleryImgs?.length && (
+        {postType === 'gallery' && galleryImgs?.length && (
           <Link
             href={
-              lang === "en"
+              lang === 'en'
                 ? `/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
                 : `/${lang}/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
             }
@@ -139,7 +136,7 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
         <h2 className="line-clamp-2 block max-w-[300px] leading-snug font-semibold text-[#FFFFFF] sm:text-lg dark:text-neutral-100">
           <Link
             href={
-              lang === "en"
+              lang === 'en'
                 ? `/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
                 : `/${lang}/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
             }
@@ -151,7 +148,7 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
         </h2>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Card10V3;
+export default Card10V3

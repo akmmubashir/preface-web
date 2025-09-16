@@ -1,38 +1,35 @@
-"use client";
+'use client'
 
 import {
   useLatestArticles,
   useLatestVideos,
-  useTogglePostLike,
   useTogglePostBookmark,
+  useTogglePostLike,
   type Post,
-} from "@/hooks/api/use-posts";
-import { HeartIcon } from "@heroicons/react/24/outline";
-import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
-import { BookmarkIcon } from "@heroicons/react/24/outline";
-import { BookmarkIcon as BookmarkIconSolid } from "@heroicons/react/24/solid";
-import { EyeIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+} from '@/hooks/api/use-posts'
+import { BookmarkIcon, ChatBubbleLeftIcon, EyeIcon, HeartIcon } from '@heroicons/react/24/outline'
+import { BookmarkIcon as BookmarkIconSolid, HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid'
+import { useState } from 'react'
 
 interface InteractivePostsSectionProps {
-  initialPosts?: Post[];
-  initialVideos?: Post[];
-  heading?: string;
-  subHeading?: string;
-  contentType?: "posts" | "videos" | "mixed";
-  limit?: number;
+  initialPosts?: Post[]
+  initialVideos?: Post[]
+  heading?: string
+  subHeading?: string
+  contentType?: 'posts' | 'videos' | 'mixed'
+  limit?: number
 }
 
 export default function InteractivePostsSection({
   initialPosts = [],
   initialVideos = [],
-  heading = "INTERACTIVE POSTS",
-  subHeading = "Like, bookmark, and interact with posts in real-time",
-  contentType = "posts",
+  heading = 'INTERACTIVE POSTS',
+  subHeading = 'Like, bookmark, and interact with posts in real-time',
+  contentType = 'posts',
   limit = 8,
 }: InteractivePostsSectionProps) {
-  const [posts, setPosts] = useState<Post[]>(initialPosts);
-  const [videos, setVideos] = useState<Post[]>(initialVideos);
+  const [posts, setPosts] = useState<Post[]>(initialPosts)
+  const [videos, setVideos] = useState<Post[]>(initialVideos)
 
   // React Query hooks based on content type
   const {
@@ -40,40 +37,32 @@ export default function InteractivePostsSection({
     isLoading: postsLoading,
     error: postsError,
     refetch: refetchPosts,
-  } = useLatestArticles(contentType === "videos" ? 0 : limit);
+  } = useLatestArticles(contentType === 'videos' ? 0 : limit)
   const {
     data: latestVideos,
     isLoading: videosLoading,
     error: videosError,
     refetch: refetchVideos,
-  } = useLatestVideos(contentType === "posts" ? 0 : limit);
+  } = useLatestVideos(contentType === 'posts' ? 0 : limit)
 
-  const toggleLike = useTogglePostLike();
-  const toggleBookmark = useTogglePostBookmark();
+  const toggleLike = useTogglePostLike()
+  const toggleBookmark = useTogglePostBookmark()
 
   // Determine which data to display based on content type
   const isLoading =
-    contentType === "mixed"
-      ? postsLoading || videosLoading
-      : contentType === "videos"
-      ? videosLoading
-      : postsLoading;
+    contentType === 'mixed' ? postsLoading || videosLoading : contentType === 'videos' ? videosLoading : postsLoading
   const error =
-    contentType === "mixed"
-      ? postsError || videosError
-      : contentType === "videos"
-      ? videosError
-      : postsError;
+    contentType === 'mixed' ? postsError || videosError : contentType === 'videos' ? videosError : postsError
 
   const displayPosts =
-    contentType === "videos"
+    contentType === 'videos'
       ? latestVideos?.data || videos
-      : contentType === "mixed"
-      ? [...(latestPosts?.data || posts), ...(latestVideos?.data || videos)]
-      : latestPosts?.data || posts;
+      : contentType === 'mixed'
+        ? [...(latestPosts?.data || posts), ...(latestVideos?.data || videos)]
+        : latestPosts?.data || posts
 
   const handleLike = async (postId: string, currentLiked: boolean) => {
-    const action = currentLiked ? "unlike" : "like";
+    const action = currentLiked ? 'unlike' : 'like'
 
     // Optimistic update
     setPosts((prev) =>
@@ -86,18 +75,18 @@ export default function InteractivePostsSection({
             }
           : post
       )
-    );
+    )
 
     try {
-      await toggleLike.mutateAsync({ postId, action });
+      await toggleLike.mutateAsync({ postId, action })
       // Refetch to ensure data consistency
-      if (contentType === "videos") {
-        refetchVideos();
-      } else if (contentType === "mixed") {
-        refetchPosts();
-        refetchVideos();
+      if (contentType === 'videos') {
+        refetchVideos()
+      } else if (contentType === 'mixed') {
+        refetchPosts()
+        refetchVideos()
       } else {
-        refetchPosts();
+        refetchPosts()
       }
     } catch (error) {
       // Revert optimistic update on error
@@ -111,127 +100,104 @@ export default function InteractivePostsSection({
               }
             : post
         )
-      );
+      )
     }
-  };
+  }
 
   const handleBookmark = async (postId: string, currentBookmarked: boolean) => {
-    const action = currentBookmarked ? "unbookmark" : "bookmark";
+    const action = currentBookmarked ? 'unbookmark' : 'bookmark'
 
     // Optimistic update
-    setPosts((prev) =>
-      prev.map((post) =>
-        post.id === postId
-          ? { ...post, isBookmarked: !currentBookmarked }
-          : post
-      )
-    );
+    setPosts((prev) => prev.map((post) => (post.id === postId ? { ...post, isBookmarked: !currentBookmarked } : post)))
 
     try {
-      await toggleBookmark.mutateAsync({ postId, action });
-      if (contentType === "videos") {
-        refetchVideos();
-      } else if (contentType === "mixed") {
-        refetchPosts();
-        refetchVideos();
+      await toggleBookmark.mutateAsync({ postId, action })
+      if (contentType === 'videos') {
+        refetchVideos()
+      } else if (contentType === 'mixed') {
+        refetchPosts()
+        refetchVideos()
       } else {
-        refetchPosts();
+        refetchPosts()
       }
     } catch (error) {
       // Revert optimistic update on error
-      setPosts((prev) =>
-        prev.map((post) =>
-          post.id === postId
-            ? { ...post, isBookmarked: currentBookmarked }
-            : post
-        )
-      );
+      setPosts((prev) => prev.map((post) => (post.id === postId ? { ...post, isBookmarked: currentBookmarked } : post)))
     }
-  };
+  }
 
   if (isLoading) {
     return (
       <div className="relative py-16 lg:py-20">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-              {heading}
-            </h2>
-            <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
-              {subHeading}
-            </p>
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold text-neutral-900 lg:text-4xl dark:text-neutral-100">{heading}</h2>
+            <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">{subHeading}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="bg-neutral-200 dark:bg-neutral-800 h-48 rounded-lg mb-4"></div>
+                <div className="mb-4 h-48 rounded-lg bg-neutral-200 dark:bg-neutral-800"></div>
                 <div className="space-y-3">
-                  <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4"></div>
-                  <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-1/2"></div>
+                  <div className="h-4 w-3/4 rounded bg-neutral-200 dark:bg-neutral-800"></div>
+                  <div className="h-4 w-1/2 rounded bg-neutral-200 dark:bg-neutral-800"></div>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   if (error) {
     return (
       <div className="relative py-16 lg:py-20">
         <div className="container text-center">
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-red-800 dark:text-red-200 mb-2">
-              Failed to load posts
-            </h3>
-            <p className="text-red-600 dark:text-red-300 mb-4">
-              {error.message || "An error occurred while loading posts"}
+          <div className="rounded-lg border border-red-200 bg-red-50 p-6 dark:border-red-800 dark:bg-red-900/20">
+            <h3 className="mb-2 text-lg font-semibold text-red-800 dark:text-red-200">Failed to load posts</h3>
+            <p className="mb-4 text-red-600 dark:text-red-300">
+              {error.message || 'An error occurred while loading posts'}
             </p>
             <button
               onClick={() => {
-                if (contentType === "videos") {
-                  refetchVideos();
-                } else if (contentType === "mixed") {
-                  refetchPosts();
-                  refetchVideos();
+                if (contentType === 'videos') {
+                  refetchVideos()
+                } else if (contentType === 'mixed') {
+                  refetchPosts()
+                  refetchVideos()
                 } else {
-                  refetchPosts();
+                  refetchPosts()
                 }
               }}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              className="rounded-lg bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
             >
               Try Again
             </button>
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   return (
     <div className="relative py-16 lg:py-20">
       <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-            {heading}
-          </h2>
-          <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
-            {subHeading}
-          </p>
-          {contentType === "videos" && (
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl font-bold text-neutral-900 lg:text-4xl dark:text-neutral-100">{heading}</h2>
+          <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">{subHeading}</p>
+          {contentType === 'videos' && (
             <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
-              {displayPosts.length} video{displayPosts.length !== 1 ? "s" : ""}{" "}
-              available
+              {displayPosts.length} video{displayPosts.length !== 1 ? 's' : ''} available
             </p>
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {displayPosts.map((post) => (
             <article
               key={post.id}
-              className="group bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="group overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-neutral-900"
             >
               {/* Post Image */}
               <div className="relative overflow-hidden">
@@ -239,40 +205,34 @@ export default function InteractivePostsSection({
                   <img
                     src={post.featuredImage}
                     alt={post.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
-                  <div className="w-full h-48 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center">
-                    <span className="text-white text-lg font-semibold">
-                      No Image
-                    </span>
+                  <div className="flex h-48 w-full items-center justify-center bg-gradient-to-br from-blue-400 to-purple-600">
+                    <span className="text-lg font-semibold text-white">No Image</span>
                   </div>
                 )}
 
                 {/* Action Buttons Overlay */}
-                <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <button
-                    onClick={() =>
-                      handleBookmark(post.id, post.isBookmarked || false)
-                    }
-                    className="p-2 bg-white/90 dark:bg-neutral-800/90 rounded-full shadow-lg hover:bg-white dark:hover:bg-neutral-800 transition-colors"
-                    title={
-                      post.isBookmarked ? "Remove bookmark" : "Add bookmark"
-                    }
+                    onClick={() => handleBookmark(post.id, post.isBookmarked || false)}
+                    className="rounded-full bg-white/90 p-2 shadow-lg transition-colors hover:bg-white dark:bg-neutral-800/90 dark:hover:bg-neutral-800"
+                    title={post.isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
                   >
                     {post.isBookmarked ? (
-                      <BookmarkIconSolid className="w-5 h-5 text-blue-600" />
+                      <BookmarkIconSolid className="h-5 w-5 text-blue-600" />
                     ) : (
-                      <BookmarkIcon className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
+                      <BookmarkIcon className="h-5 w-5 text-neutral-600 dark:text-neutral-400" />
                     )}
                   </button>
                 </div>
 
                 {/* Play Button for Videos */}
-                {contentType === "videos" && (
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-16 h-16 bg-white/90 dark:bg-neutral-800/90 rounded-full flex items-center justify-center shadow-lg">
-                      <div className="w-0 h-0 border-l-[12px] border-l-white dark:border-l-neutral-800 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1"></div>
+                {contentType === 'videos' && (
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-lg dark:bg-neutral-800/90">
+                      <div className="ml-1 h-0 w-0 border-t-[8px] border-b-[8px] border-l-[12px] border-t-transparent border-b-transparent border-l-white dark:border-l-neutral-800"></div>
                     </div>
                   </div>
                 )}
@@ -281,40 +241,38 @@ export default function InteractivePostsSection({
               {/* Post Content */}
               <div className="p-4">
                 {/* Category and Content Type */}
-                <div className="flex gap-2 mb-3">
+                <div className="mb-3 flex gap-2">
                   {post.category && (
-                    <span className="inline-block px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400 rounded-full">
+                    <span className="inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                       {post.category.name}
                     </span>
                   )}
-                  {contentType === "videos" && (
-                    <span className="inline-block px-3 py-1 text-xs font-medium text-red-600 bg-red-100 dark:bg-red-900/30 dark:text-red-400 rounded-full">
+                  {contentType === 'videos' && (
+                    <span className="inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-600 dark:bg-red-900/30 dark:text-red-400">
                       🎥 Video
                     </span>
                   )}
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <h3 className="mb-2 line-clamp-2 text-lg font-bold text-neutral-900 transition-colors group-hover:text-blue-600 dark:text-neutral-100 dark:group-hover:text-blue-400">
                   {post.title}
                 </h3>
 
                 {/* Excerpt */}
                 {post.excerpt && (
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-2">
-                    {post.excerpt}
-                  </p>
+                  <p className="mb-4 line-clamp-2 text-sm text-neutral-600 dark:text-neutral-400">{post.excerpt}</p>
                 )}
 
                 {/* Meta Information */}
-                <div className="flex items-center justify-between text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+                <div className="mb-4 flex items-center justify-between text-sm text-neutral-500 dark:text-neutral-400">
                   <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1">
-                      <EyeIcon className="w-4 h-4" />
+                      <EyeIcon className="h-4 w-4" />
                       {post.viewCount || 0}
                     </span>
                     <span className="flex items-center gap-1">
-                      <ChatBubbleLeftIcon className="w-4 h-4" />
+                      <ChatBubbleLeftIcon className="h-4 w-4" />
                       {post.commentCount || 0}
                     </span>
                   </div>
@@ -323,16 +281,16 @@ export default function InteractivePostsSection({
 
                 {/* Author */}
                 {post.author && (
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="mb-4 flex items-center gap-3">
                     {post.author.avatar ? (
                       <img
                         src={post.author.avatar}
                         alt={post.author.name}
-                        className="w-8 h-8 rounded-full object-cover"
+                        className="h-8 w-8 rounded-full object-cover"
                       />
                     ) : (
-                      <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center">
-                        <span className="text-white text-sm font-semibold">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-green-400 to-blue-500">
+                        <span className="text-sm font-semibold text-white">
                           {post.author.name.charAt(0).toUpperCase()}
                         </span>
                       </div>
@@ -347,20 +305,16 @@ export default function InteractivePostsSection({
                 <button
                   onClick={() => handleLike(post.id, post.isLiked || false)}
                   disabled={toggleLike.isPending}
-                  className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg border border-neutral-200 px-4 py-2 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-700 dark:hover:bg-neutral-800"
                 >
                   {post.isLiked ? (
-                    <HeartIconSolid className="w-5 h-5 text-red-500" />
+                    <HeartIconSolid className="h-5 w-5 text-red-500" />
                   ) : (
-                    <HeartIcon className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
+                    <HeartIcon className="h-5 w-5 text-neutral-600 dark:text-neutral-400" />
                   )}
-                  <span className="text-sm font-medium">
-                    {post.isLiked ? "Liked" : "Like"}
-                  </span>
+                  <span className="text-sm font-medium">{post.isLiked ? 'Liked' : 'Like'}</span>
                   {post.likeCount && post.likeCount > 0 && (
-                    <span className="text-xs text-neutral-500 dark:text-neutral-400">
-                      ({post.likeCount})
-                    </span>
+                    <span className="text-xs text-neutral-500 dark:text-neutral-400">({post.likeCount})</span>
                   )}
                 </button>
               </div>
@@ -369,33 +323,27 @@ export default function InteractivePostsSection({
         </div>
 
         {/* Refresh Button */}
-        <div className="text-center mt-8">
+        <div className="mt-8 text-center">
           <button
             onClick={() => {
-              if (contentType === "videos") {
-                refetchVideos();
-              } else if (contentType === "mixed") {
-                refetchPosts();
-                refetchVideos();
+              if (contentType === 'videos') {
+                refetchVideos()
+              } else if (contentType === 'mixed') {
+                refetchPosts()
+                refetchVideos()
               } else {
-                refetchPosts();
+                refetchPosts()
               }
             }}
             disabled={isLoading}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isLoading
-              ? "Refreshing..."
-              : `Refresh ${
-                  contentType === "videos"
-                    ? "Videos"
-                    : contentType === "mixed"
-                    ? "Content"
-                    : "Posts"
-                }`}
+              ? 'Refreshing...'
+              : `Refresh ${contentType === 'videos' ? 'Videos' : contentType === 'mixed' ? 'Content' : 'Posts'}`}
           </button>
         </div>
       </div>
     </div>
-  );
+  )
 }

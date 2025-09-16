@@ -5,8 +5,9 @@ import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
 import Card17Skelton from '@/components/Skeletons/Card17Skelton'
 import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
 import {
-  //  getPostsDefault, 
-  getPostsGallery } from '@/data/posts'
+  //  getPostsDefault,
+  getPostsGallery,
+} from '@/data/posts'
 import { getDictionary } from '@/i18n'
 import { serverFetch } from '@/lib/server/api'
 import { Metadata } from 'next'

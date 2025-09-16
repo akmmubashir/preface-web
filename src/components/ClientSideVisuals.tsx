@@ -1,16 +1,8 @@
-"use client";
+'use client'
 
-import SectionMagazine4 from "./SectionMagazine4"; // adjust the path
+import SectionMagazine4 from './SectionMagazine4' // adjust the path
 
-const ClientSideVisuals = ({
-  dict,
-  posts,
-  lang,
-}: {
-  dict: any;
-  posts: any;
-  lang: string;
-}) => {
+const ClientSideVisuals = ({ dict, posts, lang }: { dict: any; posts: any; lang: string }) => {
   // const { data: latestVideos, isLoading, error } = useLatestVideos(8);
   // console.log(latestVideos,"latestVideos");
   // const displayPosts = latestVideos?.data || [];
@@ -29,7 +21,7 @@ const ClientSideVisuals = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ClientSideVisuals;
+export default ClientSideVisuals

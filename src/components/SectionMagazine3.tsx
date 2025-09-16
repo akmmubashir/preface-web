@@ -1,32 +1,26 @@
-import { TPost } from "@/data/posts";
-import { HeadingWithSubProps } from "@/shared/Heading";
-import clsx from "clsx";
-import { FC } from "react";
-import Card2 from "./PostCards/Card2";
-import Card9 from "./PostCards/Card9";
-import SectionTabHeader from "./SectionTabHeader";
+import { TPost } from '@/data/posts'
+import { HeadingWithSubProps } from '@/shared/Heading'
+import clsx from 'clsx'
+import { FC } from 'react'
+import Card2 from './PostCards/Card2'
+import Card9 from './PostCards/Card9'
+import SectionTabHeader from './SectionTabHeader'
 
-interface Props extends Pick<HeadingWithSubProps, "subHeading" | "dimHeading"> {
-  posts: TPost[];
-  heading?: string;
-  className?: string;
+interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
+  posts: TPost[]
+  heading?: string
+  className?: string
 }
 
-const SectionMagazine3: FC<Props> = ({
-  posts,
-  heading,
-  className,
-  subHeading,
-  dimHeading,
-}) => {
+const SectionMagazine3: FC<Props> = ({ posts, heading, className, subHeading, dimHeading }) => {
   return (
-    <div className={clsx("section-magazine-3 relative", className)}>
+    <div className={clsx('section-magazine-3 relative', className)}>
       <SectionTabHeader
         heading={heading}
         subHeading={subHeading}
         dimHeading={dimHeading}
         tabActive="development"
-        tabs={["development", "design", "illustration", "photography"]}
+        tabs={['development', 'design', 'illustration', 'photography']}
       />
 
       {!posts.length && <span>Nothing we found!</span>}
@@ -41,7 +35,7 @@ const SectionMagazine3: FC<Props> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SectionMagazine3;
+export default SectionMagazine3

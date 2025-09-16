@@ -20,7 +20,7 @@ const SwipableSliderPostsSkeleton = () => {
           <div className="mt-4 h-3 w-24 animate-pulse rounded bg-gray-500" />
         </div>
         <div className="col-span-6 max-md:col-span-full max-md:hidden">
-          <div className="h-[340px] animate-pulse rounded-lg bg-gray-700 " />
+          <div className="h-[340px] animate-pulse rounded-lg bg-gray-700" />
           <div className="mt-4 h-3 w-24 animate-pulse rounded bg-gray-500" />
         </div>
       </div>

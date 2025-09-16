@@ -1,23 +1,13 @@
-"use client";
+'use client'
 
-import FollowButton from "@/components/FollowButton";
-import { TCategory } from "@/data/categories";
-import Avatar from "@/shared/Avatar";
-import { Badge } from "@/shared/Badge";
-import { Button } from "@/shared/Button";
-import ButtonCircle from "@/shared/ButtonCircle";
-import {
-  Dialog,
-  DialogActions,
-  DialogBody,
-  DialogTitle,
-} from "@/shared/dialog";
-import {
-  Dropdown,
-  DropdownButton,
-  DropdownItem,
-  DropdownMenu,
-} from "@/shared/dropdown";
+import FollowButton from '@/components/FollowButton'
+import { TCategory } from '@/data/categories'
+import Avatar from '@/shared/Avatar'
+import { Badge } from '@/shared/Badge'
+import { Button } from '@/shared/Button'
+import ButtonCircle from '@/shared/ButtonCircle'
+import { Dialog, DialogActions, DialogBody, DialogTitle } from '@/shared/dialog'
+import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from '@/shared/dropdown'
 import {
   CopyLinkIcon,
   Facebook01Icon,
@@ -30,30 +20,30 @@ import {
   Share03Icon,
   ViewOffSlashIcon,
   Vynil02Icon,
-} from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
-import clsx from "clsx";
-import { useState } from "react";
+} from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+import clsx from 'clsx'
+import { useState } from 'react'
 
 const PageHeader = ({
   category,
   className,
-  type = "default",
+  type = 'default',
 }: {
-  category: TCategory;
-  className?: string;
-  type?: "audio" | "video" | "default";
+  category: TCategory
+  className?: string
+  type?: 'audio' | 'video' | 'default'
 }) => {
-  const { name, description, handle, thumbnail, count, color } = category;
+  const { name, description, handle, thumbnail, count, color } = category
 
   return (
-    <div className={clsx("w-full", className)}>
+    <div className={clsx('w-full', className)}>
       <div className="relative h-32 w-full bg-neutral-100 md:h-48 dark:bg-white/10" />
       <div className="container -mt-16">
         <div className="relative flex flex-col items-start gap-6 rounded-3xl border border-transparent bg-white p-5 shadow-xl md:flex-row md:rounded-4xl lg:p-8 lg:px-9 dark:border-neutral-700 dark:bg-neutral-900">
           {/* AVATAR */}
           <Avatar
-            alt={category.name || "Avatar"}
+            alt={category.name || 'Avatar'}
             src={thumbnail.src}
             square
             width={144}
@@ -67,29 +57,19 @@ const PageHeader = ({
             <div className="max-w-(--breakpoint-sm) space-y-3.5">
               <div>
                 <Badge color={color as any}>Category</Badge>
-                <h2 className="mt-2 text-2xl font-semibold lg:text-3xl">
-                  {name}
-                </h2>
+                <h2 className="mt-2 text-2xl font-semibold lg:text-3xl">{name}</h2>
               </div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-300">
-                {description}
-              </p>
+              <p className="text-sm text-neutral-600 dark:text-neutral-300">{description}</p>
               <p className="mt-auto flex items-center gap-x-1 text-sm">
-                {type === "audio" && (
-                  <HugeiconsIcon icon={Vynil02Icon} size={20} />
-                )}
-                {type === "video" && (
-                  <HugeiconsIcon icon={PlayListIcon} size={20} />
-                )}
-                {type === "default" && (
-                  <HugeiconsIcon icon={Fire03Icon} size={20} />
-                )}
+                {type === 'audio' && <HugeiconsIcon icon={Vynil02Icon} size={20} />}
+                {type === 'video' && <HugeiconsIcon icon={PlayListIcon} size={20} />}
+                {type === 'default' && <HugeiconsIcon icon={Fire03Icon} size={20} />}
                 <span>
                   {count}
                   {` `}
-                  {type === "audio" && "podcasts"}
-                  {type === "video" && "videos"}
-                  {type === "default" && "articles"}
+                  {type === 'audio' && 'podcasts'}
+                  {type === 'video' && 'videos'}
+                  {type === 'default' && 'articles'}
                 </span>
               </p>
             </div>
@@ -104,27 +84,27 @@ const PageHeader = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 function ShareDropdown({ handle }: { handle: string }) {
   const socialsShare = [
     {
-      name: "Facebook",
-      href: "#",
+      name: 'Facebook',
+      href: '#',
       icon: Facebook01Icon,
     },
     {
-      name: "Email",
-      href: "#",
+      name: 'Email',
+      href: '#',
       icon: Mail01Icon,
     },
     {
-      name: "Twitter",
-      href: "#",
+      name: 'Twitter',
+      href: '#',
       icon: NewTwitterIcon,
     },
-  ];
+  ]
 
   return (
     <Dropdown>
@@ -140,42 +120,36 @@ function ShareDropdown({ handle }: { handle: string }) {
         ))}
       </DropdownMenu>
     </Dropdown>
-  );
+  )
 }
 
-function ActionDropdown({
-  handle,
-  category,
-}: {
-  handle: string;
-  category: TCategory;
-}) {
-  const [isOpenDialogHideAuthor, setIsOpenDialogHideAuthor] = useState(false);
-  const [isOpenDialogReportPost, setIsOpenDialogReportPost] = useState(false);
+function ActionDropdown({ handle, category }: { handle: string; category: TCategory }) {
+  const [isOpenDialogHideAuthor, setIsOpenDialogHideAuthor] = useState(false)
+  const [isOpenDialogReportPost, setIsOpenDialogReportPost] = useState(false)
 
   const actions = [
     {
-      name: "Copy link",
+      name: 'Copy link',
       icon: CopyLinkIcon,
       onClick: () => {
-        navigator.clipboard.writeText(window.location.href);
+        navigator.clipboard.writeText(window.location.href)
       },
     },
     {
-      name: "Hide category",
+      name: 'Hide category',
       icon: ViewOffSlashIcon,
       onClick: () => {
-        setIsOpenDialogHideAuthor(true);
+        setIsOpenDialogHideAuthor(true)
       },
     },
     {
-      name: "Report category",
+      name: 'Report category',
       icon: Flag03Icon,
       onClick: () => {
-        setIsOpenDialogReportPost(true);
+        setIsOpenDialogReportPost(true)
       },
     },
-  ];
+  ]
   return (
     <>
       <Dropdown>
@@ -193,19 +167,14 @@ function ActionDropdown({
       </Dropdown>
 
       {/* DIALOG HIDE AUTHOR */}
-      <Dialog
-        open={isOpenDialogHideAuthor}
-        onClose={() => setIsOpenDialogHideAuthor(false)}
-      >
+      <Dialog open={isOpenDialogHideAuthor} onClose={() => setIsOpenDialogHideAuthor(false)}>
         <DialogTitle>
-          Hide this category?{" "}
-          <span className="font-semibold">({category.name.trim()})</span>
+          Hide this category? <span className="font-semibold">({category.name.trim()})</span>
         </DialogTitle>
         <DialogBody>
           <p>
-            Are you sure you want to hide the{" "}
-            <span className="font-semibold">{category.name.trim()}</span>? This
-            action will hide all posts from this category.
+            Are you sure you want to hide the <span className="font-semibold">{category.name.trim()}</span>? This action
+            will hide all posts from this category.
           </p>
         </DialogBody>
         <DialogActions>
@@ -217,31 +186,24 @@ function ActionDropdown({
       </Dialog>
 
       {/* DIALOG REPORT POST */}
-      <Dialog
-        open={isOpenDialogReportPost}
-        onClose={() => setIsOpenDialogReportPost(false)}
-      >
+      <Dialog open={isOpenDialogReportPost} onClose={() => setIsOpenDialogReportPost(false)}>
         <DialogTitle>Report this category?</DialogTitle>
         <DialogBody>
           <p>
-            Are you sure you want to report the{" "}
-            <span className="font-semibold">
-              &quot;{category.name.trim()}&quot;
-            </span>
-            ? This action will report this category.
+            Are you sure you want to report the{' '}
+            <span className="font-semibold">&quot;{category.name.trim()}&quot;</span>? This action will report this
+            category.
           </p>
         </DialogBody>
         <DialogActions>
           <Button plain onClick={() => setIsOpenDialogReportPost(false)}>
             Cancel
           </Button>
-          <Button onClick={() => setIsOpenDialogReportPost(false)}>
-            Report
-          </Button>
+          <Button onClick={() => setIsOpenDialogReportPost(false)}>Report</Button>
         </DialogActions>
       </Dialog>
     </>
-  );
+  )
 }
 
-export default PageHeader;
+export default PageHeader

@@ -1,12 +1,11 @@
-import { redirect } from "next/navigation";
-import dynamic from "next/dynamic";
-import { ProtectedRoute } from "@/contexts/AuthContext";
+import { ProtectedRoute } from '@/contexts/AuthContext'
+import { redirect } from 'next/navigation'
 
 // Dynamically import with no SSR
 
 function DashboardPage() {
-  redirect("/dashboard/posts");
-  return null;
+  redirect('/dashboard/posts')
+  return null
 }
 
 export default function Page() {
@@ -14,5 +13,5 @@ export default function Page() {
     <ProtectedRoute>
       <DashboardPage />
     </ProtectedRoute>
-  );
+  )
 }
