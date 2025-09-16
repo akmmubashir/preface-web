@@ -1,23 +1,14 @@
-import React from "react";
-import Skeleton from "../Skeleton";
+import React from 'react'
 
-const BannerSkeleton: React.FC<{ className?: string }> = ({
-  className = "",
-}) => {
+const BannerSkeleton: React.FC<{ className?: string }> = ({}) => {
   return (
-    <div className={`relative aspect-16/9 lg:aspect-16/5 ${className}`}>
-      <Skeleton className="absolute inset-0 md:rounded-2xl" />
-
-      {/* Gradient overlay */}
-      <div className="absolute inset-y-0 left-0 w-1/2 md:rounded-l-2xl bg-gradient-to-r from-black/30 to-transparent" />
-
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col justify-center gap-2 px-10">
-        <Skeleton className="h-8 w-64 max-w-full mb-2" />
-        <Skeleton className="h-5 w-48 max-w-full" />
+    <div className={`relative aspect-16/9 bg-neutral-200 lg:aspect-16/5 dark:bg-neutral-700 rounded-xl max-md:rounded-none animate-pulse`}>
+      <div className="absolute inset-0 top-0 left-0 flex flex-col justify-center gap-4 max-md:gap-2 px-10">
+        <div className="h-6 w-1/4 max-md:w-3/4 max-md:h-4 animate-pulse rounded bg-neutral-400 dark:bg-neutral-800"></div>
+        <div className="h-4 w-1/3 max-md:w-1/2 max-md:h-3 animate-pulse rounded bg-neutral-400 dark:bg-neutral-800"></div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BannerSkeleton;
+export default BannerSkeleton
