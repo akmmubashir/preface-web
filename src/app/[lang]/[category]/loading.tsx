@@ -1,16 +1,16 @@
-import Skeleton from '@/components/Skeleton'
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
 import Card17Skelton from '@/components/Skeletons/Card17Skelton'
+import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
 
 export default function Loading() {
   return (
     <div className={`page-category`}>
       <div className="container mx-auto mt-12 sm:mt-20">
         <BannerSkeleton />
-        <div className="mt-12 w-full">
-          <Skeleton className="mb-2 h-4 w-full max-w-full rounded" />
-          <Skeleton className="mb-2 h-4 w-full max-w-full rounded" />
-          <Skeleton className="h-4 w-1/3 rounded" />
+        <div className="mt-12 flex w-full flex-col gap-3">
+          <div className="h-3 w-full animate-pulse rounded bg-neutral-400 dark:bg-neutral-800"></div>
+          <div className="h-3 w-full animate-pulse rounded bg-neutral-400 dark:bg-neutral-800"></div>
+          <div className="h-3 w-1/2 animate-pulse rounded bg-neutral-400 dark:bg-neutral-800"></div>
         </div>
         {/* Horizontal line - matching Figma design */}
         <hr className="mt-12 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" />
@@ -21,15 +21,7 @@ export default function Loading() {
 
       <div className="container py-10 md:py-14 lg:py-20">
         <div className="relative">
-          {/* <ClientSectionSliderPosts
-            postCardName="card10V5"
-            // heading={`POPULAR ARTICLES FROM ${categoryName}`}
-            heading={`${dict.sections.populararticlesfrom.heading} ${categoryName}`}
-            // subHeading="Over 10 Articles"
-            parentSlug={category}
-            limit={6}
-            lang={lang}
-          /> */}
+          <SectionSliderPostsSkeleton />
         </div>
       </div>
     </div>
