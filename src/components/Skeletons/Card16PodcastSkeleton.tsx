@@ -6,11 +6,18 @@ import { FC } from 'react'
 interface Props {
   className?: string
   ratio?: string
+  beta?: boolean
 }
 
-const Card16PodcastSkeleton: FC<Props> = ({ className, ratio = 'aspect-4/3' }) => {
+const Card16PodcastSkeleton: FC<Props> = ({ className, ratio = 'aspect-4/3', beta = false }) => {
   return (
-    <div className={clsx('group post-card-16-podcast relative flex flex-col pb-6', className)}>
+    <div
+      className={clsx(
+        'group post-card-16-podcast relative flex flex-col pb-6',
+        beta ? 'col-span-3 max-md:col-span-full' : '',
+        className
+      )}
+    >
       {/* Thumbnail */}
       <div className={`relative w-full shrink-0 ${ratio}`}>
         <div className="absolute inset-0 animate-pulse rounded-3xl bg-neutral-200 dark:bg-neutral-700" />

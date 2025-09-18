@@ -1,4 +1,8 @@
 import PaginationWrapper2 from '@/components/PaginationWrapper2'
+import PostBannerSkeleton from '@/components/Skeletons/PostBannerSkeleton'
+import PostContentSkelton from '@/components/Skeletons/PostContentSkelton'
+import WidgetCategoriesSkeleton from '@/components/Skeletons/WidgetCategoriesSkeleton'
+import WidgetPostsSkeleton from '@/components/Skeletons/WidgetPostsSkeleton'
 import WidgetCategories from '@/components/WidgetCategories'
 import WidgetPosts from '@/components/WidgetPosts'
 import { getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
@@ -6,6 +10,7 @@ import { getAllPosts, getCommentsByPostId, getPostByHandle } from '@/data/posts'
 import { serverFetch } from '@/lib/server/api'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 import SingleContentContainer from '../../../post/SingleContentContainer'
 import SingleHeaderContainer from '../../../post/SingleHeaderContainer'
 import SingleRelatedPosts from '../../../post/SingleRelatedPosts'
@@ -102,21 +107,43 @@ const Page = async ({
 
   return (
     <div className="single-post-page pt-8">
-      <SingleHeaderContainer post={post} />
-
+      <Suspense fallback={<PostBannerSkeleton />}>
+        <SingleHeaderContainer post={post} />
+      </Suspense>
       <div className="container mt-12 flex flex-col lg:flex-row">
         <div className="w-full lg:w-3/5 xl:w-2/3 xl:pe-20">
-          <SingleContentContainer post={post} comments={comments} lang={lang} />
+          <Suspense fallback={<PostContentSkelton />}>
+            <SingleContentContainer post={post} comments={comments} lang={lang} />
+          </Suspense>
           <div className="mt-12">
-            <PaginationWrapper2 post={post} />
+            <Suspense
+              fallback={
+                <div className="flex gap-4">
+                  <div className="flex animate-pulse items-center gap-2 rounded-full bg-neutral-200 p-2 dark:bg-neutral-700">
+                    <div className="h-3 w-3 rounded-full bg-neutral-400 dark:bg-neutral-800"></div>
+                    <div className="h-2 w-12 rounded bg-neutral-400 dark:bg-neutral-800"></div>
+                  </div>
+                  <div className="flex animate-pulse items-center gap-2 rounded-full bg-neutral-400 p-2 dark:bg-neutral-800">
+                    <div className="h-2 w-12 rounded bg-neutral-200 dark:bg-neutral-700"></div>
+                    <div className="h-3 w-3 rounded-full bg-neutral-200 dark:bg-neutral-700"></div>
+                  </div>
+                </div>
+              }
+            >
+              <PaginationWrapper2 post={post} />
+            </Suspense>
           </div>
         </div>
         <div className="mt-12 w-full lg:mt-0 lg:w-2/5 lg:ps-10 xl:w-1/3 xl:ps-0">
           <div className="space-y-7 lg:sticky lg:top-7">
             {/* <WidgetAuthors authors={widgetAuthors} />
             <WidgetTags tags={widgetTags} /> */}
-            <WidgetCategories categories={filteredSubcategoryPosts} />
-            <WidgetPosts posts={otherTopics} />
+            <Suspense fallback={<WidgetCategoriesSkeleton />}>
+              <WidgetCategories categories={filteredSubcategoryPosts} />
+            </Suspense>
+            <Suspense fallback={<WidgetPostsSkeleton />}>
+              <WidgetPosts posts={otherTopics} />
+            </Suspense>
           </div>
         </div>
       </div>
