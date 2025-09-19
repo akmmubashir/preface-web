@@ -5,9 +5,8 @@ import WidgetCategoriesSkeleton from '@/components/Skeletons/WidgetCategoriesSke
 import WidgetPostsSkeleton from '@/components/Skeletons/WidgetPostsSkeleton'
 import WidgetCategories from '@/components/WidgetCategories'
 import WidgetPosts from '@/components/WidgetPosts'
-import { getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
+import { getCategoryBySlug, getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
 import { getAllPosts, getCommentsByPostId, getPostByHandle } from '@/data/posts'
-import { serverFetch } from '@/lib/server/api'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -95,11 +94,11 @@ const Page = async ({
   const relatedPosts = (await getAllPosts()).slice(0, 6)
   const moreFromAuthorPosts = (await getAllPosts()).slice(1, 7)
 
-  const subcategoryList = await serverFetch.get(`/api/frontend/category/slug/${category}`)
+  const categoryData = await getCategoryBySlug(category, lang)
 
-  // console.log(subcategoryList,"subcategoryList");
+  // console.log(categoryData, "categoryData");
 
-  const otherTopics = subcategoryList.data.subcategories
+  const otherTopics = categoryData?.subcategories || []
 
   // console.log(otherTopics,"otherTopics");
 
