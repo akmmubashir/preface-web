@@ -6,7 +6,7 @@ import { getNavigation as fetchNavigation } from '@/data/navigation'
 import { getAllPosts } from '@/data/posts'
 import { getDictionary } from '@/i18n'
 import Navbar2 from '@/shared/Navbar2'
-import { Noto_Kufi_Arabic, Noto_Serif } from 'next/font/google'
+import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
 import { ReactNode } from 'react'
 
 interface Props {
@@ -27,7 +27,11 @@ const notoKufiArabic = Noto_Kufi_Arabic({
   display: 'swap',
   weight: ['400', '500', '600', '700'],
 })
-
+const notoSerifMalayalam = Noto_Serif_Malayalam({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
 const ApplicationLayout = async ({ children, home, params }: Props) => {
   const dict = await getDictionary((await params).lang)
   const fetchNavigationData = await fetchNavigation((await params).lang)
@@ -36,7 +40,7 @@ const ApplicationLayout = async ({ children, home, params }: Props) => {
   const isTransparentHeader = (await params).pathname === '/' || (await params).pathname === '/visuals'
   return (
     <div
-      className={(await params).lang === 'ar' ? notoKufiArabic.className : notoSerif.className}
+      className={(await params).lang === 'ar' ? notoKufiArabic.className : (await params).lang === 'ml' ? notoSerifMalayalam.className : notoSerif.className}
       dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}
     >
       {home ? null : (
