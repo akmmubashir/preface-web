@@ -40,7 +40,13 @@ const ApplicationLayout = async ({ children, home, params }: Props) => {
   const isTransparentHeader = (await params).pathname === '/' || (await params).pathname === '/visuals'
   return (
     <div
-      className={(await params).lang === 'ar' ? notoKufiArabic.className : (await params).lang === 'ml' ? notoSerifMalayalam.className : notoSerif.className}
+      className={
+        (await params).lang === 'ar'
+          ? notoKufiArabic.className
+          : (await params).lang === 'ml'
+            ? notoSerifMalayalam.className
+            : notoSerif.className
+      }
       dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}
     >
       {home ? null : (
